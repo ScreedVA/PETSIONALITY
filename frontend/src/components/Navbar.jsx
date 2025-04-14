@@ -1,11 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { navigations } from "./Data";
+import { BiChevronDown } from "react-icons/bi";
+import Logo from "../assets/images/logo/1.png";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   return (
     <div className="fixed left-0 top-0 w-full">
-      <div className="wrapper flex justify-between items-center">
-        <div>Logo</div>
-        <div className="flex">{}</div>
+      <div className="wrapper flex justify-between items-center py-1">
+        <div>
+          <img style={{ maxWidth: "250px" }} src={Logo} alt="" />
+        </div>
+        <div className="flex items-center lg:flex hidden">
+          {navigations.map((nav, i) => {
+            return (
+              <div
+                className={`nav_link relative py-5 pr-14 group   transition ${
+                  pathname === nav.link ? "yes" : ""
+                }`}
+                key={i}>
+                {nav.dropdown ? (
+                  <Link to={nav.link} className="font-bold">
+                    {nav.text}
+                    <BiChevronDown className="inline text-xl transition  group-hover:rotate-180" />
+                  </Link>
+                ) : (
+                  <Link to={nav.link} className="font-bold">
+                    {nav.text}
+                  </Link>
+                )}
+
+                {nav.dropdown ? (
+                  <div className="absolute bg-beige top-full left-0 py-4 px-6 opacity-0 -translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 invisible group-hover:visible transition ">
+                    {nav.dropdown.map((item, i) => {
+                      return (
+                        <Link key={i} to={item.link} className="block mb-2">
+                          {item.text}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            );
+          })}
+          <Link
+            to="/"
+            className="block bg-orange h-fit align-middle py-2 px-8 font-bold">
+            Sign In
+          </Link>
+        </div>
+        {/* menu button */}
+        <button
+          onClick={() => setMobileMenu(!mobileMenu)}
+          className={`menuButton lg:hidden z-50 ${
+            mobileMenu ? "clicked" : ""
+          }`}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </button>
       </div>
     </div>
   );
