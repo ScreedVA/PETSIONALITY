@@ -4,12 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "lemonada";
+  src: url(assets/fonts/Lemonada-VariableFont_wght.ttf);
+}
 *,
 *::after,
 *::before {
-  font-family: "dejavu";
-  margin: 0;
-  padding: 0;
+  font-family: "lemonada";
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -44,7 +46,7 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: "dejavu";
+  font-family: "lemonada";
   font-weight: 400;
   line-height: 1.3;
   color: #000;
@@ -56,9 +58,6 @@ body {
 p {
   font-weight: 100;
   line-height: 1.5;
-}
-h1 {
-  font-weight: 600;
 }
 ul {
   list-style: none;
@@ -239,6 +238,42 @@ img {
 }
 .bg-dark-green {
   background: #49978b;
+}
+.bg-orange {
+  background: #ff914d;
+}
+.bg-beige {
+  background: #e8dedb;
+}
+h2 {
+  font-size: 55px;
+  font-weight: bold;
+}
+h3 {
+  font-size: 30px;
+  font-weight: 600;
+}
+.menuButton {
+  cursor: pointer;
+}
+.menuButton div {
+  background: #000;
+  border-radius: 1px;
+  width: 50px;
+  height: 5px;
+  margin: 6px 0;
+  transition: 0.5s;
+}
+.menuButton.clicked div:nth-child(2) {
+  scale: 0;
+}
+.menuButton.clicked div:first-child {
+  rotate: -45deg;
+  translate: 0 10px;
+}
+.menuButton.clicked div:last-child {
+  rotate: -135deg;
+  translate: 0 -11px;
 }
 
 /* home page */
