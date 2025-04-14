@@ -20,8 +20,9 @@ const PetSitters = () => {
           </div>
         </div>
       </div>
-
-      <PetSitterSearchForm />
+      <div className="flex justify-center">
+        <PetSitterSearchForm />
+      </div>
     </>
   );
 };

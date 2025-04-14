@@ -9,7 +9,7 @@ const PetSitterSearchForm = () => {
   return (
     // For Christian
     <div className="petsittersearchform-container h-[500px] p-10 m-1">
-      <form action="" className="flex flex-col gap-3 pb-5 bg-white border w-fit ">
+      <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3 pb-5 bg-white border rounded-lg">
         {/* 1/5 */}
         <div className="flex flex-row gap-5 px-5 py-2 bg-gray-100">
           <p>I'm looking for service for my:</p>
@@ -37,29 +37,39 @@ const PetSitterSearchForm = () => {
           </div>
 
           {/* 3/5 */}
-          <div className="flex flex-col gap-1">
-            <p>How often do you need this service</p>
-            <div className="flex gap-4">
-              <input
-                type="checkbox"
-                className="checkbox3 after:content-['One-Time'] before:content-['\f133'] "
-                name="one-time"
-              />
-              <input
-                type="checkbox"
-                className="checkbox3 after:content-['Repeat-Weakly'] before:content-['\f363'] "
-                name="repeat-weakly"
-              />
+          <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
+              <p>How often do you need this service</p>
+              <div className="flex gap-4">
+                <input
+                  type="checkbox"
+                  className="checkbox3 after:content-['One-Time'] before:content-['\f133'] "
+                  name="one-time"
+                />
+                <input
+                  type="checkbox"
+                  className="checkbox3 after:content-['Repeat-Weakly'] before:content-['\f363'] "
+                  name="repeat-weakly"
+                />
+              </div>
             </div>
           </div>
 
           {/* 4/5 */}
-          {/* <div className="flex flex-col">
-            <p>For what dates?</p>
-            <div>
-              <input type="date" name="start-date" />
+          <div className="flex gap-5">
+            <div className="flex flex-col gap-1">
+              <p>Start Date</p>
+              <div>
+                <input type="date" name="start-date" />
+              </div>
             </div>
-          </div> */}
+            <div className="flex flex-col gap-1">
+              <p>End Date</p>
+              <div>
+                <input type="date" name="start-date" />
+              </div>
+            </div>
+          </div>
 
           {/* 5/5 */}
           <div className="flex flex-col">
@@ -84,7 +94,7 @@ const PetSitterSearchForm = () => {
                 type="checkbox"
                 name="small-dog"
               />
-              <button className="bg-[#49978b] w-2/4 rounded-md text-white text-4xl" type="submit">
+              <button className="w-2/4 text-4xl rounded-md button1" type="submit">
                 Search
               </button>
             </div>

@@ -6,6 +6,9 @@ export default {
       fontWeight: {
         ultra: "1000",
       },
+      backgroundImage: {
+        "mint-gradient": "linear-gradient(to bottom, #7CB4AB, #C0DAD6)",
+      },
     },
   },
   plugins: [],

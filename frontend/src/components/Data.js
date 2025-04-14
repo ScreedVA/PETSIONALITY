@@ -6,6 +6,9 @@ import Video1 from "../assets/videos/paw/1.mp4";
 import Video2 from "../assets/videos/paw/2.mp4";
 import Video3 from "../assets/videos/paw/3.mp4";
 import Video4 from "../assets/videos/paw/4.mp4";
+import role1 from "../assets/images/pets/4.jpg";
+import role2 from "../assets/images/pets/5.jpg";
+import role3 from "../assets/images/pets/6.jpg";
 
 export const navigations = [
   {
@@ -46,7 +49,7 @@ export const navigations = [
 
 export const toes = [
   {
-    link: "/",
+    link: "/pet-sitters",
     img: Toe1,
     label: "Sitters",
   },
@@ -68,3 +71,5 @@ export const toes = [
 ];
 
 export const homeVideos = [Video1, Video2, Video3, Video4];
+
+export const roles = [role1, role2, role3];
