@@ -1,5 +1,4 @@
 import React from "react";
-import SearchForm from "../components/SearchForm";
 import Img1 from "../assets/images/pets/1.png";
 import Img2 from "../assets/images/pets/2.png";
 import PetSitterSearchForm from "../components/PetSitterSearchForm";
