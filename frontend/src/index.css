@@ -1,4 +1,8 @@
-@import "tailwindcss";
+/* @import "tailwindcss"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *,
 *::after,
@@ -9,7 +13,9 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  transition: all ease 0.3s;
 }
+
 *::after,
 *::before {
   position: absolute;
@@ -68,6 +74,149 @@ button {
   border: none;
   background: none;
 }
+
+input[type="checkbox"] {
+  appearance: none;
+  cursor: pointer;
+
+  transition: all ease 0.3s;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  height: 20px;
+  width: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="checkbox"]::before {
+  transition-duration: 0.1s;
+}
+input[type="checkbox"]::after {
+  transition-duration: 0.1s;
+}
+
+/* Checkbox 1 */
+input.checkbox1[type="checkbox"]:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f00c";
+  font-size: 12px;
+  color: white;
+  display: none;
+}
+
+input.checkbox1[type="checkbox"]:hover {
+  background-color: gray;
+}
+
+input.checkbox1[type="checkbox"]:checked {
+  background-color: #000;
+}
+
+input.checkbox1[type="checkbox"]:checked::after {
+  display: block;
+}
+
+/* Checkbox 2 */
+input.checkbox2[type="checkbox"] {
+  height: 70px;
+  width: 150px;
+  position: relative;
+  border: 2px solid gray;
+}
+
+input.checkbox2[type="checkbox"]:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 24px;
+  color: #666;
+  position: absolute;
+  top: 15%;
+}
+
+input.checkbox2[type="checkbox"]:after {
+  font-size: 14px;
+  color: #333;
+  position: absolute;
+  top: 60%;
+}
+
+/* Checkbox 3 */
+input.checkbox3[type="checkbox"] {
+  position: relative;
+  height: 25px;
+  width: 400px;
+  padding: 20px 20px;
+  justify-content: start;
+  border: 2px solid gray;
+}
+
+input.checkbox3[type="checkbox"]:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 15px;
+  color: #666;
+
+  position: absolute;
+}
+
+input.checkbox3[type="checkbox"]:after {
+  font-size: 15px;
+  color: #666;
+  position: absolute;
+  left: 12%;
+}
+
+/* Checkbox 4 */
+
+input.checkbox4[type="checkbox"] {
+  position: relative;
+  height: 60px;
+  width: 100px;
+  padding: 20px 20px;
+  justify-content: center;
+  border: 2px solid gray;
+}
+
+input.checkbox4[type="checkbox"]:before {
+  font-size: 15px;
+  color: #666;
+  position: absolute;
+  top: 20%;
+}
+
+input.checkbox4[type="checkbox"]:after {
+  font-size: 15px;
+  color: #666;
+  position: absolute;
+  top: 50%;
+}
+
+/* Checkbox 2,3,4 */
+input.checkbox2[type="checkbox"]:checked,
+input.checkbox3[type="checkbox"]:checked {
+  border-color: #49978b;
+}
+
+input.checkbox2[type="checkbox"]:checked::before,
+input.checkbox3[type="checkbox"]:checked::before {
+  color: #49978b;
+}
+
+input.checkbox2[type="checkbox"]:checked::after,
+input.checkbox3[type="checkbox"]:checked::after {
+  color: #49978b;
+}
+
+/* Dates */
+input[type="date"] {
+  appearance: none;
+}
+
 img {
   max-width: 100%;
 }
@@ -179,3 +328,5 @@ img {
     width: 95%;
   }
 }
+
+/* PetSitterSearchForm */

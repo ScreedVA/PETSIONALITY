@@ -1,12 +1,13 @@
 import React from "react";
-import SearchForm from "../components/SearchForm";
+import PetSitterSearchForm from "../components/PetSitterSearchForm";
 
 const PetSitters = () => {
   return (
     <>
-      <div className="h-96 bg-green-200">Hero Section</div>
+      <div className="h-32 bg-green-200">Hero Section</div>
 
-      <SearchForm />
+      <PetSitterSearchForm />
+      {/* <div className="m-5"></div> */}
     </>
   );
 };
