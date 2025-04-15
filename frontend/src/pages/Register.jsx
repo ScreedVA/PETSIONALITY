@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import PasswordValidator from "../components/PasswordValidator";
 import { imgs } from "../components/Data";
+import { useNavigate } from "react-router-dom";
 
 export default function Register2() {
   const [passwordState, setPasswordState] = useState({
@@ -10,11 +11,17 @@ export default function Register2() {
     isValid: false,
     validationsArray: [],
   });
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate("/role-selection");
+  }
 
   return (
-    <div className="bg-mint-gradient h-[100vh] flex justify-center items-center">
-      <div className="flex gap-5">
-        <form className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+    <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-20 pt-36">
+      <div className="flex gap-28">
+        <form onSubmit={handleSubmit} className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
           {/* 1/3 */}
           <span className="flex gap-4">
             <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
@@ -49,6 +56,11 @@ export default function Register2() {
               </button>
             </div>
             <div className="flex gap-2">
+              <p>
+                Don't have an account yet? <u className="font-semibold text-blue-400">Sign up here</u>
+              </p>
+            </div>
+            <div className="flex gap-2">
               <input type="checkbox" className="flex-shrink-0 checkbox1" />
               <p className="text-xs ">
                 By registering you agree to accept the <u>Terms of Service</u> and the <u>Privacy & Cookie Policy</u>
@@ -56,7 +68,7 @@ export default function Register2() {
             </div>
           </div>
         </form>
-        <img src={imgs[0]} className="w-[500px] bg-white " />
+        <img src={imgs[0]} className="w-[500px] bg-white rounded-2xl" />
       </div>
     </div>
   );

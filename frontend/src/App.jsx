@@ -5,8 +5,9 @@ import PetSitters from "./pages/PetSitters";
 import PetOwners from "./pages/PetOwners";
 import RoleSelection from "./pages/RoleSelection";
 import Contact from "./pages/Contact";
-import Register1 from "./pages/Register1";
-import Register2 from "./pages/Register2";
+import RegisterSSO from "./pages/RegisterSSO";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Route path="/pet-sitters" exact element={<PetSitters />} />
         <Route path="/pet-owners" exact element={<PetOwners />} />
         <Route path="/role-selection" exact element={<RoleSelection />} />
-        <Route path="/register/sso" exact element={<Register1 />} />
+        <Route path="/register/sso" exact element={<RegisterSSO />} />
+        <Route path="/register" exact element={<Register />} />
+        <Route path="/login" exact element={<Login />} />
         <Route path="/contact" exact element={<Contact />} />
-        <Route path="/register" exact element={<Register2 />} />
       </Routes>
     </Router>
   );

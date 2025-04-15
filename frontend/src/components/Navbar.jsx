@@ -50,10 +50,10 @@ const Navbar = () => {
               </div>
             );
           })}
-          <Link to="/" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+          <Link to="/login" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
             Sign In
           </Link>
-          <Link to="/register-1" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+          <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
             Register
           </Link>
         </div>
