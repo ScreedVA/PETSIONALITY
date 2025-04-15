@@ -9,23 +9,22 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <div className="fixed left-0 top-0 w-full">
-      <div className="wrapper flex justify-between items-center py-1">
+    <div className="fixed top-0 left-0 w-full">
+      <div className="flex items-center justify-between py-1 wrapper">
         <div>
           <img style={{ maxWidth: "250px" }} src={Logo} alt="" />
         </div>
-        <div className="flex items-center lg:flex hidden">
+        <div className="flex items-center hidden gap-2 lg:flex">
           {navigations.map((nav, i) => {
             return (
               <div
-                className={`nav_link relative py-5 pr-14 group   transition ${
-                  pathname === nav.link ? "yes" : ""
-                }`}
-                key={i}>
+                className={`nav_link relative py-5 pr-14 group   transition ${pathname === nav.link ? "yes" : ""}`}
+                key={i}
+              >
                 {nav.dropdown ? (
                   <Link to={nav.link} className="font-bold">
                     {nav.text}
-                    <BiChevronDown className="inline text-xl transition  group-hover:rotate-180" />
+                    <BiChevronDown className="inline text-xl transition group-hover:rotate-180" />
                   </Link>
                 ) : (
                   <Link to={nav.link} className="font-bold">
@@ -34,7 +33,7 @@ const Navbar = () => {
                 )}
 
                 {nav.dropdown ? (
-                  <div className="absolute bg-beige top-full left-0 py-4 px-6 opacity-0 -translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 invisible group-hover:visible transition ">
+                  <div className="absolute left-0 invisible px-6 py-4 transition -translate-y-5 opacity-0 bg-beige top-full group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible ">
                     {nav.dropdown.map((item, i) => {
                       return (
                         <Link key={i} to={item.link} className="block mb-2">
@@ -49,18 +48,19 @@ const Navbar = () => {
               </div>
             );
           })}
-          <Link
-            to="/"
-            className="block bg-orange h-fit align-middle py-2 px-8 font-bold">
+          <Link to="/" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
             Sign In
           </Link>
+          <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+            Register
+          </Link>
         </div>
+
         {/* menu button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className={`menuButton lg:hidden z-50 ${
-            mobileMenu ? "clicked" : ""
-          }`}>
+          className={`menuButton lg:hidden z-50 ${mobileMenu ? "clicked" : ""}`}
+        >
           <div></div>
           <div></div>
           <div></div>

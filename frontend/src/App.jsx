@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import PetSitters from "./pages/PetSitters";
 import Navbar from "./components/Navbar";
 import RoleSelection from "./pages/RoleSelection";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/pet-sitters" exact element={<PetSitters />} />
         <Route path="/role-selection" exact element={<RoleSelection />} />
+        <Route path="/register" exact element={<Register />} />
       </Routes>
     </Router>
   );
