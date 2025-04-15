@@ -8,7 +8,9 @@ export default function RoleSelection() {
         <p>Select your role to get started with the pet care community.</p>
         <h1 className="w-2/3 text-5xl font-semibold text-center text-white">Get Started By Defining Your Role</h1>
       </div>
-      <div className="grid w-2/3 h-1/2 gap-1 grid-cols-2 grid-rows-[1fr_1fr]">
+
+      <div className="grid w-2/3 h-1/2 gap-2 grid-cols-2 grid-rows-[1fr_1fr]">
+        {/* Top Left */}
         <div
           className="col-start-1 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[0]})` }}
@@ -19,6 +21,7 @@ export default function RoleSelection() {
           <h2 className="mt-2 text-3xl font-bold">PET SITTER</h2>
         </div>
 
+        {/* Top Right */}
         <div
           className="col-start-2 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[1]})` }}
@@ -29,6 +32,7 @@ export default function RoleSelection() {
           <h2 className="mt-2 text-3xl font-bold">PET OWNER</h2>
         </div>
 
+        {/* Bottom */}
         <div
           className="col-start-1 col-end-3 row-start-2 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[2]})` }}

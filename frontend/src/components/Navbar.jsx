@@ -28,7 +28,7 @@ const Navbar = () => {
                 {nav.dropdown ? (
                   <Link to={nav.link} className="font-bold">
                     {nav.text}
-                    <BiChevronDown className="inline text-xl transition  group-hover:rotate-180" />
+                    <BiChevronDown className="inline text-xl transition group-hover:rotate-180" />
                   </Link>
                 ) : (
                   <Link to={nav.link} className="font-bold">
@@ -37,7 +37,7 @@ const Navbar = () => {
                 )}
 
                 {nav.dropdown ? (
-                  <div className="absolute bg-beige top-full left-0 py-4 px-6 opacity-0 -translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 invisible group-hover:visible transition ">
+                  <div className="absolute left-0 invisible px-6 py-4 transition -translate-y-5 opacity-0 bg-beige top-full group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible ">
                     {nav.dropdown.map((item, i) => {
                       return (
                         <Link key={i} to={item.link} className="block mb-2">
@@ -54,10 +54,16 @@ const Navbar = () => {
           })}
           <Link
             to="/"
-            className="block bg-orange h-fit align-middle py-2 px-8 font-bold">
+            className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
             Sign In
           </Link>
+          <Link
+            to="/register"
+            className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+            Register
+          </Link>
         </div>
+
         {/* menu button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
