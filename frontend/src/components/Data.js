@@ -10,6 +10,7 @@ import role1 from "../assets/images/pets/4.jpg";
 import role2 from "../assets/images/pets/5.jpg";
 import role3 from "../assets/images/pets/6.jpg";
 import bg1 from "../assets/images/bgs/2.png";
+import img1 from "../assets/images/pets/3.png";
 
 export const navigations = [
   {
@@ -76,3 +77,5 @@ export const homeVideos = [Video1, Video2, Video3, Video4];
 export const roles = [role1, role2, role3];
 
 export const bgs = [bg1];
+
+export const imgs = [img1];

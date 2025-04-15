@@ -4,17 +4,20 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDog, faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-export default function Register() {
+export default function Register1() {
   return (
     <div
       style={{ backgroundImage: `url(${bgs})` }}
       className="min-h-[100vh] bg-cover flex flex-col justify-center items-center py-[7%]"
     >
       <div className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+        {/* 1/4 */}
         <span className="flex gap-4">
           <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
           <p>Go back</p>
         </span>
+
+        {/* 2/4 */}
         <div>
           <h3>Register to Pawshake</h3>
         </div>
