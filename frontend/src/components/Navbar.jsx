@@ -9,16 +9,19 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <div className="fixed left-0 top-0 w-full">
+    <div className="absolute left-0 top-0 w-full z-10">
       <div className="wrapper flex justify-between items-center py-1">
         <div>
           <img style={{ maxWidth: "250px" }} src={Logo} alt="" />
         </div>
-        <div className="flex items-center lg:flex hidden">
+        <div
+          className={`flex items-center flex mobile_menu ${
+            mobileMenu ? "open" : ""
+          }`}>
           {navigations.map((nav, i) => {
             return (
               <div
-                className={`nav_link relative py-5 pr-14 group   transition ${
+                className={`nav_link relative py-5 xl:pr-14 pr-8 group transition whitespace-nowrap ${
                   pathname === nav.link ? "yes" : ""
                 }`}
                 key={i}>
@@ -59,7 +62,7 @@ const Navbar = () => {
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
           className={`menuButton lg:hidden z-50 ${
-            mobileMenu ? "clicked" : ""
+            mobileMenu ? "clicked fixed right-6" : ""
           }`}>
           <div></div>
           <div></div>
