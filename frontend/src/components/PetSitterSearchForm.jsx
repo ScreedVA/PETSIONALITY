@@ -7,14 +7,21 @@ const PetSitterSearchForm = () => {
   }
 
   return (
-    // For Christian
     <div className="petsittersearchform-container h-[500px] p-10 m-1">
-      <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3 pb-5 bg-white border rounded-lg">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="flex flex-col gap-3 pb-5 bg-white border rounded-lg">
         {/* 1/5 */}
         <div className="flex flex-row gap-5 px-5 py-2 bg-gray-100">
           <p>I'm looking for service for my:</p>
           <div className="flex gap-2">
-            <input className="checkbox1" type="checkbox" name="dog" id="dog-check" onClick={checkboxClick} />
+            <input
+              className="checkbox1"
+              type="checkbox"
+              name="dog"
+              id="dog-check"
+              onClick={checkboxClick}
+            />
             <p>Dog</p>
           </div>
           <div className="flex gap-2">
@@ -28,11 +35,26 @@ const PetSitterSearchForm = () => {
           <div className="flex flex-col gap-1">
             <p>For When You're Away</p>
             <div className="flex gap-4">
-              <input type="checkbox" className="checkbox2 after:content-['Boarding'] before:content-['\f0f2'] " />
-              <input type="checkbox" className="checkbox2 after:content-['House-Sitting'] before:content-['\f015'] " />
-              <input type="checkbox" className="checkbox2 after:content-['Drop-In-Visits'] before:content-['\e4c6'] " />
-              <input type="checkbox" className="checkbox2 after:content-['Doggy-Day-Care'] before:content-['\f185'] " />
-              <input type="checkbox" className="checkbox2 after:content-['Dog-Walking'] before:content-['\f1b0'] " />
+              <input
+                type="checkbox"
+                className="checkbox2 after:content-['Boarding'] before:content-['\f0f2'] "
+              />
+              <input
+                type="checkbox"
+                className="checkbox2 after:content-['House-Sitting'] before:content-['\f015'] "
+              />
+              <input
+                type="checkbox"
+                className="checkbox2 after:content-['Drop-In-Visits'] before:content-['\e4c6'] "
+              />
+              <input
+                type="checkbox"
+                className="checkbox2 after:content-['Doggy-Day-Care'] before:content-['\f185'] "
+              />
+              <input
+                type="checkbox"
+                className="checkbox2 after:content-['Dog-Walking'] before:content-['\f1b0'] "
+              />
             </div>
           </div>
 
@@ -94,7 +116,9 @@ const PetSitterSearchForm = () => {
                 type="checkbox"
                 name="small-dog"
               />
-              <button className="w-2/4 text-4xl rounded-md button1" type="submit">
+              <button
+                className="w-2/4 text-4xl rounded-md button1"
+                type="submit">
                 Search
               </button>
             </div>

@@ -22,7 +22,11 @@ export const navigations = [
     text: "Services",
     dropdown: [
       {
-        link: "/",
+        link: "/pet-owners",
+        text: "Pet Owners",
+      },
+      {
+        link: "/pet-sitters",
         text: "Sitters",
       },
       {
@@ -44,7 +48,7 @@ export const navigations = [
     text: "Community",
   },
   {
-    link: "/",
+    link: "/contact",
     text: "Contact",
   },
 ];
