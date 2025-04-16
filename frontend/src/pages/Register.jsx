@@ -8,11 +8,13 @@ export default function Register() {
   return (
     <div
       style={{ backgroundImage: `url(${bgs})` }}
-      className="min-h-[100vh] bg-cover flex flex-col justify-center items-center py-[7%]"
-    >
+      className="min-h-[100vh] bg-cover flex flex-col justify-center items-center py-[7%]">
       <div className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
         <span className="flex gap-4">
-          <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
+          <FontAwesomeIcon
+            icon={faLongArrowLeft}
+            className="text-2xl text-gray-700"
+          />
           <p>Go back</p>
         </span>
         <div>
