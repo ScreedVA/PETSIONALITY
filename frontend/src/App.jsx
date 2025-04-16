@@ -16,7 +16,6 @@ function App() {
     <NavbarProvider>
       <Router>
         <NavBarSelector />
-        not f u
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/pet-sitters" exact element={<PetSitters />} />
