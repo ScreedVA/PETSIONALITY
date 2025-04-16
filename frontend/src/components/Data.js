@@ -1,3 +1,4 @@
+import logo from "../assets/images/logo/1.png";
 import Toe1 from "../assets/images/pets/1.webp";
 import Toe2 from "../assets/images/pets/2.avif";
 import Toe3 from "../assets/images/pets/3.jpg";
@@ -10,6 +11,10 @@ import role1 from "../assets/images/pets/4.jpg";
 import role2 from "../assets/images/pets/5.jpg";
 import role3 from "../assets/images/pets/6.jpg";
 import bg1 from "../assets/images/bgs/2.png";
+import img1 from "../assets/images/pets/3.png";
+import img2 from "../assets/images/other/1.jpg";
+
+import { faUser, faDog, faMessage } from "@fortawesome/free-solid-svg-icons";
 
 export const navigations = [
   {
@@ -75,8 +80,27 @@ export const toes = [
   },
 ];
 
+export const options1 = [
+  {
+    icon: faUser,
+    label: "User Info",
+  },
+  {
+    icon: faDog,
+    label: "My Pets",
+  },
+  {
+    icon: faMessage,
+    label: "Messages",
+  },
+];
+
 export const homeVideos = [Video1, Video2, Video3, Video4];
+
+export const logos = [logo];
 
 export const roles = [role1, role2, role3];
 
 export const bgs = [bg1];
+
+export const imgs = [img1, img2];

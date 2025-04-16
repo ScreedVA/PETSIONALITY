@@ -1,64 +1,81 @@
-import React from "react";
-import { bgs } from "../components/Data";
-import { Link } from "react-router-dom";
+import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDog, faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import PasswordValidator from "../components/PasswordValidator";
+import { imgs } from "../components/Data";
+import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Register2() {
+  const [passwordState, setPasswordState] = useState({
+    password: "",
+    isValid: false,
+    validationsArray: [],
+  });
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate("/role-selection");
+  }
+
   return (
-    <div
-      style={{ backgroundImage: `url(${bgs})` }}
-      className="min-h-[100vh] bg-cover flex flex-col justify-center items-center py-[7%]">
-      <div className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
-        <span className="flex gap-4">
-          <FontAwesomeIcon
-            icon={faLongArrowLeft}
-            className="text-2xl text-gray-700"
-          />
-          <p>Go back</p>
-        </span>
-        <div>
-          <h3>Register to Pawshake</h3>
-        </div>
+    <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-20 pt-36">
+      <div className="flex gap-28">
+        <form
+          onSubmit={handleSubmit}
+          className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+          {/* 1/3 */}
+          <span className="flex gap-4">
+            <FontAwesomeIcon
+              icon={faLongArrowLeft}
+              className="text-2xl text-gray-700"
+            />
+            <p>Go back</p>
+          </span>
 
-        <div className="flex flex-col gap-10">
-          {/* 3/4 */}
-          <div className="flex flex-col gap-3">
-            {/* Google */}
-            <div className="flex justify-center py-2 border border-gray-300 border-solid rounded-lg">
-              <p>Continue with Google</p>
-            </div>
-            {/* Facebook */}
-            <div className="flex justify-center py-2 border border-gray-300 border-solid rounded-lg">
-              <p>Continue with Facebook</p>
-            </div>
-            {/* Apple */}
-            <div className="flex justify-center py-2 border border-gray-300 border-solid rounded-lg">
-              <p>Continue with Apple</p>
-            </div>
+          {/* 2/3 */}
+          <div>
+            <h3>Create an account</h3>
           </div>
 
-          {/* 4/4 */}
+          {/* 3/3 */}
           <div className="flex flex-col gap-5">
-            <div className="flex justify-center">
-              <hr />
-              <p>or</p>
-              <hr />
+            <div className="flex flex-col gap-1">
+              <label>Email</label>
+              <input type="email" placeholder="Email" />
             </div>
-
-            {/* Email */}
-            <div className="flex justify-center py-2 border border-gray-300 border-solid rounded-lg">
-              <p>Continue with Email</p>
+            <div className="flex flex-col gap-1">
+              <label>First name</label>
+              <input type="text" placeholder="First name" />
             </div>
-
-            <span className="flex gap-2 text-sm">
-              <p>Already have an account</p>
-              <Link href="#" className="text-blue-500">
-                Log in here
-              </Link>
-            </span>
+            <div className="flex flex-col gap-1">
+              <label>Last name</label>
+              <input type="text" placeholder="Last name" />
+            </div>
+            <div>
+              <PasswordValidator onChange={setPasswordState} />
+            </div>
+            <div>
+              <button type="submit" className="w-full py-3 button1">
+                Register
+              </button>
+            </div>
+            <div className="flex gap-2">
+              <p>
+                Already have an account?{" "}
+                <u className="font-semibold text-blue-400">Login here</u>
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <input type="checkbox" className="flex-shrink-0 checkbox1" />
+              <p className="text-xs ">
+                By registering you agree to accept the <u>Terms of Service</u>{" "}
+                and the <u>Privacy & Cookie Policy</u>
+              </p>
+            </div>
           </div>
-        </div>
+        </form>
+        <img src={imgs[0]} className="w-[500px] bg-white rounded-2xl" />
       </div>
     </div>
   );
