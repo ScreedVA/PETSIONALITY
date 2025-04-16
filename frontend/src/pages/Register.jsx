@@ -57,7 +57,7 @@ export default function Register2() {
             </div>
             <div className="flex gap-2">
               <p>
-                Don't have an account yet? <u className="font-semibold text-blue-400">Sign up here</u>
+                Already have an account? <u className="font-semibold text-blue-400">Login here</u>
               </p>
             </div>
             <div className="flex gap-2">

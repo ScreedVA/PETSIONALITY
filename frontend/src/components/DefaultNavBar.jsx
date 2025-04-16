@@ -4,7 +4,7 @@ import { navigations } from "./Data";
 import { BiChevronDown } from "react-icons/bi";
 import Logo from "../assets/images/logo/1.png";
 
-const Navbar = () => {
+const DefaultNavBar = () => {
   const { pathname } = useLocation();
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -72,4 +72,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DefaultNavBar;
