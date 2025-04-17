@@ -14,7 +14,7 @@ export default function Login() {
   return (
     <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-14 pt-36">
       <div className="flex gap-28">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 p-10 bg-white rounded-xl ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 bg-white p-14 rounded-xl ">
           {/* 1/5 */}
           <span className="flex gap-4">
             <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />

@@ -5,6 +5,7 @@ import { options1 } from "../components/Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import UserInfo from "../components/UserInfo";
+import MyPets from "../components/MyPets";
 
 export default function UserDashboard() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -21,15 +22,16 @@ export default function UserDashboard() {
           <h3 className="text-center ">User Profile</h3>
           <TabMenu selectedIndex={selectedIndex} onIndexChange={setSelectedIndex} options={options1} />
         </div>
-        <div className="flex justify-center gap-3 cursor-pointer">
+        <div className="flex items-center justify-center gap-3 cursor-pointer">
           <FontAwesomeIcon icon={faDoorOpen} />
           <p>Logout</p>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-[5] pb-20 pt-14 px-52">
-        <UserInfo />
+      <div className="flex-[5] pb-24 pt-5 px-80 overflow-y-auto">
+        {selectedIndex === 0 && <UserInfo />}
+        {selectedIndex === 1 && <MyPets />}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { logos, imgs } from "./Data";
 
 export default function ProfileNavbar() {
   return (
-    <nav className="flex justify-between px-16 py-5 w-full bg-[#90C6BE] fixed">
+    <nav className="flex justify-between px-16 py-2 w-full bg-[#90C6BE] fixed">
       {/* Logo */}
       <Link to={"/"}>
         <img src={logos[0]} alt="Logo" className="h-16" />

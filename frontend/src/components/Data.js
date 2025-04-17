@@ -13,8 +13,12 @@ import role3 from "../assets/images/pets/6.jpg";
 import bg1 from "../assets/images/bgs/2.png";
 import img1 from "../assets/images/pets/3.png";
 import img2 from "../assets/images/other/1.jpg";
+import pet1 from "../assets/images/pets/7.jpg";
+import pet2 from "../assets/images/pets/8.jpg";
+import pet3 from "../assets/images/pets/9.jpg";
 
 import { faUser, faDog, faMessage } from "@fortawesome/free-solid-svg-icons";
+import { name } from "ejs";
 
 export const navigations = [
   {
@@ -92,6 +96,52 @@ export const options1 = [
   {
     icon: faMessage,
     label: "Messages",
+  },
+];
+
+export const petList = [
+  {
+    name: "Luna",
+    species: "Dog",
+    breed: "Siberian Husky",
+    gender: "Female",
+    size: "medium-large",
+    weight: "50 Ibs",
+    yob: 2020,
+    "spayed/neutered": true,
+    microchipped: true,
+    vaccinations: true,
+    description: "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
+    img: pet3,
+    showDetails: false,
+  },
+  {
+    name: "Pickles",
+    species: "Cat",
+    breed: "Ragdoll",
+    gender: "Male",
+    size: "medium",
+    yob: 2021,
+    microchipped: true,
+    vaccinations: true,
+    description:
+      "Pickles is an elegant and independent feline with a love for sunbeams and quiet corners. She’s low...",
+    img: pet2,
+    showDetails: false,
+  },
+  {
+    name: "Rusty",
+    species: "Dog",
+    breed: "Golden Retriever Mix",
+    size: "Large",
+    weight: "68 Ibs",
+    yob: 2018,
+    "spayed/neutered": true,
+    microchipped: true,
+    vaccinations: true,
+    description: "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
+    img: pet1,
+    showDetails: false,
   },
 ];
 

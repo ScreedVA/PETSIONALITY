@@ -80,16 +80,13 @@ input[type="checkbox"] {
   cursor: pointer;
 
   transition: all ease 0.3s;
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 5px;
 
-  height: 20px;
-  width: 20px;
+  border-radius: 5px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 input[type="checkbox"]::before {
@@ -100,13 +97,25 @@ input[type="checkbox"]::after {
 }
 
 /* Checkbox 1 */
+input.checkbox1[type="checkbox"] {
+  border: 1px solid gray;
+
+  height: 20px;
+  width: 20px;
+}
+
 input.checkbox1[type="checkbox"]:after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f00c";
   font-size: 12px;
   color: white;
+
+  background-color: white;
   display: none;
+
+  height: 20px;
+  width: 20px;
 }
 
 input.checkbox1[type="checkbox"]:hover {
@@ -114,7 +123,7 @@ input.checkbox1[type="checkbox"]:hover {
 }
 
 input.checkbox1[type="checkbox"]:checked {
-  background-color: #000;
+  background-color: #49978b;
 }
 
 input.checkbox1[type="checkbox"]:checked::after {
@@ -127,12 +136,35 @@ input.checkbox2[type="checkbox"] {
   width: 150px;
   position: relative;
   border: 2px solid gray;
+  background-color: white;
+}
+
+input.checkbox2x2[type="checkbox"] {
+  background: linear-gradient(to bottom, white, #e8dedb);
+  position: relative;
+  height: 50px;
+  /* width: 50px; */
+  width: 100%;
+  /* padding: 20px 20px; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 input.checkbox2[type="checkbox"]:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 24px;
+  color: #666;
+  position: absolute;
+  top: 10%;
+}
+
+input.checkbox2x2[type="checkbox"]:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 16px;
   color: #666;
   position: absolute;
   top: 15%;
@@ -142,20 +174,35 @@ input.checkbox2[type="checkbox"]:after {
   font-size: 14px;
   color: #333;
   position: absolute;
+  top: 15%;
+}
+
+input.checkbox2x2[type="checkbox"]:after {
+  font-size: 8px;
+  color: #333;
+  position: absolute;
   top: 60%;
 }
 
-/* Checkbox 3 */
+/* Checkbox 3 and 3x2 */
 input.checkbox3[type="checkbox"] {
   position: relative;
   height: 25px;
-  width: 400px;
   padding: 20px 20px;
   justify-content: start;
   border: 2px solid gray;
 }
 
-input.checkbox3[type="checkbox"]:before {
+input.checkbox3x2[type="checkbox"] {
+  background: linear-gradient(to bottom, white, #e8dedb);
+  position: relative;
+  height: 25px;
+  padding: 20px 20px;
+  justify-content: start;
+}
+
+input.checkbox3[type="checkbox"]:before,
+input.checkbox3x2[type="checkbox"]:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 15px;
@@ -164,11 +211,11 @@ input.checkbox3[type="checkbox"]:before {
   position: absolute;
 }
 
-input.checkbox3[type="checkbox"]:after {
+input.checkbox3[type="checkbox"]:after,
+input.checkbox3x2[type="checkbox"]:after {
   font-size: 15px;
   color: #666;
   position: absolute;
-  left: 12%;
 }
 
 /* Checkbox 4 */
@@ -195,23 +242,41 @@ input.checkbox4[type="checkbox"]:after {
   top: 50%;
 }
 
-/* Checkbox 2,3,4 */
+/* Checkbox 2, 2x2, 3, 3x2, 4 */
 input.checkbox2[type="checkbox"]:checked,
 input.checkbox3[type="checkbox"]:checked,
+input.checkbox2x2[type="checkbox"]:checked,
+input.checkbox3x2[type="checkbox"]:checked,
 input.checkbox4[type="checkbox"]:checked {
   border-color: #49978b;
 }
 
 input.checkbox2[type="checkbox"]:checked::before,
 input.checkbox3[type="checkbox"]:checked::before,
+input.checkbox2x2[type="checkbox"]:checked::before,
+input.checkbox3x2[type="checkbox"]:checked::before,
 input.checkbox4[type="checkbox"]:checked::before {
   color: #49978b;
 }
 
 input.checkbox2[type="checkbox"]:checked::after,
+input.checkbox2x2[type="checkbox"]:checked:after,
 input.checkbox3[type="checkbox"]:checked::after,
+input.checkbox3x2[type="checkbox"]:checked:after,
 input.checkbox4[type="checkbox"]:checked::after {
   color: #49978b;
+}
+
+/* Select */
+select {
+  appearance: none;
+  padding: 0.5rem 1rem;
+}
+
+select.select1 {
+  background: linear-gradient(to bottom, white, #e8dedb);
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
 }
 
 /* Dates */
@@ -227,16 +292,39 @@ input[type="date"] {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   appearance: none;
   border: 1px solid black;
+  padding: 0.5rem 1rem;
+}
 
+input.input2[type="text"],
+input.input2[type="email"],
+input.input2[type="password"],
+input.input2[type="number"] {
+  border-radius: 2px;
+  border-color: #808080;
+  background-color: #e8dedb;
+}
+
+input.input3[type="text"],
+input.input3[type="email"],
+input.input3[type="password"],
+input.input3[type="number"] {
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(to bottom, #ffffff, #e8dedb);
+}
+
+/* Button */
+button {
+  appearance: none;
+  font-weight: 500;
   padding: 0.75rem 1rem;
 }
 
-/*  */
-.button1 {
-  font-weight: 500;
+button.button1 {
   color: white;
   border: 3px solid #49978b;
   background: linear-gradient(to right, #fff 50%, #49978b 50%);
@@ -245,14 +333,27 @@ input[type="password"] {
   transition: background-position 0.4s ease, color 0.4s ease;
 }
 
-.button1:hover {
+button.button1:hover {
   background-position: 0 0;
   color: #49978b;
 }
 
-.button1:active {
+button.button1:active {
   transition: all ease-in-out 0.5s;
   transform: translateY(5px);
+}
+
+button.button2 {
+  color: #ff914d;
+  border: 3px solid #ff914d;
+  background: linear-gradient(to right, #ff914d 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+}
+
+button.button2:hover {
+  background-position: 0 0;
+  color: white;
 }
 
 .card1 {
