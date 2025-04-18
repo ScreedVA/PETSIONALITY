@@ -13,7 +13,7 @@ const PetSitterSearchForm = () => {
         <div className="flex flex-row gap-5 px-5 py-2 bg-gray-100">
           <p>I'm looking for service for my:</p>
           <div className="flex gap-2">
-            <input className="checkbox1" type="checkbox" name="dog" id="dog-check" onClick={checkboxClick} />
+            <input className="checkbox1" type="checkbox" name="dog" onClick={checkboxClick} />
             <p>Dog</p>
           </div>
           <div className="flex gap-2">

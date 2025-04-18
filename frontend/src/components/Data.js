@@ -93,10 +93,6 @@ export const options1 = [
     icon: faDog,
     label: "My Pets",
   },
-  {
-    icon: faMessage,
-    label: "Messages",
-  },
 ];
 
 export const petList = [

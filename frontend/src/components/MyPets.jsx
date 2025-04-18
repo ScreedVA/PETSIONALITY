@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { imgs } from "./Data";
 import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { petList as pets } from "./Data";
@@ -35,9 +35,11 @@ export default function MyPets() {
                 className="flex w-full gap-3 border px-10 py-4 bg-mint-gradient-light border-[#49978B]"
               >
                 <div className={`flex flex-col w-full ${pet.showDetails ? "gap-10" : ""}`}>
+                  {/* Card Summary */}
                   <div className="flex ">
                     <div className="flex justify-start items-center gap-5 w-[450px]">
                       <img src={pet.img} alt="Dog Image" className="w-20 h-20 rounded-full" />
+
                       <div className="flex flex-col">
                         <h3>{pet.name}</h3>
                         <p className="text-[#808080] font-semibold text-xs">{pet.description}</p>
@@ -70,9 +72,9 @@ export default function MyPets() {
                     </div>
                   </div>
 
-                  {/* Expand or Collapse Form */}
+                  {/* FORM - Expand or Collapse  */}
                   <form
-                    className={`w-full overflow-hidden duration-400 ease-in-out text-[#49978B] pb-5 ${
+                    className={`w-full overflow-hidden duration-400 ease-in-out text-[#49978B] pb-5 flex flex-col gap-5 relative z-0 ${
                       pet.showDetails ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
@@ -109,8 +111,8 @@ export default function MyPets() {
                       </div>
 
                       {/* Right */}
-                      {/* 1/2 */}
-                      <div className="flex flex-col w-full gap-3">
+                      {/* 1/3 (form) 1/2 (right) */}
+                      <div className="relative z-0 flex flex-col w-full gap-3">
                         <div className="flex flex-col w-full">
                           <input
                             type="checkbox"
@@ -135,8 +137,8 @@ export default function MyPets() {
                             className="checkbox3x2 after:left-12 after:content-['House-Trained'] before:content-['\e509'] "
                           />
                         </div>
-                        {/* 2/2 */}
-                        <div className="flex flex-col gap-1">
+                        {/* 1/3 (form) 2/2 (right) */}
+                        <div className="flex flex-col gap-4">
                           <h4 className="font-normal">Friendly with...</h4>
                           <div className="flex w-full gap-3">
                             <div className="flex flex-grow">
@@ -167,8 +169,14 @@ export default function MyPets() {
                         </div>
                       </div>
                     </div>
-                    <div>
-                      <textarea name="description" id="description" cols={4} className="bg-beige-gradient"></textarea>
+                    {/* 2/3 (form) */}
+                    <div className="flex flex-col gap-3">
+                      <label htmlFor="">Short Description</label>
+                      <textarea name="description" cols={55} rows={10} draggable="false"></textarea>
+                    </div>
+                    {/* 3/3 (form) */}
+                    <div className="flex justify-end">
+                      <button className="button2">Save Changes</button>
                     </div>
                   </form>
                 </div>

@@ -50,12 +50,14 @@ const DefaultNavBar = () => {
               </div>
             );
           })}
-          <Link to="/login" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
-            Sign In
-          </Link>
-          <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
-            Register
-          </Link>
+          <div className="flex gap-8">
+            <Link to="/login" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+              Sign In
+            </Link>
+            <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+              Register
+            </Link>
+          </div>
         </div>
 
         {/* menu button */}

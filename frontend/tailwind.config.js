@@ -11,6 +11,9 @@ export default {
         "mint-gradient-light": "linear-gradient(to bottom, #FFFF, #B3DAD5)",
         "beige-gradient": "linear-gradient(to bottom, #FFFFF, #E8DEDB)",
       },
+      backgroundColor: {
+        "dark-green": "#49978b",
+      },
     },
   },
   plugins: [],
