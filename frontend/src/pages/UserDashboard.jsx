@@ -15,7 +15,7 @@ export default function UserDashboard() {
     setNavbarType("profile");
   }, []);
   return (
-    <div className="flex h-[100vh] pt-[105px]">
+    <div className="flex h-[100vh] pt-[105px] bg-beige-gradient">
       {/* Sidebar */}
       <div className="flex flex-col justify-between pb-5 text-[#49978B]">
         <div className="flex flex-col flex-1 gap-6 pt-5">

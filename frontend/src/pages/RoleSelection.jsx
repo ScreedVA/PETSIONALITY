@@ -1,5 +1,6 @@
 import React from "react";
 import { roles } from "../components/Data";
+import { Link } from "react-router-dom";
 
 export default function RoleSelection() {
   return (
@@ -10,8 +11,9 @@ export default function RoleSelection() {
       </div>
 
       <div className="grid w-2/3 h-1/2 gap-2 grid-cols-2 grid-rows-[1fr_1fr]">
-        {/* Top Left */}
-        <div
+        {/* Pet Sitter (Top-Left) */}
+        <Link
+          to={"/user-dashboard"}
           className="col-start-1 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[0]})` }}
         >
@@ -19,10 +21,10 @@ export default function RoleSelection() {
             Caring for pets while their owners are away. Offer walks, feeding, and companionship.
           </p>
           <h2 className="mt-2 text-3xl font-bold">PET SITTER</h2>
-        </div>
+        </Link>
 
-        {/* Top Right */}
-        <div
+        {/* Pet-Owner (Top-Right) */}
+        <Link
           className="col-start-2 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[1]})` }}
         >
@@ -30,10 +32,10 @@ export default function RoleSelection() {
             Looking for trusted care, training, or services for your furry friend.
           </p>
           <h2 className="mt-2 text-3xl font-bold">PET OWNER</h2>
-        </div>
+        </Link>
 
-        {/* Bottom */}
-        <div
+        {/* Trainer (Bottom) */}
+        <Link
           className="col-start-1 col-end-3 row-start-2 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[2]})` }}
         >
@@ -41,7 +43,7 @@ export default function RoleSelection() {
             Caring for pets while their owners are away. Offer walks, feeding, and companionship.
           </p>
           <h2 className="mt-2 text-3xl font-bold">TRAINER</h2>
-        </div>
+        </Link>
       </div>
     </div>
   );

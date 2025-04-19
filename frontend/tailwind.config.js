@@ -13,6 +13,7 @@ export default {
       },
       backgroundColor: {
         "dark-green": "#49978b",
+        beige: "#F5F5F5",
       },
     },
   },
