@@ -13,7 +13,7 @@ export default function RoleSelection() {
       <div className="grid w-2/3 h-1/2 gap-2 grid-cols-2 grid-rows-[1fr_1fr]">
         {/* Pet Sitter (Top-Left) */}
         <Link
-          to={"/user-dashboard"}
+          to={"/user-dashboard/sitter"}
           className="col-start-1 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[0]})` }}
         >
@@ -25,6 +25,7 @@ export default function RoleSelection() {
 
         {/* Pet-Owner (Top-Right) */}
         <Link
+          to={"/user-dashboard/owner"}
           className="col-start-2 row-start-1 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[1]})` }}
         >
@@ -36,6 +37,7 @@ export default function RoleSelection() {
 
         {/* Trainer (Bottom) */}
         <Link
+          to={"/user-dashboard/trainer"}
           className="col-start-1 col-end-3 row-start-2 p-4 text-white bg-black card1"
           style={{ backgroundImage: `url(${roles[2]})` }}
         >

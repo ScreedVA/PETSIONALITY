@@ -7,7 +7,7 @@ import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import UserInfo from "../components/UserInfo";
 import MyPets from "../components/MyPets";
 
-export default function UserDashboard() {
+export default function UserDashboardOwner() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { setNavbarType } = useNavbar();
 
@@ -29,7 +29,7 @@ export default function UserDashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-[5] pb-24 pt-5 px-80 overflow-y-auto">
+      <div className="flex-[5] pb-24 pt-5 px-[12%] overflow-y-auto">
         {selectedIndex === 0 && <UserInfo />}
         {selectedIndex === 1 && <MyPets />}
       </div>
