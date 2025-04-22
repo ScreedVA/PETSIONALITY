@@ -7,7 +7,7 @@ const PetSitterSearchForm = () => {
   }
 
   return (
-    <div className="petsittersearchform-container h-[500px] p-10 m-1">
+    <div className="petsittersearchform-container h-[500px] sm:p-10 p-2 m-1 w-full lg:w-auto">
       <form
         onSubmit={(e) => e.preventDefault()}
         className="flex flex-col gap-3 pb-5 bg-white border rounded-lg">
@@ -19,7 +19,6 @@ const PetSitterSearchForm = () => {
               className="checkbox1"
               type="checkbox"
               name="dog"
-              id="dog-check"
               onClick={checkboxClick}
             />
             <p>Dog</p>
@@ -34,7 +33,7 @@ const PetSitterSearchForm = () => {
           {/* 2/5 */}
           <div className="flex flex-col gap-1">
             <p>For When You're Away</p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <input
                 type="checkbox"
                 className="checkbox2 after:content-['Boarding'] before:content-['\f0f2'] "
@@ -62,15 +61,15 @@ const PetSitterSearchForm = () => {
           <div className="flex flex-col">
             <div className="flex flex-col gap-1">
               <p>How often do you need this service</p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap">
                 <input
                   type="checkbox"
-                  className="checkbox3 after:content-['One-Time'] before:content-['\f133'] "
+                  className="checkbox3 w-[400px] after:left-10 after:content-['One-Time'] before:content-['\f133'] "
                   name="one-time"
                 />
                 <input
                   type="checkbox"
-                  className="checkbox3 after:content-['Repeat-Weakly'] before:content-['\f363'] "
+                  className="checkbox3 w-[400px] after:left-10 after:content-['Repeat-Weakly'] before:content-['\f363'] "
                   name="repeat-weakly"
                 />
               </div>
@@ -78,7 +77,7 @@ const PetSitterSearchForm = () => {
           </div>
 
           {/* 4/5 */}
-          <div className="flex gap-5">
+          <div className="flex gap-5 flex-wrap">
             <div className="flex flex-col gap-1">
               <p>Start Date</p>
               <div>
@@ -95,7 +94,7 @@ const PetSitterSearchForm = () => {
 
           {/* 5/5 */}
           <div className="flex flex-col">
-            <div className="flex gap-4">
+            <div className="flex gap-4 lg:flex-nowrap flex-wrap">
               <input
                 className="checkbox4 after:content-['0-15-Ibs'] before:content-['Small']"
                 type="checkbox"
@@ -117,7 +116,7 @@ const PetSitterSearchForm = () => {
                 name="small-dog"
               />
               <button
-                className="w-2/4 text-4xl rounded-md button1"
+                className="sm:w-2/4 w-full text-2xl rounded-md button1"
                 type="submit">
                 Search
               </button>
