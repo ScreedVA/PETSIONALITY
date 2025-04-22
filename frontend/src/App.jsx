@@ -10,7 +10,9 @@ import Contact from "./pages/Contact";
 import RegisterSSO from "./pages/RegisterSSO";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import UserDashboard from "./pages/UserDashboard";
+import UserDashboardOwner from "./pages/UserDashboardOwner";
+import UserDashboardSitter from "./pages/UserDashboardSitter";
+import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 
@@ -28,7 +30,9 @@ function App() {
           <Route path="/job-offer" exact element={<JobOffer />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
-          <Route path="/user-dashboard" exact element={<UserDashboard />} />
+          <Route path="/user-dashboard/owner" exact element={<UserDashboardOwner />} />
+          <Route path="/user-dashboard/sitter" exact element={<UserDashboardSitter />} />
+          <Route path="/user-dashboard/trainer" exact element={<UserDashboardTrainer />} />
 
           {/* Auth */}
           <Route path="/register/sso" exact element={<RegisterSSO />} />

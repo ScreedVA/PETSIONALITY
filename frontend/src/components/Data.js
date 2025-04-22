@@ -33,8 +33,14 @@ import img10 from "../assets/images/other/9.jpg";
 import pet1 from "../assets/images/pets/7.jpg";
 import pet2 from "../assets/images/pets/8.jpg";
 import pet3 from "../assets/images/pets/9.jpg";
-
-import { faUser, faDog, faComment } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faDog,
+  faComment,
+  faClipboard,
+  faPaw,
+  faCat,
+} from "@fortawesome/free-solid-svg-icons";
 // import { name } from "ejs";
 
 export const homeVideos = [Video1, Video2, Video3, Video4];
@@ -123,6 +129,32 @@ export const options1 = [
   {
     icon: faComment,
     label: "My Sitters",
+  },
+];
+
+export const options2 = [
+  {
+    icon: faUser,
+    label: "User Info",
+  },
+  {
+    icon: faCat,
+    label: "Sitter Info",
+  },
+  {
+    icon: faClipboard,
+    label: "Services",
+  },
+];
+
+export const options3 = [
+  {
+    icon: faUser,
+    label: "User Info",
+  },
+  {
+    icon: faPaw,
+    label: "Trainer Info",
   },
 ];
 
@@ -335,3 +367,45 @@ export const shopBoxes = [
     tel: "555555555",
   },
 ];
+
+export const trainingSpecialities = [
+  "Obedience Training (Basic/Advanced)",
+  "Puppy-Training",
+  "Behavorial-Issues",
+  "Aggression/Reactivity",
+  "Seperation-Anxiety",
+  "Leash-Training",
+  "Potty-Training",
+  "Trick-Training",
+  "Therapy/Emotional-Support-Animal-Prep",
+  "Service-Dog-Training",
+  "Gaurd-Dog-Training",
+  "Clicker-Training",
+  "Agility/Sports-Training",
+];
+
+export const serviceOptions = [
+  "In-person-at-Trainer's-Location",
+  "In-person-at-Client's-Location",
+  "Group-Classes",
+  "Online/Virtual-Training",
+];
+
+export const servicePage = {
+  dogBoarding: {
+    active: false,
+    showDetails: false,
+  },
+  doggyDaycare: {
+    active: false,
+    showDetails: false,
+  },
+  dropInVisits: {
+    active: false,
+    showDetails: false,
+  },
+  dogWalking: {
+    active: false,
+    showDetails: false,
+  },
+};

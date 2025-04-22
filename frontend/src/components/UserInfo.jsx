@@ -58,7 +58,7 @@ export default function UserInfo() {
             </div>
           </div>
         </div>
-        <div className="flex ">
+        <div className="flex justify-center">
           <button className="button2">Save Changes</button>
         </div>
       </form>
