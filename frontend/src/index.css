@@ -716,6 +716,10 @@ p {
   width: 40px !important;
   height: 40px !important;
 }
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #49978b !important;
+}
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 20px !important;
