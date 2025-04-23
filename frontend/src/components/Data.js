@@ -33,6 +33,10 @@ import img10 from "../assets/images/other/9.jpg";
 import pet1 from "../assets/images/pets/7.jpg";
 import pet2 from "../assets/images/pets/8.jpg";
 import pet3 from "../assets/images/pets/9.jpg";
+import UserIcon from "../assets/images/icons/user.png";
+import BoneIcon from "../assets/images/icons/bone.png";
+import DocIcon from "../assets/images/icons/doc.png";
+
 import {
   faUser,
   faDog,
@@ -81,7 +85,7 @@ export const navigations = [
     ],
   },
   {
-    link: "/",
+    link: "/about-us",
     text: "About us",
   },
   {
@@ -409,3 +413,24 @@ export const servicePage = {
     showDetails: false,
   },
 };
+
+export const ourBenefits = [
+  {
+    icon: UserIcon,
+    title: "AI-Powered Matching",
+    paragraph:
+      "Our AI system matches pet owners with sitters based on your pet’s needs and preferences for a perfect fit.",
+  },
+  {
+    icon: BoneIcon,
+    title: "Trusted Sitters",
+    paragraph:
+      "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
+  },
+  {
+    icon: DocIcon,
+    title: "Hassle-Free Booking",
+    paragraph:
+      "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
+  },
+];

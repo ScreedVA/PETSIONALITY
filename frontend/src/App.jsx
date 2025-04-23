@@ -15,6 +15,7 @@ import UserDashboardSitter from "./pages/UserDashboardSitter";
 import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -28,11 +29,24 @@ function App() {
           <Route path="/pet-trainers" exact element={<PetTrainers />} />
           <Route path="/pet-shops" exact element={<PetShops />} />
           <Route path="/job-offer" exact element={<JobOffer />} />
+          <Route path="/about-us" exact element={<AboutUs />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
-          <Route path="/user-dashboard/owner" exact element={<UserDashboardOwner />} />
-          <Route path="/user-dashboard/sitter" exact element={<UserDashboardSitter />} />
-          <Route path="/user-dashboard/trainer" exact element={<UserDashboardTrainer />} />
+          <Route
+            path="/user-dashboard/owner"
+            exact
+            element={<UserDashboardOwner />}
+          />
+          <Route
+            path="/user-dashboard/sitter"
+            exact
+            element={<UserDashboardSitter />}
+          />
+          <Route
+            path="/user-dashboard/trainer"
+            exact
+            element={<UserDashboardTrainer />}
+          />
 
           {/* Auth */}
           <Route path="/register/sso" exact element={<RegisterSSO />} />
