@@ -7,7 +7,7 @@ const PetSitters = () => {
   return (
     <>
       <div className="petSitters">
-        <div className="flex items-end justify-center pr-5 bg-main-green mb-36 md:pt-0 pt-20">
+        <div className="flex items-end justify-center pr-5 bg-main-green sm:mb-36 mb-20 md:pt-0 pt-20">
           <div>
             <img
               style={{ maxWidth: "700px" }}

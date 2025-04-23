@@ -1,6 +1,6 @@
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { imgs } from "../components/Data";
+import { imgs, logos } from "../components/Data";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ export default function Login() {
   return (
     <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-14 pt-36">
       <div className="flex gap-28">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 p-10 bg-white rounded-xl ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 bg-white p-14 rounded-xl ">
           {/* 1/5 */}
           <span className="flex gap-4">
             <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
@@ -29,17 +29,26 @@ export default function Login() {
           {/* 3/5 */}
           <div className="flex flex-col gap-5">
             {/* Google */}
-            <div className="flex justify-center py-2 border border-black border-solid">
+            <div className="flex items-center justify-center gap-2 py-2 border border-black border-solid">
+              <div className="flex items-center justify-center w-8 h-8">
+                <img src={logos[1]} alt="Google Logo" />
+              </div>
               <p>Continue with Google</p>
             </div>
 
             {/* Yahoo */}
-            <div className="flex justify-center py-2 border border-black border-solid">
+            <div className="flex items-center justify-center gap-2 py-2 border border-black border-solid">
+              <div className="flex items-center justify-center w-8 h-8">
+                <img src={logos[2]} alt="Facebook Logo" />
+              </div>
               <p>Continue with Facebook</p>
             </div>
 
             {/* Apple */}
-            <div className="flex justify-center py-2 border border-black border-solid">
+            <div className="flex items-center justify-center gap-2 py-2 border border-black border-solid">
+              <div className="flex items-center justify-center w-8 h-8">
+                <img src={logos[3]} alt="Apple Logo" />
+              </div>
               <p>Continue with Apple</p>
             </div>
           </div>

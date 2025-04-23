@@ -14,15 +14,17 @@ const DefaultNavBar = () => {
         <div>
           <img style={{ maxWidth: "250px" }} src={Logo} alt="" />
         </div>
-        <div className={`flex items-center flex mobile_menu ${mobileMenu ? "open" : ""}`}>
+        <div
+          className={`flex items-center flex mobile_menu ${
+            mobileMenu ? "open" : ""
+          }`}>
           {navigations.map((nav, i) => {
             return (
               <div
-                className={`nav_link relative py-5 xl:pr-14 pr-8 group transition whitespace-nowrap ${
+                className={`nav_link relative py-5 pr-8 group transition whitespace-nowrap ${
                   pathname === nav.link ? "yes" : ""
                 }`}
-                key={i}
-              >
+                key={i}>
                 {nav.dropdown ? (
                   <Link to={nav.link} className="font-bold">
                     {nav.text}
@@ -35,7 +37,7 @@ const DefaultNavBar = () => {
                 )}
 
                 {nav.dropdown ? (
-                  <div className="absolute left-0 invisible px-6 py-4 transition -translate-y-5 opacity-0 bg-beige top-full group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible ">
+                  <div className="absolute left-0 invisible px-4 py-4 transition -translate-y-5 opacity-0 bg-beige top-full group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible ">
                     {nav.dropdown.map((item, i) => {
                       return (
                         <Link key={i} to={item.link} className="block mb-2">
@@ -50,19 +52,26 @@ const DefaultNavBar = () => {
               </div>
             );
           })}
-          <Link to="/login" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
-            Sign In
-          </Link>
-          <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
-            Register
-          </Link>
+          <div className="flex gap-6">
+            <Link
+              to="/login"
+              className="block py-2 font-bold align-middle  h-fit text-orange underline">
+              Sign In
+            </Link>
+            <Link
+              to="/register"
+              className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+              Register
+            </Link>
+          </div>
         </div>
 
         {/* menu button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className={`menuButton lg:hidden z-50 ${mobileMenu ? "clicked fixed right-6" : ""}`}
-        >
+          className={`menuButton lg:hidden z-50 ${
+            mobileMenu ? "clicked fixed right-6" : ""
+          }`}>
           <div></div>
           <div></div>
           <div></div>
