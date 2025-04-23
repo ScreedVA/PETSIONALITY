@@ -2,7 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { logos, imgs, notifications, messages } from "./Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faMessage, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBell,
+  faMessage,
+  faCircleInfo,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function ProfileNavbar() {
   const [pageState, setPageState] = useState("notifications");
@@ -14,9 +18,12 @@ export default function ProfileNavbar() {
   useEffect(() => {
     function handleClickOutside(event) {
       // Reset page state when clicked out of panel
-      const clickOutsideNotif = notifRef.current && !notifRef.current.contains(event.target);
-      const clickOutsideMsg = msgRef.current && !msgRef.current.contains(event.target);
-      const clickOutsideInfo = msgRef.current && !infoRef.current.contains(event.target);
+      const clickOutsideNotif =
+        notifRef.current && !notifRef.current.contains(event.target);
+      const clickOutsideMsg =
+        msgRef.current && !msgRef.current.contains(event.target);
+      const clickOutsideInfo =
+        msgRef.current && !infoRef.current.contains(event.target);
 
       if (
         (pageState === "notifications" && clickOutsideNotif) ||
@@ -52,8 +59,7 @@ export default function ProfileNavbar() {
           className="relative p-3 cursor-pointer hover:bg-dark-green"
           onClick={() => {
             setPageState("notifications");
-          }}
-        >
+          }}>
           {/* Notification (icon) */}
           <FontAwesomeIcon icon={faBell} />
 
@@ -78,9 +84,13 @@ export default function ProfileNavbar() {
 
                       {/* Notification (Content) */}
                       <div className="flex flex-col justify-center flex-grow-0">
-                        <p className="pr-20 text-xs font-semibold">{notification.header}</p>
+                        <p className="pr-20 text-xs font-semibold">
+                          {notification.header}
+                        </p>
                         <p className="text-[0.6rem]">{notification.body}</p>
-                        <p className="text-[0.4rem] text-gray-400">{notification.date}</p>
+                        <p className="text-[0.4rem] text-gray-400">
+                          {notification.date}
+                        </p>
                       </div>
                     </div>
                     <hr />
@@ -97,8 +107,7 @@ export default function ProfileNavbar() {
           className="relative p-3 cursor-pointer hover:bg-dark-green"
           onClick={() => {
             setPageState("messages");
-          }}
-        >
+          }}>
           {/* Messages (Icon) */}
           <FontAwesomeIcon icon={faMessage} />
 
@@ -124,9 +133,13 @@ export default function ProfileNavbar() {
 
                       {/* Message (Content - Flex-Right) */}
                       <div className="flex flex-col justify-center flex-grow-0">
-                        <p className="pr-20 text-xs font-semibold">{message.header}</p>
+                        <p className="pr-20 text-xs font-semibold">
+                          {message.header}
+                        </p>
                         <p className="text-[0.6rem]">{message.body}</p>
-                        <p className="text-[0.4rem] text-gray-400">{message.date}</p>
+                        <p className="text-[0.4rem] text-gray-400">
+                          {message.date}
+                        </p>
                       </div>
                     </div>
                     <hr />
@@ -143,8 +156,7 @@ export default function ProfileNavbar() {
           className="relative p-3 cursor-pointer hover:bg-dark-green"
           onClick={() => {
             setPageState("info");
-          }}
-        >
+          }}>
           {/* Info (icon) */}
           <FontAwesomeIcon icon={faCircleInfo} />
 
@@ -158,7 +170,11 @@ export default function ProfileNavbar() {
           )}
         </div>
         <div>
-          <img src={imgs[1]} alt="Profile Image" className="h-8 w-8 rounded-[100%] cursor-pointer" />
+          <img
+            src={imgs[1]}
+            alt="Profile Image"
+            className="h-8 w-8 rounded-[100%] cursor-pointer"
+          />
         </div>
       </div>
     </nav>
