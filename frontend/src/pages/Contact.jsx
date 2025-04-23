@@ -9,17 +9,17 @@ const ContactUs = () => {
         <input
           type="text"
           placeholder="Name"
-          className="w-full p-3 rounded-lg border-2 border-white bg-transparent placeholder-white text-white focus:outline-none"
+          className="w-full p-3 rounded-lg !border-2 !border-white  placeholder-white text-white focus:outline-none"
         />
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-3 rounded-lg border-2 border-white bg-transparent placeholder-white text-white focus:outline-none"
+          className="w-full p-3 rounded-lg !border-2 !border-white  placeholder-white text-white focus:outline-none"
         />
         <textarea
           rows="5"
           placeholder="Message"
-          className="w-full p-3 rounded-lg border-2 border-white bg-transparent placeholder-white text-white focus:outline-none"
+          className="border-solid bg-none w-full p-3 rounded-lg !border-2 !border-white placeholder-white text-white focus:outline-none"
         ></textarea>
         <button
           type="submit"
