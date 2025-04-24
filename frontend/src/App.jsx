@@ -16,7 +16,11 @@ import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
+<<<<<<< HEAD
 import Matchmaking from "./pages/Matchmaking";
+=======
+import SingleTrainer from "./pages/SingleTrainer";
+>>>>>>> 4984457e411cdb135dda2024541630e7b4489224
 
 function App() {
   return (
@@ -31,6 +35,7 @@ function App() {
           <Route path="/pet-shops" exact element={<PetShops />} />
           <Route path="/job-offer" exact element={<JobOffer />} />
           <Route path="/about-us" exact element={<AboutUs />} />
+          <Route path="/single-trainer" exact element={<SingleTrainer />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/Matchmaking" exact element={<Matchmaking />} />

@@ -1,6 +1,7 @@
 import React from "react";
 import Bg from "../assets/images/bgs/4.png";
-import { ourBenefits } from "../components/Data";
+import { ourBenefits, reviews } from "../components/Data";
+import ReviewBox from "../components/ReviewBox";
 
 const AboutUs = () => {
   return (
@@ -58,6 +59,20 @@ const AboutUs = () => {
           Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever{" "}
         </h5>
+      </div>
+
+      <h2 className="text-center mb-16">Reviews</h2>
+      <div className="wrapper xl:px-28 pb-20 flex gap-10 md:flex-row flex-col">
+        {reviews.map((item, index) => {
+          return (
+            <ReviewBox
+              key={index}
+              stars={item.stars}
+              paragraph={item.text}
+              name={item.name}
+            />
+          );
+        })}
       </div>
     </div>
   );
