@@ -434,3 +434,16 @@ export const ourBenefits = [
       "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
   },
 ];
+
+export const reviews = [
+  {
+    stars: "⭐⭐⭐⭐⭐",
+    text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.sitatibus essLorem ipsum, dolor sit amet consectetur adipisicing elit. Necessit.",
+    name: "Jane Doemington",
+  },
+  {
+    stars: "⭐⭐⭐⭐⭐",
+    text: "Neces orem ipsum, dolor sit amet consectetur adipisicing elit.sitatibus essLorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus essisicing elit. Necessitatibus ess",
+    name: "Jane Doe",
+  },
+];
