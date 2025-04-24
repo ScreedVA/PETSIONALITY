@@ -322,7 +322,7 @@ export const ownerOfferBoxes = [
 
 export const trainerBoxes = [
   {
-    link: "/",
+    link: "/single-trainer",
     img: Trainer1,
     name: "William Butcher",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem laborum quibusdam repellat laudantium odio molestias nesciunt enim itaque iste tempore a dolore officiis accusantium fugiat,",
@@ -330,7 +330,7 @@ export const trainerBoxes = [
     price: "15",
   },
   {
-    link: "/",
+    link: "/single-trainer",
     img: Trainer2,
     name: "Daenerys Targaryen",
     text: "consectetur adipisicing elit. Dolorem laborum quibusdam repellat laudantium odio molestias nesciunt enim itaque iste tempore a dolore officiis accusantium fugiat,",
@@ -338,7 +338,7 @@ export const trainerBoxes = [
     price: "55",
   },
   {
-    link: "/",
+    link: "/single-trainer",
     img: Trainer3,
     name: "Gustavo Fring",
     text: "amet consecteturrem laborum quibusdam repellat laudantiumempore a dolLorem ipsum dolor sitore offi adipisicing elit. Dolociis accusantium fugiat, odio molestias nesciunt enim itaque iste t",

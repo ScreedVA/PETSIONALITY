@@ -16,6 +16,7 @@ import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
+import SingleTrainer from "./pages/SingleTrainer";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/pet-shops" exact element={<PetShops />} />
           <Route path="/job-offer" exact element={<JobOffer />} />
           <Route path="/about-us" exact element={<AboutUs />} />
+          <Route path="/single-trainer" exact element={<SingleTrainer />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route
