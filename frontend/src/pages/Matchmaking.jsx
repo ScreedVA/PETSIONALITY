@@ -9,8 +9,8 @@ import pi2 from "../assets/images/other/7.jpg";
 
 const Matchmaking = () => {
   return (  
-    <div className="flex ">
-     <div className="w-1/2 bg-[#E8DEDB] pl-10 sm:pt-30 pt-32 pb-60 xl:px-28 p-6">
+    <div className="flex mt-20 ">
+     <div className="w-1/2 bg-[#F0E8E5] pl-10 sm:pt-10 pt-32 pb-60 xl:px-28 p-6">
        <div className="flex item-start gap-6">
          <img
          src={Img1}

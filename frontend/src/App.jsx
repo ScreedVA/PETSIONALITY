@@ -16,11 +16,10 @@ import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
-<<<<<<< HEAD
-import Matchmaking from "./pages/Matchmaking";
-=======
+
 import SingleTrainer from "./pages/SingleTrainer";
->>>>>>> 4984457e411cdb135dda2024541630e7b4489224
+import Matchmaking from "./pages/Matchmaking";
+
 
 function App() {
   return (
