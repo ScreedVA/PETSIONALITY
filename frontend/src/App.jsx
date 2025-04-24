@@ -16,6 +16,7 @@ import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
+import Matchmaking from "./pages/Matchmaking";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about-us" exact element={<AboutUs />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
+          <Route path="/Matchmaking" exact element={<Matchmaking />} />
           <Route
             path="/user-dashboard/owner"
             exact

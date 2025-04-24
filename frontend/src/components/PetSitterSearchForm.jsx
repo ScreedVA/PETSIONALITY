@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PetSitterSearchForm = () => {
   function checkboxClick(e) {
@@ -115,11 +116,13 @@ const PetSitterSearchForm = () => {
                 type="checkbox"
                 name="small-dog"
               />
-              <button
-                className="sm:w-2/4 w-full text-2xl rounded-md button1"
-                type="submit">
-                Search
-              </button>
+              <Link to='/Matchmaking'>
+               <button
+                 className="sm:w-2/4 !w-full text-2xl rounded-md button1"
+                 type="submit">
+                 Search
+               </button>
+              </Link>
             </div>
           </div>
         </div>
