@@ -687,7 +687,7 @@ p {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #49978bc8;
+  background-color: #ff914dd2;
   transition: 0.5s;
 }
 .paw .toe:hover::after,
@@ -701,10 +701,10 @@ p {
 /* petSitters */
 
 .petSitters .dog_img {
-  translate: 0 136px;
+  translate: 0 89px;
 }
 .petSitters .cat_img {
-  translate: 0 38px;
+  translate: 0 22px;
 }
 
 /* swiper */

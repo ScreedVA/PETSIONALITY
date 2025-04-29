@@ -47,7 +47,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 // import { name } from "ejs";
 
-export const homeVideos = [Video1, Video2, Video3, Video4];
+export const homeVideos = [Video1, Video4, Video3, Video2];
 
 export const logos = [logo, logo2, logo3, logo4];
 
@@ -58,40 +58,55 @@ export const bgs = [bg1];
 export const imgs = [img1, img2];
 
 export const navigations = [
+  // {
+  //   link: "/",
+  //   text: "Home",
+  // },
   {
     link: "/",
-    text: "Home",
-  },
-  {
-    link: "/",
-    text: "Services",
+    text: "Petsitting",
     dropdown: [
-      {
-        link: "/pet-owners",
-        text: "Pet Owners",
-      },
       {
         link: "/pet-sitters",
         text: "Sitters",
       },
       {
-        link: "/pet-trainers",
-        text: "Trainers",
+        link: "/pet-owners",
+        text: "Owners",
       },
       {
-        link: "/pet-shops",
-        text: "Shops",
+        link: "/pet-trainers",
+        text: "Trainers",
       },
     ],
   },
   {
-    link: "/about-us",
-    text: "About us",
+    link: "/pet-shops",
+    text: "Animal Agancy",
+  },
+  {
+    link: "/pet-shops",
+    text: "Shops",
   },
   {
     link: "/",
-    text: "Community",
+    text: "Company",
+    dropdown: [
+      {
+        link: "/about-us",
+        text: "About us",
+      },
+      {
+        link: "/pet-owners",
+        text: "Our concept",
+      },
+      {
+        link: "/pet-trainers",
+        text: "FAQs",
+      },
+    ],
   },
+
   {
     link: "/contact",
     text: "Contact",
@@ -325,6 +340,7 @@ export const trainerBoxes = [
     link: "/single-trainer",
     img: Trainer1,
     name: "William Butcher",
+    location: "Berlin",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem laborum quibusdam repellat laudantium odio molestias nesciunt enim itaque iste tempore a dolore officiis accusantium fugiat,",
     rating: "5.0",
     price: "15",
@@ -333,6 +349,7 @@ export const trainerBoxes = [
     link: "/single-trainer",
     img: Trainer2,
     name: "Daenerys Targaryen",
+    location: "Hamburg",
     text: "consectetur adipisicing elit. Dolorem laborum quibusdam repellat laudantium odio molestias nesciunt enim itaque iste tempore a dolore officiis accusantium fugiat,",
     rating: "5.0",
     price: "55",
@@ -341,6 +358,7 @@ export const trainerBoxes = [
     link: "/single-trainer",
     img: Trainer3,
     name: "Gustavo Fring",
+    location: "Frankfurt",
     text: "amet consecteturrem laborum quibusdam repellat laudantiumempore a dolLorem ipsum dolor sitore offi adipisicing elit. Dolociis accusantium fugiat, odio molestias nesciunt enim itaque iste t",
     rating: "4.9",
     price: "29",

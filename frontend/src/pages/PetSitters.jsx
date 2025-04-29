@@ -7,10 +7,10 @@ const PetSitters = () => {
   return (
     <>
       <div className="petSitters">
-        <div className="flex items-end justify-center pr-5 bg-main-green sm:mb-36 mb-20 md:pt-0 pt-20">
+        <div className="flex items-end justify-center pr-5 bg-main-green sm:mb-40 mb-20 md:pt-0 pt-20">
           <div>
             <img
-              style={{ maxWidth: "700px" }}
+              style={{ maxWidth: "460px" }}
               src={Img1}
               alt=""
               className="dog_img"
@@ -18,13 +18,13 @@ const PetSitters = () => {
           </div>
           <div className="text-center">
             <div>
-              <h2>Find your best match!</h2>
-              <h3 className="sm:block hidden">
+              <h3 className="font-bold">Find your best match!</h3>
+              <h4 className="sm:block hidden max-w-xl">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
-              </h3>
+              </h4>
             </div>
             <img
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "230px" }}
               src={Img2}
               alt=""
               className="cat_img !mx-auto"

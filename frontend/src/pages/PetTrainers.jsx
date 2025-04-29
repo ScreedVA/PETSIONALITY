@@ -2,6 +2,8 @@ import React from "react";
 import Img1 from "../assets/images/other/2.png";
 import { trainerBoxes } from "../components/Data";
 import { Link } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
+import { RiMapPinLine } from "react-icons/ri";
 
 const PetTrainers = () => {
   return (
@@ -21,11 +23,37 @@ const PetTrainers = () => {
             </h4>
           </div>
           <img
-            style={{ maxWidth: "700px" }}
+            style={{ maxWidth: "500px" }}
             src={Img1}
             alt=""
             className="md:w-1/2 w-2/3 relative"
           />
+        </div>
+      </div>
+
+      <div className="wrapper py-10">
+        <div className="flex justify-center gap-4 flex-wrap">
+          <div className="relative bg-white">
+            <FiSearch className="absolute text-2xl top-2 left-2" />
+            <input
+              className="w-full h-full !pl-10 text-sm !border-none"
+              type="text"
+              name=""
+              id=""
+            />
+          </div>
+          <div className="relative bg-white">
+            <RiMapPinLine className="absolute text-2xl top-2 left-2" />
+            <input
+              className="w-full h-full !pl-10 text-sm !border-none"
+              type="text"
+              name=""
+              id=""
+            />
+          </div>
+          <button className="bg-dark-green px-10 font-bold text-white whitespace-nowrap">
+            Find trainer
+          </button>
         </div>
       </div>
 
@@ -41,6 +69,8 @@ const PetTrainers = () => {
                   <img src={item.img} alt="" />
                 </div>
                 <h5 className="mt-4 mb-2">{item.name}</h5>
+                <p>📍 {item.location}</p>
+                <br />
                 <p>{item.text}</p>
                 <h5 className="my-3">⭐ {item.rating}</h5>
                 <h5>From €{item.price}</h5>
