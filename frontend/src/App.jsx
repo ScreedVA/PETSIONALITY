@@ -20,6 +20,7 @@ import AboutUs from "./pages/AboutUs";
 import SingleTrainer from "./pages/SingleTrainer";
 import Matchmaking from "./pages/Matchmaking";
 import OurConcept from "./pages/OurConcept";
+import FAQs from "./pages/FAQs";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/job-offer" exact element={<JobOffer />} />
           <Route path="/about-us" exact element={<AboutUs />} />
           <Route path="/our-concept" exact element={<OurConcept />} />
+          <Route path="/faq" exact element={<FAQs />} />
           <Route path="/single-trainer" exact element={<SingleTrainer />} />
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
