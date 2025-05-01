@@ -4,6 +4,7 @@ import Pattern1 from "../assets/images/bgs/1.png";
 import { Link } from "react-router-dom";
 import { toes, homeVideos } from "../components/Data";
 import Img1 from "../assets/images/pets/4.png";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const [videoHovered, setVideoHovered] = useState(5);
@@ -91,6 +92,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

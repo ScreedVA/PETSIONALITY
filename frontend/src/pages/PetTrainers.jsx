@@ -4,6 +4,7 @@ import { trainerBoxes } from "../components/Data";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { RiMapPinLine } from "react-icons/ri";
+import Footer from "../components/Footer";
 
 const PetTrainers = () => {
   return (
@@ -79,6 +80,7 @@ const PetTrainers = () => {
           })}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

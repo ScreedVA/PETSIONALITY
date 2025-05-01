@@ -2,6 +2,7 @@ import React from "react";
 import Bg from "../assets/images/bgs/4.png";
 import { ourBenefits, reviews } from "../components/Data";
 import ReviewBox from "../components/ReviewBox";
+import Footer from "../components/Footer";
 
 const AboutUs = () => {
   return (
@@ -74,6 +75,7 @@ const AboutUs = () => {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 };

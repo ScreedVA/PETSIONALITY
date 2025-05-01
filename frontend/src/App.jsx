@@ -19,7 +19,6 @@ import AboutUs from "./pages/AboutUs";
 
 import SingleTrainer from "./pages/SingleTrainer";
 import Matchmaking from "./pages/Matchmaking";
-import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -59,7 +58,6 @@ function App() {
           <Route path="/register" exact element={<Register />} />
           <Route path="/login" exact element={<Login />} />
         </Routes>
-        <Footer />
       </Router>
     </NavbarProvider>
   );

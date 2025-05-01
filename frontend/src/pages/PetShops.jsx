@@ -8,7 +8,7 @@ const PetShops = () => {
       style={{ backgroundColor: "#B6D4DE" }}>
       <div className="wrapper max-w-3xl">
         {" "}
-        <h2 className="relative z-10">Coming soon...</h2>
+        <h2 className="relative z-5">Coming soon...</h2>
         <img className="mx-auto md:-my-20" src={GIF} alt="" />
         <h4>
           Here goes a text explaining that there will be something like an
