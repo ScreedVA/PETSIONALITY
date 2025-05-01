@@ -6,13 +6,13 @@ export default function SitterInfo() {
       {/* 1/5 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
-        <div className="flex justify-center py-3 bg-[#49978B] text-white">
+        <div className="flex justify-center py-3 text-[#49978B]">
           <h5>What size dogs do you want to sit?</h5>
         </div>
         {/* Body/Grid */}
         <div className="grid grid-cols-4">
           <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"0-10 kgs"} />
+            <input type="checkbox" className={`h-20 checkbox2x3 rounded-lg `} data-label={"0-10 kgs"} />
           </div>
           <div className="flex flex-grow w-full h-full">
             <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"11-25 kgs"} />
@@ -29,7 +29,7 @@ export default function SitterInfo() {
       {/* 2/5 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
-        <div className="flex justify-center py-3 bg-[#49978B] text-white">
+        <div className="flex justify-center py-3 text-[#49978B]">
           <h5>What ages of dogs do you want to sit?</h5>
         </div>
         {/* Body/Grid */}
@@ -49,7 +49,7 @@ export default function SitterInfo() {
       {/* 3/5 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
-        <div className="flex justify-center py-3 bg-[#49978B] text-white">
+        <div className="flex justify-center py-3 text-[#49978B]">
           <h5>What type of building do you live in?</h5>
         </div>
         {/* Body/Grid */}
@@ -75,7 +75,7 @@ export default function SitterInfo() {
       {/*4/5 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
-        <div className="flex justify-center py-3 bg-[#49978B] text-white">
+        <div className="flex justify-center py-3 text-[#49978B]">
           <h5>Does anyone smoke inside your house?</h5>
         </div>
         {/* Body/Grid */}
@@ -101,7 +101,7 @@ export default function SitterInfo() {
       {/* 5/5 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
-        <div className="flex justify-center py-3 bg-[#49978B] text-white">
+        <div className="flex justify-center py-3 text-[#49978B]">
           <h5>Does your home have children?</h5>
         </div>
         {/* Body/Grid */}
