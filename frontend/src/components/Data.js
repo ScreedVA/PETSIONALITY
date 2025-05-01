@@ -79,7 +79,7 @@ export const navigations = [
     ],
   },
   {
-    link: "/pet-shops",
+    link: "/animal-agency",
     text: "Animal Agancy",
   },
   {
@@ -95,11 +95,11 @@ export const navigations = [
         text: "About us",
       },
       {
-        link: "/pet-owners",
+        link: "/our-concept",
         text: "Our concept",
       },
       {
-        link: "/pet-trainers",
+        link: "/faq",
         text: "FAQs",
       },
     ],
@@ -118,17 +118,17 @@ export const toes = [
     label: "Sitters",
   },
   {
-    link: "/",
+    link: "/pet-owners",
     img: Toe2,
     label: "Owners",
   },
   {
-    link: "/",
+    link: "/pet-trainers",
     img: Toe3,
     label: "Trainers",
   },
   {
-    link: "/",
+    link: "/pet-shops",
     img: Toe4,
     label: "Shops",
   },

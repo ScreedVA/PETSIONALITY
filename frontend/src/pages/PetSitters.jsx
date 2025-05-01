@@ -2,10 +2,11 @@ import React from "react";
 import Img1 from "../assets/images/pets/1.png";
 import Img2 from "../assets/images/pets/2.png";
 import PetSitterSearchForm from "../components/PetSitterSearchForm";
+import Footer from "../components/Footer";
 
 const PetSitters = () => {
   return (
-    <>
+    <div>
       <div className="petSitters">
         <div className="flex items-end justify-center pr-5 bg-main-green sm:mb-40 mb-20 md:pt-0 pt-20">
           <div>
@@ -35,7 +36,8 @@ const PetSitters = () => {
       <div className="flex justify-center pb-32">
         <PetSitterSearchForm />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 
