@@ -3,50 +3,7 @@ import React from "react";
 export default function SitterInfo() {
   return (
     <div className="flex flex-col gap-3">
-      {/* 1/5 */}
-      <div className="flex flex-col gap-3">
-        {/* Head */}
-        <div className="flex justify-center py-3 text-[#49978B]">
-          <h5>What size dogs do you want to sit?</h5>
-        </div>
-        {/* Body/Grid */}
-        <div className="grid grid-cols-4">
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 rounded-lg `} data-label={"0-10 kgs"} />
-          </div>
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"11-25 kgs"} />
-          </div>
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"26-45 kgs"} />
-          </div>
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={">45 kgs"} />
-          </div>
-        </div>
-      </div>
-
-      {/* 2/5 */}
-      <div className="flex flex-col gap-3">
-        {/* Head */}
-        <div className="flex justify-center py-3 text-[#49978B]">
-          <h5>What ages of dogs do you want to sit?</h5>
-        </div>
-        {/* Body/Grid */}
-        <div className="grid grid-cols-3">
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"<1 year"} />
-          </div>
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"1-8 years"} />
-          </div>
-          <div className="flex flex-grow w-full h-full">
-            <input type="checkbox" className={`h-20 checkbox2x3 `} data-label={"8+ years"} />
-          </div>
-        </div>
-      </div>
-
-      {/* 3/5 */}
+      {/* 1/3 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
         <div className="flex justify-center py-3 text-[#49978B]">
@@ -72,7 +29,7 @@ export default function SitterInfo() {
         </div>
       </div>
 
-      {/*4/5 */}
+      {/*2/3 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
         <div className="flex justify-center py-3 text-[#49978B]">
@@ -98,7 +55,7 @@ export default function SitterInfo() {
         </div>
       </div>
 
-      {/* 5/5 */}
+      {/* 3/3 */}
       <div className="flex flex-col gap-3">
         {/* Head */}
         <div className="flex justify-center py-3 text-[#49978B]">
