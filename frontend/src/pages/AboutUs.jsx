@@ -62,7 +62,7 @@ const AboutUs = () => {
       </div>
 
       <h2 className="text-center mb-16">Reviews</h2>
-      <div className="wrapper xl:px-28 pb-20 flex gap-10 md:flex-row flex-col">
+      <div className="wrapper xl:px-28 pb-20  gap-10 grid md:grid-cols-2">
         {reviews.map((item, index) => {
           return (
             <ReviewBox

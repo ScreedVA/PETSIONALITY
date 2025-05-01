@@ -13,8 +13,6 @@ import Video4 from "../assets/videos/paw/4.mp4";
 import Trainer1 from "../assets/images/trainers/1.png";
 import Trainer2 from "../assets/images/trainers/2.png";
 import Trainer3 from "../assets/images/trainers/3.png";
-import Shop1 from "../assets/images/products/1.png";
-import Shop2 from "../assets/images/products/2.png";
 
 import role1 from "../assets/images/pets/4.jpg";
 import role2 from "../assets/images/pets/5.jpg";
@@ -362,31 +360,6 @@ export const trainerBoxes = [
     text: "amet consecteturrem laborum quibusdam repellat laudantiumempore a dolLorem ipsum dolor sitore offi adipisicing elit. Dolociis accusantium fugiat, odio molestias nesciunt enim itaque iste t",
     rating: "4.9",
     price: "29",
-  },
-];
-
-export const shopBoxes = [
-  {
-    img: Shop1,
-    name: "Fressnapf",
-    title: "Pet Supplies Store",
-    rating: "4.3",
-    reviews: "102",
-    text: "Praesentium adipisci hic, ipsum perspiciatis autem quibusdam non unde placeat magni quidem! Ab, ipsam earum saepe ut odit veniam recusandae adipisci laborum",
-    website: "https://petshop.de/",
-    location: "https://maps.app.goo.gl/4vbhQwbKdDpuuYQ46",
-    tel: "555555555",
-  },
-  {
-    img: Shop2,
-    name: "Neighborhood Dog Shop",
-    title: "Pet Supplies Store",
-    rating: "3.8",
-    reviews: "27",
-    text: "Praesentium adipisci hic, ipsum perspiciatis autem quibusdam non unde placeat magni quidem! Ab, ipsam earum saepe ut odit veniam recusandae adipisci laborum",
-    website: "https://petshop.de/",
-    location: "https://maps.app.goo.gl/4vbhQwbKdDpuuYQ46",
-    tel: "555555555",
   },
 ];
 
