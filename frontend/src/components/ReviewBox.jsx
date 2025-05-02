@@ -4,7 +4,7 @@ import QuotesIcon from "../assets/images/icons/quotes.png";
 const ReviewBox = (props) => {
   return (
     <div
-      className="relative text-center p-10 md:w-1/2"
+      className="relative text-center p-10 "
       style={{
         background: "#D7EAE8",
         borderTopLeftRadius: "100px",

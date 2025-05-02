@@ -30,10 +30,7 @@ export default function MyPets() {
           <ul className="flex flex-col w-full gap-4 ">
             {/* Pet Card */}
             {petList.map((pet, index) => (
-              <li
-                key={`${pet.name}-${index}`}
-                className="flex w-full gap-3 border px-10 py-4 bg-mint-gradient-light border-[#49978B]"
-              >
+              <li key={`${pet.name}-${index}`} className="flex w-full gap-3 border px-10 py-4  border-[#49978B]">
                 <div className={`flex flex-col w-full ${pet.showDetails ? "gap-10" : ""}`}>
                   {/* Card Summary */}
                   <div className="flex ">

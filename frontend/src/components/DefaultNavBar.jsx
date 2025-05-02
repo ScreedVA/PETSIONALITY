@@ -9,7 +9,7 @@ const DefaultNavBar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <div className="absolute top-0 left-0 z-10 w-full">
+    <div className="absolute top-0 left-0 z-10 w-full text-sm">
       <div className="flex items-center justify-between py-1 wrapper">
         <Link to="/">
           <img style={{ maxWidth: "250px" }} src={Logo} alt="" />

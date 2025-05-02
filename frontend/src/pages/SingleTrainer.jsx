@@ -44,7 +44,7 @@ const SingleTrainer = () => {
         </div>
 
         <h3 className="text-center my-16">Reviews</h3>
-        <div className="lg:px-20 px-5 pb-20 flex gap-10 md:flex-row flex-col">
+        <div className="lg:px-20 px-5 pb-20 gap-10 grid md:grid-cols-2">
           {reviews.map((item, index) => {
             return (
               <ReviewBox
