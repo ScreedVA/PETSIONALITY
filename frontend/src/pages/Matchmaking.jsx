@@ -5,12 +5,13 @@ import pse2 from "../assets/images/pse/2.jpeg";
 import pse3 from "../assets/images/pse/3.jpeg";
 import pi1 from "../assets/images/other/5.jpg";
 import pi2 from "../assets/images/other/7.jpg";
+import pse4 from "../assets/images/pse/4.jpg";
 
 
 const Matchmaking = () => {
   return (  
     <div className="flex mt-20 ">
-     <div className="w-1/2 bg-[#F0E8E5] pl-10 sm:pt-10 pt-32 pb-60 xl:px-28 p-6">
+     <div className="w-1/2 bg-[#F0E8E5] pl-10 sm:pt-10s pt-25 pb-60 xl:px-28 p-6">
        <div className="flex item-start gap-6">
          <img
          src={Img1}
@@ -87,7 +88,21 @@ const Matchmaking = () => {
           </div>
         </div>
       </div>
-     <div className="w-1/2  bg-[#FCF9F8] ">Right Side</div>
+     <div className="w-1/2  bg-[#FCF9F8] pl-10 xl:px-36">
+       <div className="flex justify-center mt-10">
+           <div className="bg-white rounded-2xl overflow-hidden shadow-lg w-96">
+              <img src={pse4} alt="Jane Smith with cat" className="w-[500px] h-[600px] object-cover" />
+                <div className="bg-[#90C6BE] p-4 text-center">
+                   <h2 className="text-white text-lg font-semibold">Jane Smith</h2>
+                </div>
+              <div className="flex justify-between items-center bg-[#D1E7E4] px-6 py-3">
+                <button className="text-red-600 text-2xl">✖️</button>
+                <button className="text-green-600 text-2xl">👍</button>
+              </div>
+            </div>
+         </div>
+
+      </div>
     </div>
   )
 }
