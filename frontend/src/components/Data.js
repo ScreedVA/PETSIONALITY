@@ -438,3 +438,22 @@ export const reviews = [
     name: "Jane Doe",
   },
 ];
+
+export const questions = [
+  {
+    q: " Lorem Ipsum typesetting industry. Lorem Ipsum has been?",
+    a: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus",
+  },
+  {
+    q: "Тypesetting in Lorem Ipsum Lorem Ipsy. Lorem Ipsum has been?",
+    a: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  },
+  {
+    q: "Lorem Ipsum is simply dummy text of the Lorem Ipsum typesetting industry. Lorem Ipsum has been?",
+    a: "printing and typesetting industry. Lorem Ipsum has been the indus",
+  },
+  {
+    q: "Тypesetting in Lorem Ipsum Lorem Ipsy. Lorem Ipsum has been?",
+    a: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  },
+];
