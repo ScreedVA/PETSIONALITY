@@ -78,10 +78,10 @@ export const navigations = [
       },
     ],
   },
-  {
-    link: "/animal-agency",
-    text: "Animal Agancy",
-  },
+  // {
+  //   link: "/animal-agency",
+  //   text: "Animal Agancy",
+  // },
   {
     link: "/pet-shops",
     text: "Shops",
