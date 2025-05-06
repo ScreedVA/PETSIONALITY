@@ -14,17 +14,15 @@ const DefaultNavBar = () => {
         <Link to="/">
           <img style={{ maxWidth: "250px" }} src={Logo} alt="" />
         </Link>
-        <div
-          className={`flex items-center flex mobile_menu ${
-            mobileMenu ? "open" : ""
-          }`}>
+        <div className={`flex items-center mobile_menu ${mobileMenu ? "open" : ""}`}>
           {navigations.map((nav, i) => {
             return (
               <div
                 className={`nav_link relative py-5 pr-8 group transition whitespace-nowrap ${
                   pathname === nav.link ? "yes" : ""
                 }`}
-                key={i}>
+                key={i}
+              >
                 {nav.dropdown ? (
                   <Link to={nav.link} className="font-bold">
                     {nav.text}
@@ -53,14 +51,10 @@ const DefaultNavBar = () => {
             );
           })}
           <div className="flex gap-6">
-            <Link
-              to="/login"
-              className="block py-2 font-bold align-middle  h-fit text-orange underline">
+            <Link to="/login" className="block py-2 font-bold underline align-middle h-fit text-orange">
               Sign In
             </Link>
-            <Link
-              to="/register"
-              className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+            <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
               Register
             </Link>
           </div>
@@ -69,9 +63,8 @@ const DefaultNavBar = () => {
         {/* menu button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className={`menuButton lg:hidden z-50 ${
-            mobileMenu ? "clicked fixed right-6" : ""
-          }`}>
+          className={`menuButton lg:hidden z-50 ${mobileMenu ? "clicked fixed right-6" : ""}`}
+        >
           <div></div>
           <div></div>
           <div></div>
