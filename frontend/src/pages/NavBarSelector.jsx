@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavbar } from "../services/ContextService";
-import ProfileNavbar from "./ProfileNavbar";
-import DefaultNavbar from "./DefaultNavbar";
+import ProfileNavbar from "../components/ProfileNavbar";
+import DefaultNavbar from "../components/DefaultNavbar";
 
 const NavBarSelector = () => {
   const { navbarType } = useNavbar();

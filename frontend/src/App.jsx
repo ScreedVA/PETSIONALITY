@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBarSelector from "./components/NavBarSelector";
+import NavBarSelector from "./pages/NavBarSelector";
 import Home from "./pages/Home";
 import PetOwners from "./pages/PetOwners";
 import PetSitters from "./pages/PetSitters";
@@ -41,21 +41,10 @@ function App() {
           <Route path="/role-selection" exact element={<RoleSelection />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/Matchmaking" exact element={<Matchmaking />} />
-          <Route
-            path="/user-dashboard/owner"
-            exact
-            element={<UserDashboardOwner />}
-          />
-          <Route
-            path="/user-dashboard/sitter"
-            exact
-            element={<UserDashboardSitter />}
-          />
-          <Route
-            path="/user-dashboard/trainer"
-            exact
-            element={<UserDashboardTrainer />}
-          />
+
+          <Route path="/user-dashboard/owner" exact element={<UserDashboardOwner />} />
+          <Route path="/user-dashboard/sitter" exact element={<UserDashboardSitter />} />
+          <Route path="/user-dashboard/trainer" exact element={<UserDashboardTrainer />} />
 
           {/* Auth */}
           <Route path="/register/sso" exact element={<RegisterSSO />} />
