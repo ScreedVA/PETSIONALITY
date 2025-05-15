@@ -14,14 +14,12 @@ const AboutUs = () => {
           alt=""
         />
         <div className="wrapper sm:pt-40 pt-32 pb-60 xl:px-28">
-          <h2>We are...</h2>
+          <h2>What we wanna do</h2>
           <h4 className="max-w-4xl mt-5">
-            a platform that connects pet owners with trusted, AI-matched pet
-            sitters for personalized care. Our AI technology ensures the perfect
-            sitter for your pet’s unique needs, while real-time updates keep you
-            connected. With easy booking and flexible scheduling, we make pet
-            care convenient and reliable—so you can rest easy knowing your pet
-            is in good hands.
+            Our goal with PETSONALITY is to create an intelligent, secure and
+            user-friendly platform that helps pet owners to find the perfect pet
+            sitter - based on an innovative matching system that harmonizes
+            personal characteristics and animal needs.
           </h4>
         </div>
       </div>
@@ -42,24 +40,64 @@ const AboutUs = () => {
         })}
       </div>
 
-      <div className="wrapper xl:px-28 pb-20">
-        <h5>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          Lorem Ipsum is
+      <div className="wrapper xl:px-28 pb-20 ">
+        <p className="sm:text-lg">
+          We want to offer a solution to a widespread problem: Pet owners are
+          often faced with the question of where to take their pet when they go
+          on vacation, are tied up at work or are ill. Conventional boarding
+          kennels rarely offer individual care - we, on the other hand, offer a
+          personal and coordinated alternative.
           <br />
           <br />
-          <strong>Some Title here</strong>
+          We not only provide allround service for pet owners, but also a
+          fulfilling activity for animal lovers who want to take in animals -
+          whether for extra income, an emotional connection or as a try to a
+          life with animals.
           <br />
-          <br /> simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever Lorem
-          Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever Lorem
-          Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever{" "}
-        </h5>
+          <br />
+          Our vision is sustainable pet care in which the needs of everyone
+          involved - whether human or animal - complement each other perfectly.
+          <br />
+          <br />
+          <h4>What we stand for</h4>
+          <br /> At PETSONALITY, we focus on the well-being of animals, the
+          strengthening of human and animal bonds and a sustainable, smart
+          solution. We believe that every pet deserves a temporary home that is
+          not only functional, but loving, empathetic and individual. Our
+          innovative approach combines modern technology with genuine love for
+          animals - for a better quality of life for people and pets.
+          <br />
+          <br />
+          Our values: <br />
+          Animal welfare – our focus on everything we do Empathy &
+          responsibility - for animals, their owners and pet sitters Innovation
+          & transparency - through modern technology and traceable processes
+          Sustainability & community - through local placement, resource
+          conservation and strong partnerships
+          <br />
+          <br />
+          PETSONALITY is more than a platform - we are a movement towards a more
+          responsible and appropriate approach to pet care.
+          <br />
+          <br />
+          <h4>Who we are</h4>
+          <br />
+          Behind PETSONALITY is a dedicated team of founders who know from their
+          own experience how difficult it can be to find trustworthy care for
+          your pet. The idea was born as part of a university project - but the
+          motivation behind it is deeply rooted in our personal love of animals.
+          <br />
+          <br />
+          We are pet owners ourselves and know about the challenges of everyday
+          life, but also about the desire to know that your pet is always in
+          good hands.
+          <br />
+          <br />
+          Our strength? We think from the customer's perspective, live empathy,
+          combine digital skills with social sensitivity - and have the ambition
+          to create an offer that is both technologically strong and close to
+          the heart.
+        </p>
       </div>
 
       <h2 className="text-center mb-16">Reviews</h2>
