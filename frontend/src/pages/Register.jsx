@@ -21,15 +21,10 @@ export default function Register2() {
   return (
     <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-20 pt-36">
       <div className="flex gap-28">
-        <form
-          onSubmit={handleSubmit}
-          className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+        <form onSubmit={handleSubmit} className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
           {/* 1/3 */}
           <span className="flex gap-4">
-            <FontAwesomeIcon
-              icon={faLongArrowLeft}
-              className="text-2xl text-gray-700"
-            />
+            <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
             <p>Go back</p>
           </span>
 
@@ -45,12 +40,8 @@ export default function Register2() {
               <input type="email" placeholder="Email" />
             </div>
             <div className="flex flex-col gap-1">
-              <label>First name</label>
+              <label>Username</label>
               <input type="text" placeholder="First name" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label>Last name</label>
-              <input type="text" placeholder="Last name" />
             </div>
             <div>
               <PasswordValidator onChange={setPasswordState} />
@@ -62,15 +53,13 @@ export default function Register2() {
             </div>
             <div className="flex gap-2">
               <p>
-                Already have an account?{" "}
-                <u className="font-semibold text-blue-400">Login here</u>
+                Already have an account? <u className="font-semibold text-blue-400">Login here</u>
               </p>
             </div>
             <div className="flex gap-2">
               <input type="checkbox" className="flex-shrink-0 checkbox1" />
               <p className="text-xs ">
-                By registering you agree to accept the <u>Terms of Service</u>{" "}
-                and the <u>Privacy & Cookie Policy</u>
+                By registering you agree to accept the <u>Terms of Service</u> and the <u>Privacy & Cookie Policy</u>
               </p>
             </div>
           </div>
