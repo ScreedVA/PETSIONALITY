@@ -72,8 +72,51 @@ def read_user_by_email(db: Session, email: str):
     user = db.query(UserTable).filter(UserTable.username == email).first()
 
     return user
+def read_user_by_id(db: Session, id: int):
+    """
+    Retrieves a single user from the database by exact id match.
 
-# Create
+    Parameters:
+    - db (Session): Active SQLAlchemy database session.
+    - id (str): The exact id to search for.
+
+    Returns:
+    - UserTable | None: The matched user instance if found, otherwise None.
+
+    Note:
+    - This function performs a case-sensitive exact match on the `id` field.
+    - Caller is responsible for handling the `None` result if no user is found.
+    """
+    user = db.query(UserTable).filter(UserTable.id == id).first()
+
+    return user
+
+def read_token(db: Session, token):
+    """
+    Retrieves a stored refresh token from the database.
+
+    Parameters:
+    - db (Session): SQLAlchemy database session used to query the token table.
+    - token (str): The refresh token string to look up.
+
+    Returns:
+    - TokenTable | None: The matching token record if found, otherwise None.
+
+    Notes:
+    - This function is typically used to validate or refresh a user's session.
+    - Ensure that token expiration is checked elsewhere if required.
+    """
+    stored_token = db.query(TokenTable).filter(TokenTable.token == token).first()
+    return stored_token
+def read_token_list(db: Session, filter = None):
+    stored_token_list = db.query(TokenTable).all()
+    return stored_token_list
+def read_token_by_user_id(db: Session, user_id: int):
+    token = db.query(TokenTable).filter(TokenTable.user_id == user_id).first()
+
+    return token
+#
+#  Create
 def create_user(db: Session, schema: CreateUserFrontend):
     """
     Creates and persists a new user in the database.

@@ -1,17 +1,21 @@
 # PyPi Dependencies
+from fastapi import Depends
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from jose import jwt
 
 # Python Library
 from datetime import datetime, timedelta
-from typing import Dict
+from typing import Dict, Annotated
 
 # Modules
-from crud import read_user_by_name, read_user_by_email
+from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token
+from models import UserTable
 
 # Convert Plain Text to hash
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/login')
 
 SECRET_KEY = '197b2c37c391bed93fe80344fe73b806947a65e36206e05a1a23c2fa12702fe3'
 ALGORITHM = 'HS256'
@@ -60,6 +64,62 @@ def issue_token(username: str, user_id: int, expires_delta:timedelta):
         "expiration_date": datetime.strftime(expires, "%Y-%m-%d")
     }
 
-    token = jwt.encode(claims=encode, key=SECRET_KEY, algorithm=ALGORITHM)
+    token_encoded: str = jwt.encode(claims=encode, key=SECRET_KEY, algorithm=ALGORITHM)
 
-    return token, expires
+    return token_encoded, expires
+
+
+def issue_access_and_refresh_tokens(username: str, user_id: int, access_expire: timedelta, refresh_expire: timedelta):
+    
+    access_token, access_expires = issue_token(user_id, username, access_expire)
+    refresh_token, refresh_expires = issue_token(user_id, username, refresh_expire)
+
+    return {
+        "access_token": access_token,
+        "access_expires": access_expires,
+        "refresh_token": refresh_token,
+        "refresh_expires": refresh_expires
+    }
+
+
+
+def authenticate_user(db: Session, username: str, password: str):
+    """
+    Authenticates a user by verifying their username and password.
+
+    Parameters:
+    - db (Session): Active SQLAlchemy session for database access.
+    - username (str): The username to search for in the database.
+    - password (str): The plaintext password to verify against the stored hash.
+
+    Returns:
+    - bool: Returns True if authentication succeeds.
+    - bool: Returns False if authentication fails.
+
+    Notes:
+    - Uses bcrypt to securely compare the provided password with the stored hash.
+    - Relies on `read_user_by_name` to fetch the user record.
+    """
+
+    user: UserTable = read_user_by_name(db, username)
+    if bcrypt_context.verify(password, user.hashed_password):
+        return True
+    return False
+
+async def decode_token(token: Annotated[str, Depends(oauth2_bearer)]):
+
+    # Decode and authorize Access Token str -> GETDecodedAccessTokenSchema
+    token_decoded: Dict = jwt.decode(claim=token, key=SECRET_KEY, algorithms=ALGORITHM)
+
+    return token_decoded
+
+def upsert_refresh_token(db: Session, user_id: int, token: str):
+    
+    token_table = read_token_by_user_id(db, user_id)
+
+    if token_table:
+        token_table.update(token)
+    else:
+        create_refresh_token(db, token, user_id)
+        
+

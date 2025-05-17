@@ -42,4 +42,5 @@ class TokenTable(TimeStampModel):
 
     user = relationship('UserTable', back_populates='token')
 
-
+    def update(self, token):
+        self.token = token

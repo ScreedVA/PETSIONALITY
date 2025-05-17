@@ -2,6 +2,7 @@
 from fastapi import APIRouter, HTTPException
 from passlib.context import CryptContext
 from starlette import status
+from jose import JWTError
 
 # Python Library
 from typing import List
@@ -64,6 +65,7 @@ async def get_list(db: db_dependency, filter):
     except HTTPException:
         raise  # re-raise custom exceptions
 
+    
     except Exception as e:
         # Log generic error
         raise HTTPException(

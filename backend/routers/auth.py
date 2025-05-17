@@ -1,17 +1,19 @@
 
 # PyPi dependancies
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
+from jose import JWTError
 
 # Python Library
-from typing import Dict
+from typing import Dict, Annotated
 from datetime import timedelta
 
 # Modules 
 from db import db_dependency
-from crud import create_user, create_refresh_token
-from schemas import CreateUserFrontend, ReadTokenFrontend
-from services import duplicate_user_check, issue_token
+from crud import create_user, create_refresh_token, read_user_by_name, read_token, read_user_by_id, read_token_list
+from schemas import CreateUserFrontend, ReadToken
+from services import duplicate_user_check, issue_token, decode_token, authenticate_user, issue_access_and_refresh_tokens, upsert_refresh_token
 
 router = APIRouter(
     prefix="/auth",
@@ -53,12 +55,12 @@ async def register(db: db_dependency, user_schema: CreateUserFrontend):
 
         create_refresh_token(db, refresh_token, user_table.id, refresh_expires)
         
-        token_response = ReadTokenFrontend(
+        return ReadToken(
             access_token=access_token,
             refresh_token=refresh_token,
             token_type='bearer'
         )
-        return token_response
+
 
     except HTTPException:
         raise  # re-raise custom exceptions
@@ -72,12 +74,91 @@ async def register(db: db_dependency, user_schema: CreateUserFrontend):
 
 
 
+@router.post("/login", status_code=status.HTTP_200_OK)
+async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    """
+    Authenticates a user using their username and password and returns a JWT access token.
+
+    Parameters:
+    - db (Session): Database session dependency used for querying user data.
+    - form_data (OAuth2PasswordRequestForm): Form data containing `username` and `password`, parsed from the request body.
+
+    Returns:
+    - ReadTokenFrontend: An object containing the access token and its type if authentication is successful.
+
+    Raises:
+    - HTTPException 404: If the user is not found or credentials are incorrect.
+    - HTTPException 401: If the JWT token cannot be created or verified.
+    - HTTPException 500: For any unexpected internal server error.
+
+    Notes:
+    - Expects credentials in OAuth2-compatible form format (application/x-www-form-urlencoded).
+    - Token is returned as a Bearer token to be used in the `Authorization` header for authenticated routes.
+    """
+    try:
+        # Business Logic
+        user = read_user_by_name(db, form_data.username)
+        if not user:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="No users found.")
+        
+        if not authenticate_user(db, form_data.username, form_data.password):
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User un-authorized")
+            
+        tokens = issue_access_and_refresh_tokens(user.id, user.username, timedelta(minutes=30), timedelta(days=7))
+        upsert_refresh_token(db, user.id, tokens["refresh_token"])
+
+        return ReadToken(
+            access_token=tokens["access_token"],
+            refresh_token=tokens["refresh_token"],
+            token_type="bearer"
+        )
+
+    except HTTPException:
+        raise  # re-raise custom exceptions
+
+    except JWTError as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail=f'User not authorized: {str(e)}')
+
+    except Exception as e:
+        # Log generic error
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An unexpected error occurred: {str(e)}"
+        )
     
 
-    return "test auth router"
+@router.post("/refresh", status_code=status.HTTP_200_OK)
+async def refresh_access_token(db: db_dependency, refresh_token: str):
+    try:
+        stored_token = read_token(db, refresh_token) 
+       
+        if not stored_token:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
+ 
+        user = read_user_by_id(db, stored_token.user_id)
 
 
+        new_access_token, _ = issue_token(stored_token.user_id, user.username, timedelta(minutes=30))
 
-@router.get("/test", status_code=status.HTTP_200_OK)
-async def test():
-    return "test auth router"
+        # return ReadToken(
+        #     access_token=new_access_token,
+        #     token_type="bearer"
+        # )
+        return {
+            "stored_token_object": stored_token,
+            "stored_token_decoded": decode_token(refresh_token)
+        }
+
+    except Exception as e:
+        # Log generic error
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An unexpected error occurred: {str(e)}"
+        )
+
+@router.get("/test/refresh/list", status_code=status.HTTP_200_OK)
+async def refresh_token_list(db: db_dependency):
+    token_list = read_token_list(db)
+
+    return token_list
