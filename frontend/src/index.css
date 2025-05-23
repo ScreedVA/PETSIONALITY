@@ -850,3 +850,19 @@ p {
     font-size: 15px;
   }
 }
+
+/* Utility */
+
+.line-underneath {
+  position: relative;
+}
+
+.line-underneath::before {
+  position: absolute;
+  content: "";
+  bottom: 0%;
+  height: 2px;
+  width: 100%;
+  background-color: #49978b;
+  transform: translateY(9px);
+}

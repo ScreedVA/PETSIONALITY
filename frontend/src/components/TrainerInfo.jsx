@@ -51,7 +51,7 @@ export default function TrainerInfo() {
         </div>
 
         {/* Upload Photos (Body/Grid) */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           <div className="flex flex-col items-center justify-center gap-3 p-6 bg-white text-[#49978B] border border-[#49978B]">
             <FontAwesomeIcon icon={faImage} fontSize={30} />
             <small className="text-center">Upload a Photo Here</small>
@@ -75,7 +75,7 @@ export default function TrainerInfo() {
         </div>
 
         {/* Upload Photos (Body/Grid) */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
           <div className="flex flex-col items-center justify-center gap-3 p-6 bg-white text-[#49978B] border border-[#49978B]">
             <FontAwesomeIcon icon={faVideo} fontSize={30} />
             <small className="text-center">Upload a Video Here</small>
@@ -99,7 +99,7 @@ export default function TrainerInfo() {
         </div>
 
         {/* Upload Documents (Body/Grid) */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <div className="flex flex-col items-center justify-center gap-3 p-6 bg-white text-[#49978B] border border-[#49978B]">
             <FontAwesomeIcon icon={faFile} fontSize={30} />
             <small className="text-center">Upload a Certification Here</small>
@@ -110,7 +110,7 @@ export default function TrainerInfo() {
           </div>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-center md:justify-end">
         <button className="button2">Save Changes</button>
       </div>
     </div>

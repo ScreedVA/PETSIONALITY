@@ -81,7 +81,7 @@ export default function Login() {
             </div>
           </div>
         </form>
-        <img src={imgs[0]} className="w-[500px] bg-white rounded-2xl " />
+        <img src={imgs[0]} className="md:inline hidden w-[500px] bg-white rounded-2xl " />
       </div>
     </div>
   );

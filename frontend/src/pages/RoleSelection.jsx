@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 
 export default function RoleSelection() {
   return (
-    <div className="flex flex-col gap-10 justify-center items-center align-middle bg-mint-gradient h-[100vh] w-full px-[10%]">
-      <div className="flex flex-col items-center w-full">
-        <p>Select your role to get started with the pet care community.</p>
-        <h1 className="w-2/3 text-5xl font-semibold text-center text-white">Get Started By Defining Your Role</h1>
+    <div className="flex flex-col gap-10 justify-center items-center align-middle bg-mint-gradient w-full h-full px-[10%] py-20">
+      <div className="flex flex-col items-center w-full gap-2">
+        <p className="text-center">Select your role to get started with the pet care community.</p>
+        <h1 className="w-2/3 text-2xl font-semibold text-center text-white md:text-5xl">
+          Get Started By Defining Your Role
+        </h1>
       </div>
 
-      <div className="grid w-2/3 h-1/2 gap-2 grid-cols-2 grid-rows-[1fr_1fr]">
+      <div className="flex flex-col  md:grid md:w-2/3 h-1/2 gap-2 grid-cols-2 grid-rows-[1fr_1fr]">
         {/* Pet Sitter (Top-Left) */}
         <Link
           to={"/user-dashboard/sitter"}

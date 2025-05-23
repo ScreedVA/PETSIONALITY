@@ -10,7 +10,7 @@ export default function Register1() {
       style={{ backgroundImage: `url(${bgs})` }}
       className="min-h-[100vh] bg-cover flex flex-col justify-center items-center py-[7%]"
     >
-      <div className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+      <div className="max-w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
         {/* 1/4 */}
         <span className="flex gap-4">
           <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
@@ -52,7 +52,7 @@ export default function Register1() {
               <p>Continue with Email</p>
             </div>
 
-            <span className="flex gap-2 text-sm">
+            <span className="flex flex-col gap-2 text-sm md:flex-row">
               <p>Already have an account</p>
               <Link href="#" className="text-blue-500">
                 Log in here

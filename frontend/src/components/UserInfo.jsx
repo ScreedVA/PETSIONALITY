@@ -24,11 +24,11 @@ export default function UserInfo() {
       </div>
 
       {/* Form Body */}
-      <form className="flex flex-col gap-10 ">
-        <div className="flex gap-12 ">
+      <form className="flex flex-col gap-5 ">
+        <div className="flex flex-col gap-5 md:flex-row">
           {/* Left */}
-          <div className="flex flex-col gap-10">
-            <div className="flex flex-col">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col ">
               <label htmlFor="">First name</label>
               <input type="text" className="input2" />
             </div>
@@ -43,7 +43,7 @@ export default function UserInfo() {
           </div>
 
           {/* Right  */}
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-5">
             <div className="flex flex-col">
               <label htmlFor="">Last name</label>
               <input type="text" className="input2" />
@@ -52,14 +52,14 @@ export default function UserInfo() {
               <label htmlFor="">Phone number</label>
               <input type="text" className="input2" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-none">
               <label htmlFor="">Postal code</label>
               <input type="text" className="input2" />
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
-          <button className="button2">Save Changes</button>
+        <div className="flex justify-center lg:justify-start">
+          <button className="w-full md:w-64 button2 ">Save Changes</button>
         </div>
       </form>
     </div>

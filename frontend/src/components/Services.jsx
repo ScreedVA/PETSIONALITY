@@ -92,7 +92,7 @@ export default function Services() {
           <div className="flex flex-col gap-2">
             <p>What are your check-in and check-out times?</p>
 
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <small>Check-in</small>
                 <select id="gender" name="gender" placeholder="Select Gender" className="select2">
@@ -251,7 +251,7 @@ export default function Services() {
           <div className="flex flex-col gap-2">
             <p>What are your check-in and check-out times?</p>
 
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <small>Check-in</small>
                 <select id="gender" name="gender" placeholder="Select Gender" className="select2">
@@ -379,6 +379,7 @@ export default function Services() {
           )}
         </div>
 
+        {/* Form */}
         <form
           action=""
           className={`w-full overflow-hidden duration-400 ease-in-out text-[#49978B]  flex flex-col gap-5 relative z-0 ${

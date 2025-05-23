@@ -21,7 +21,8 @@ export default function Register2() {
   return (
     <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-20 pt-36">
       <div className="flex gap-28">
-        <form onSubmit={handleSubmit} className="w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
+        {/* Left */}
+        <form onSubmit={handleSubmit} className="max-w-[500px] bg-white rounded-xl flex flex-col gap-10 p-14">
           {/* 1/3 */}
           <span className="flex gap-4">
             <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
@@ -64,7 +65,9 @@ export default function Register2() {
             </div>
           </div>
         </form>
-        <img src={imgs[0]} className="w-[500px] bg-white rounded-2xl" />
+
+        {/* Right */}
+        <img src={imgs[0]} className="md:inline hidden w-[500px] bg-white rounded-2xl" />
       </div>
     </div>
   );

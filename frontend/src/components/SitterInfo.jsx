@@ -80,7 +80,7 @@ export default function SitterInfo() {
           </div>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-center md:justify-end">
         <button className="button2">Save Changes</button>
       </div>
     </div>
