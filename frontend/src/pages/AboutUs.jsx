@@ -1,6 +1,6 @@
 import React from "react";
 import Bg from "../assets/images/bgs/4.png";
-import { ourBenefits, reviews } from "../components/Data";
+import { ourBenefits, reviews, team } from "../components/Data";
 import ReviewBox from "../components/ReviewBox";
 import Footer from "../components/Footer";
 
@@ -100,6 +100,23 @@ const AboutUs = () => {
         </p>
       </div>
 
+      <h2 className="text-center mb-16">Team</h2>
+      <div className="wrapper flex justify-center gap-6  flex-wrap lg:flex-nowrap max-w-2xl pb-28 ">
+        {team.map((item, index) => {
+          return (
+            <div
+              key={index}
+              className="bg-beige text-center lg:w-1/2 w-full rounded-xl overflow-hidden pb-10 max-w-sm">
+              <div className="img flex items-center justify-center  w-full h-80">
+                <img src={item.img} alt="" />
+              </div>
+              <h4 className="mt-5 mb-5 whitespace-nowrap">{item.name}</h4>
+              <p>{item.info}</p>
+            </div>
+          );
+        })}
+      </div>
+
       <h2 className="text-center mb-16">Reviews</h2>
       <div className="wrapper xl:px-28 pb-20  gap-10 grid md:grid-cols-2">
         {reviews.map((item, index) => {
@@ -113,6 +130,7 @@ const AboutUs = () => {
           );
         })}
       </div>
+
       <Footer />
     </div>
   );

@@ -31,11 +31,20 @@ import img10 from "../assets/images/other/9.jpg";
 import pet1 from "../assets/images/pets/7.jpg";
 import pet2 from "../assets/images/pets/8.jpg";
 import pet3 from "../assets/images/pets/9.jpg";
+import Lena from "../assets/images/team/Lena.jpg";
+import Judith from "../assets/images/team/Judith.png";
 import UserIcon from "../assets/images/icons/user.png";
 import BoneIcon from "../assets/images/icons/bone.png";
 import DocIcon from "../assets/images/icons/doc.png";
 
-import { faUser, faDog, faComment, faClipboard, faPaw, faCat } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faDog,
+  faComment,
+  faClipboard,
+  faPaw,
+  faCat,
+} from "@fortawesome/free-solid-svg-icons";
 // import { name } from "ejs";
 
 export const homeVideos = [Video1, Video4, Video3, Video2];
@@ -180,7 +189,8 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description: "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
+    description:
+      "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
     img: pet3,
     showDetails: false,
   },
@@ -208,7 +218,8 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description: "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
+    description:
+      "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
     img: pet1,
     showDetails: false,
   },
@@ -406,12 +417,14 @@ export const ourBenefits = [
   {
     icon: BoneIcon,
     title: "Trusted Sitters",
-    paragraph: "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
+    paragraph:
+      "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
   },
   {
     icon: DocIcon,
     title: "Hassle-Free Booking",
-    paragraph: "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
+    paragraph:
+      "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
   },
 ];
 
@@ -444,5 +457,18 @@ export const questions = [
   {
     q: "Тypesetting in Lorem Ipsum Lorem Ipsy. Lorem Ipsum has been?",
     a: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+  },
+];
+
+export const team = [
+  {
+    img: Lena,
+    name: "Lena",
+    info: "Co-Founder",
+  },
+  {
+    img: Judith,
+    name: "Judith",
+    info: "Co-Founder",
   },
 ];
