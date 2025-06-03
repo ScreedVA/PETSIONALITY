@@ -168,6 +168,25 @@ export const options3 = [
   },
 ];
 
+export const tabOptions4 = [
+  {
+    icon: faUser,
+    label: "User Info",
+  },
+  {
+    icon: faDog,
+    label: "My Pets",
+  },
+  {
+    icon: faClipboard,
+    label: "Services",
+  },
+  {
+    icon: faPaw,
+    label: "Trainer Info",
+  },
+];
+
 export const petList = [
   {
     name: "Luna",

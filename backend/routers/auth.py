@@ -1,6 +1,6 @@
 
 # PyPi dependancies
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Header
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
 from jose import JWTError
@@ -13,12 +13,15 @@ from datetime import timedelta
 from db import db_dependency
 from crud import create_user, create_refresh_token, read_user_by_name, read_token, read_user_by_id, read_token_list
 from schemas import CreateUserFrontend, ReadToken
-from services import duplicate_user_check, issue_token, decode_token, authenticate_user, issue_access_and_refresh_tokens, upsert_refresh_token
+from services import duplicate_user_check, issue_token, authenticate_user, issue_access_and_refresh_tokens, upsert_refresh_token, auth_dependency
 
 router = APIRouter(
     prefix="/auth",
     tags=["auth"]
 )
+
+ACCESS_TOKEN_EXP = 5 # Seconds
+REFRESH_TOKEN_EXP = 7 # Days
 
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
@@ -73,7 +76,6 @@ async def register(db: db_dependency, user_schema: CreateUserFrontend):
         )
 
 
-
 @router.post("/login", status_code=status.HTTP_200_OK)
 async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     """
@@ -84,7 +86,7 @@ async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestFor
     - form_data (OAuth2PasswordRequestForm): Form data containing `username` and `password`, parsed from the request body.
 
     Returns:
-    - ReadTokenFrontend: An object containing the access token and its type if authentication is successful.
+    - ReadToken: An object containing the access token and its type if authentication is successful.
 
     Raises:
     - HTTPException 404: If the user is not found or credentials are incorrect.
@@ -98,15 +100,16 @@ async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestFor
     try:
         # Business Logic
         user = read_user_by_name(db, form_data.username)
+        
         if not user:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="No users found.")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
         
         if not authenticate_user(db, form_data.username, form_data.password):
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User un-authorized")
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User unauthorized")
             
-        tokens = issue_access_and_refresh_tokens(user.id, user.username, timedelta(minutes=30), timedelta(days=7))
-        upsert_refresh_token(db, user.id, tokens["refresh_token"])
-
+        tokens = issue_access_and_refresh_tokens(user.id, user.username, timedelta(seconds=ACCESS_TOKEN_EXP), timedelta(days=7))
+        upsert_refresh_token(db, user.id, tokens["refresh_token"], tokens["refresh_expires"])
+        print(tokens["access_expires"])
         return ReadToken(
             access_token=tokens["access_token"],
             refresh_token=tokens["refresh_token"],
@@ -127,28 +130,48 @@ async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestFor
             detail=f"An unexpected error occurred: {str(e)}"
         )
     
+@router.get("/refresh", status_code=status.HTTP_200_OK)
+async def refresh_access_token(db: db_dependency, refresh_token:str = Header(None)):
+    """
+    Refresh the access token using a valid refresh token.
 
-@router.post("/refresh", status_code=status.HTTP_200_OK)
-async def refresh_access_token(db: db_dependency, refresh_token: str):
+    This endpoint allows clients to obtain a new access token by presenting a previously issued
+    valid refresh token. It ensures the refresh token exists in the database and is linked to
+    a valid user. If validation succeeds, a new access token is generated and returned.
+
+    Parameters:
+    -----------
+    db : Session (Injected)
+        SQLAlchemy database session dependency.
+    refresh_token : str
+        The refresh token string used to generate a new access token.
+
+    Returns:
+    --------
+    ReadToken
+        A pydantic response model containing the new access token and its token type.
+
+    Raises:
+    -------
+    HTTPException (401)
+        If the provided refresh token is invalid, not found, or not associated with any user.
+    HTTPException (500)
+        If any unexpected error occurs during token lookup or generation.
+    """
     try:
         stored_token = read_token(db, refresh_token) 
        
         if not stored_token:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User Unauthorized: Invalid or Missing refresh token")
  
         user = read_user_by_id(db, stored_token.user_id)
 
+        new_access_token, _ = issue_token(stored_token.user_id, user.username, timedelta(seconds=ACCESS_TOKEN_EXP))
 
-        new_access_token, _ = issue_token(stored_token.user_id, user.username, timedelta(minutes=30))
-
-        # return ReadToken(
-        #     access_token=new_access_token,
-        #     token_type="bearer"
-        # )
-        return {
-            "stored_token_object": stored_token,
-            "stored_token_decoded": decode_token(refresh_token)
-        }
+        return ReadToken(
+            access_token=new_access_token,
+            token_type="bearer"
+        )
 
     except Exception as e:
         # Log generic error

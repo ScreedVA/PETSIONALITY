@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import UserDashboardOwner from "./pages/UserDashboardOwner";
 import UserDashboardSitter from "./pages/UserDashboardSitter";
 import UserDashboardTrainer from "./pages/UserDashboardTrainer";
+import UserDashboard from "./pages/UserDashboard";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
@@ -21,8 +22,24 @@ import SingleTrainer from "./pages/SingleTrainer";
 import Matchmaking from "./pages/Matchmaking";
 import OurConcept from "./pages/OurConcept";
 import FAQs from "./pages/FAQs";
+import { useEffect } from "react";
+import { handle401Exception, loginUser } from "./services/http/Auth";
+import { API_BASE_DOMAIN } from "./services/CommonService";
+import { getMe } from "./services/http/User";
 
 function App() {
+  useEffect(() => {
+    async function testHttp() {
+      // try {
+      //   response = await handle401Exception(`${API_BASE_DOMAIN}/user/me`, "GET");
+      //   console.log(response);
+      // } catch (err) {
+      //   console.error("Error Message", err.message, "Status:", err.status);
+      // }
+    }
+
+    testHttp();
+  });
   return (
     <NavbarProvider>
       <Router>
@@ -42,9 +59,10 @@ function App() {
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/Matchmaking" exact element={<Matchmaking />} />
 
-          <Route path="/user-dashboard/owner" exact element={<UserDashboardOwner />} />
+          <Route path="/user-dashboard" exact element={<UserDashboard />} />
+          {/* <Route path="/user-dashboard/owner" exact element={<UserDashboardOwner />} />
           <Route path="/user-dashboard/sitter" exact element={<UserDashboardSitter />} />
-          <Route path="/user-dashboard/trainer" exact element={<UserDashboardTrainer />} />
+          <Route path="/user-dashboard/trainer" exact element={<UserDashboardTrainer />} /> */}
 
           {/* Auth */}
           <Route path="/register/sso" exact element={<RegisterSSO />} />

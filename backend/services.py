@@ -1,13 +1,16 @@
 # PyPi Dependencies
-from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, Header
+from fastapi.security import OAuth2PasswordBearer, HTTPBearer
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
-from jose import jwt
+from jose import jwt, JWTError
+from starlette import status
 
 # Python Library
 from datetime import datetime, timedelta
 from typing import Dict, Annotated
+import os
+import uuid
 
 # Modules
 from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token
@@ -15,10 +18,99 @@ from models import UserTable
 
 # Convert Plain Text to hash
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/login')
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/login', auto_error=False)
 
-SECRET_KEY = '197b2c37c391bed93fe80344fe73b806947a65e36206e05a1a23c2fa12702fe3'
+
+login_dependency = Annotated[str, Depends(oauth2_bearer)]
+
+
+SECRET_KEY = os.getenv('JWT_SECRET_KEY', "197b2c37c391bed93fe80344fe73b806947a65e36206e05a1a23c2fa12702fe3")
+
 ALGORITHM = 'HS256'
+EXPECTED_API_KEY = os.getenv('X_API_KEY', "123")
+
+security = HTTPBearer(auto_error=False)
+
+
+async def get_current_user(token: login_dependency):
+    """
+    Extract and validate the current user from a Bearer token.
+
+    This function is used as a FastAPI dependency to retrieve and validate
+    the current authenticated user from a JWT token provided in the
+    Authorization header. If the token is invalid or missing required
+    user information, an HTTP 401 error is raised.
+
+    Parameters:
+    -----------
+    token : str
+        The JWT Bearer token extracted from the Authorization header.
+
+    Returns:
+    --------
+    dict
+        A dictionary containing the decoded user information from the token.
+
+    Raises:
+    -------
+    HTTPException
+        If the token is invalid, expired, or missing required fields.
+    """
+    try:
+        if token is None:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                                detail='Request Forbidden: Missing or malformed Authorization Header')
+
+        decoded_token = jwt.decode(token=token, key=SECRET_KEY, algorithms=ALGORITHM)
+
+        if decoded_token is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                                detail='User Unauthorized: Access Token Invalid/Expired')
+        
+        return decoded_token
+    
+    except JWTError as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail=f'User Unauthorized: JWTError:{e}')
+    
+user_dependency = Annotated[dict, Depends(get_current_user)]
+
+async def get_auth_header(authorization: str = Header(None)):
+    """
+    Extracts the raw Authorization header (e.g., "Bearer <token>").
+
+    Parameters:
+    -----------
+    authorization : str
+        The Authorization header sent by the client.
+
+    Returns:
+    --------
+    str
+        The full Authorization header value.
+
+    Raises:
+    -------
+    HTTPException (401)
+        If the header is missing.
+    """
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
+    return authorization
+
+auth_dependency = Annotated[str, Depends(get_auth_header)]
+
+def verify_api_key(x_api_key: str = Header(None)):
+    if x_api_key is None:
+        raise HTTPException(status_code=403, detail="Missing X-API-Key header")
+
+    if x_api_key != EXPECTED_API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or missing API key"
+        )
+    return x_api_key
+
 
 def duplicate_user_check(db: Session, username: str, email: str):
     """
@@ -58,16 +150,17 @@ def issue_token(username: str, user_id: int, expires_delta:timedelta):
     - The JWT is signed using the configured `SECRET_KEY` and `ALGORITHM`.
     """
     expires: datetime = datetime.now() + expires_delta
-    encode = {
+    payload = {
         "id": user_id,
         "username": username,
-        "expiration_date": datetime.strftime(expires, "%Y-%m-%d")
+        "exp": int(expires.timestamp()),  # standard 'exp'
+        "iat": int(datetime.utcnow().timestamp()),  # issued at
+        "jti": str(uuid.uuid4()),  # unique token ID
     }
 
-    token_encoded: str = jwt.encode(claims=encode, key=SECRET_KEY, algorithm=ALGORITHM)
+    token_encoded: str = jwt.encode(claims=payload, key=SECRET_KEY, algorithm=ALGORITHM)
 
     return token_encoded, expires
-
 
 def issue_access_and_refresh_tokens(username: str, user_id: int, access_expire: timedelta, refresh_expire: timedelta):
     
@@ -80,8 +173,6 @@ def issue_access_and_refresh_tokens(username: str, user_id: int, access_expire: 
         "refresh_token": refresh_token,
         "refresh_expires": refresh_expires
     }
-
-
 
 def authenticate_user(db: Session, username: str, password: str):
     """
@@ -106,20 +197,15 @@ def authenticate_user(db: Session, username: str, password: str):
         return True
     return False
 
-async def decode_token(token: Annotated[str, Depends(oauth2_bearer)]):
 
-    # Decode and authorize Access Token str -> GETDecodedAccessTokenSchema
-    token_decoded: Dict = jwt.decode(claim=token, key=SECRET_KEY, algorithms=ALGORITHM)
 
-    return token_decoded
-
-def upsert_refresh_token(db: Session, user_id: int, token: str):
+def upsert_refresh_token(db: Session, user_id: int, token: str, expiration_date: datetime):
     
     token_table = read_token_by_user_id(db, user_id)
 
     if token_table:
-        token_table.update(token)
+        token_table.update(token, expiration_date)
     else:
-        create_refresh_token(db, token, user_id)
+        create_refresh_token(db, token, user_id, expiration_date)
         
 

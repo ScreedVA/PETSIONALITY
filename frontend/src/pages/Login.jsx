@@ -1,20 +1,47 @@
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { imgs, logos } from "../components/Data";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/http/Auth";
 
 export default function Login() {
   const navigate = useNavigate();
-  function handleSubmit(e) {
+  const [loginData, setLoginData] = useState({
+    username: "Judith",
+    password: "BYX.S8CSPqVXER5",
+  });
+  const [error, setError] = useState({});
+
+  async function handleSigninClick(e) {
     e.preventDefault();
-    navigate("/role-selection");
+    try {
+      await loginUser(loginData.username, loginData.password);
+      setError({});
+      navigate("/user-dashboard");
+    } catch (err) {
+      console.error("Login failed", err.message, "Status:", err.status);
+      if (err.status === 404) {
+        setError(() => ({ username: "Account with this username does not exist" }));
+      } else if (err.status === 401) {
+        setError(() => ({ password: "Password incorrect" }));
+      }
+    }
+  }
+
+  function handleInputChange(event) {
+    const { name, value } = event.target || {};
+
+    setLoginData((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+    }));
   }
 
   return (
     <div className="bg-mint-gradient min-h-[100vh] flex justify-center items-center pb-14 pt-36">
-      <div className="flex gap-28">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 bg-white p-14 rounded-xl ">
+      <div className="flex justify-center gap-4">
+        <form onSubmit={handleSigninClick} className="flex flex-col gap-8 bg-white p-14 rounded-xl ">
           {/* 1/5 */}
           <span className="flex gap-4">
             <FontAwesomeIcon icon={faLongArrowLeft} className="text-2xl text-gray-700" />
@@ -61,12 +88,26 @@ export default function Login() {
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label>Email</label>
-                <input type="email" placeholder="Email" />
+                <label>Username</label>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  onChange={handleInputChange}
+                  value={loginData.username}
+                />
+                {error.username && <small className="text-red-400">{error.username}</small>}
               </div>
               <div className="flex flex-col gap-2">
                 <label>Password</label>
-                <input type="password" placeholder="Password" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleInputChange}
+                  value={loginData.password}
+                />
+                {error.password && <small className="text-red-400">{error.password}</small>}
               </div>
               <div>
                 <button type="submit" className="w-full py-3 button1">

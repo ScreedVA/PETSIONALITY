@@ -1,19 +1,39 @@
 # PyPi dependencies
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware 
+from dotenv import load_dotenv, find_dotenv
 
 # Python Libraries
+import os
 
 # Modules
 from db import Base, engine, SessionLocal
-from routers import auth, user
+from routers import auth, user, pet
 from data import add_default_data
+from services import verify_api_key
 
+load_dotenv(find_dotenv())
 app = FastAPI()
+
+
+origins = [
+    "http://localhost:5173", 
+    "http://127.0.0.1:5173",   
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  
+    allow_credentials=True,
+    allow_methods=["*"],     
+    allow_headers=["*"],     
+)
 
 Base.metadata.create_all(bind=engine) # Initialize Database Tables/Metadata
 
 app.include_router(auth.router)
 app.include_router(user.router)
+app.include_router(pet.router)
 
 @app.on_event("startup")
 def startup_event():

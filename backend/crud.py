@@ -7,7 +7,7 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 
 # Modules
-from models import UserTable, TokenTable
+from models import UserTable, TokenTable, PetTable
 from schemas import CreateUserFrontend
 
 # Read
@@ -115,7 +115,14 @@ def read_token_by_user_id(db: Session, user_id: int):
     token = db.query(TokenTable).filter(TokenTable.user_id == user_id).first()
 
     return token
-#
+
+def read_pet_list(db: Session, filter = None):
+    """Accepts filer and returns list of pets"""
+    pet_list = db.query(PetTable).all()
+
+    return pet_list
+
+
 #  Create
 def create_user(db: Session, schema: CreateUserFrontend):
     """
@@ -152,7 +159,6 @@ def create_user(db: Session, schema: CreateUserFrontend):
     db.refresh(user)
 
     return user
-
 def create_refresh_token(db: Session, token: str, user_id: int, expiration_date: datetime):
     """
     Stores a new refresh token in the database.
@@ -175,5 +181,4 @@ def create_refresh_token(db: Session, token: str, user_id: int, expiration_date:
     db.add(token)
     db.commit()
     db.refresh(token)
-
 
