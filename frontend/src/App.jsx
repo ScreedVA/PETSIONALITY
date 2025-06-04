@@ -23,25 +23,27 @@ import Matchmaking from "./pages/Matchmaking";
 import OurConcept from "./pages/OurConcept";
 import FAQs from "./pages/FAQs";
 import { useEffect } from "react";
-import { handle401Exception, loginUser } from "./services/http/Auth";
+import { handle401Exception, loginUser, registerUser } from "./services/http/Auth";
 import { API_BASE_DOMAIN } from "./services/CommonService";
-import { getMe } from "./services/http/User";
+import Toaster from "./pages/Toaster";
+import { updateMe } from "./services/http/User";
+import { getMyPet, getMyPets } from "./services/http/Pet";
 
 function App() {
   useEffect(() => {
     async function testHttp() {
-      // try {
-      //   response = await handle401Exception(`${API_BASE_DOMAIN}/user/me`, "GET");
-      //   console.log(response);
-      // } catch (err) {
-      //   console.error("Error Message", err.message, "Status:", err.status);
-      // }
+      try {
+        // respose = await getMyPet({ id: 9 });
+      } catch (err) {
+        // console.error("Error Message", err.message, "Status:", err.status);
+      }
     }
 
     testHttp();
   });
   return (
     <NavbarProvider>
+      <Toaster />
       <Router>
         <NavBarSelector />
         <Routes>

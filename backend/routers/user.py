@@ -9,7 +9,8 @@ from typing import List
 
 # Modules
 from models import UserTable
-from crud import read_user_list, read_user_by_id
+from schemas import UpdateUserFrontend
+from crud import read_user_list, read_user_by_id, update_user_by_id
 from db import db_dependency
 from services import user_dependency
 
@@ -106,6 +107,29 @@ async def get_logged_in_user(db:db_dependency, user: user_dependency):
 
     except HTTPException as e:
         raise HTTPException()# Re-raise handled exceptions
+
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Unexpected error: {str(e)}")
+
+
+@router.put("/me", status_code=status.HTTP_201_CREATED)
+async def update_logged_in_user(
+    db: db_dependency,
+    user: user_dependency,
+    updated_data: UpdateUserFrontend
+):
+
+    try:        
+        updated_user = update_user_by_id(db, user_id=user["id"], update_request=updated_data)
+
+        if not updated_user:
+            raise HTTPException(status_code=404, detail="Not Found: User to update does not exist")
+
+        return updated_user
+
+    except HTTPException as e:
+        raise e
 
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

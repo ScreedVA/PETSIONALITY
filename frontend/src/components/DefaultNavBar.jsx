@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { navigations } from "./Data";
 import { BiChevronDown } from "react-icons/bi";
 import Logo from "../assets/images/logo/1.png";
+import { useAuth } from "../services/ContextService";
+import { auth } from "../services/Storage";
 
 const DefaultNavBar = () => {
   const { pathname } = useLocation();
@@ -50,14 +52,26 @@ const DefaultNavBar = () => {
               </div>
             );
           })}
-          <div className="flex gap-6">
-            <Link to="/login" className="block py-2 font-bold underline align-middle h-fit text-orange">
-              Sign In
-            </Link>
-            <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
-              Register
-            </Link>
-          </div>
+          {auth.state() ? (
+            <div className="flex gap-6">
+              <Link
+                to={"/"}
+                className="block py-2 font-bold underline align-middle h-fit text-orange"
+                onClick={() => auth.logout()}
+              >
+                Sign Out
+              </Link>
+            </div>
+          ) : (
+            <div className="flex gap-6">
+              <Link to="/login" className="block py-2 font-bold underline align-middle h-fit text-orange">
+                Sign In
+              </Link>
+              <Link to="/register" className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+                Register
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* menu button */}

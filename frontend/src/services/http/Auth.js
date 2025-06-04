@@ -1,5 +1,12 @@
 import { API_BASE_DOMAIN } from "../CommonService";
-import { setAccessToken, setRefreshToken, removeAccessToken, getAccessToken, getRefreshToken } from "../Storage";
+import storage, {
+  setAccessToken,
+  setRefreshToken,
+  removeAccessToken,
+  getAccessToken,
+  getRefreshToken,
+  auth,
+} from "../Storage";
 
 const API_BASE_URL = `${API_BASE_DOMAIN}/auth`;
 
@@ -70,9 +77,8 @@ export async function handle401Exception(endpoint, method, body = null) {
       throw err;
     }
 
-    const data = await response.json();
-    console.log("handle401Exception response data:", data);
-    console.log(response);
+    console.warn("User Unauhtorized: Token refresh redirect successful");
+    auth.login();
     return response;
   } catch (err) {
     if (err instanceof TypeError) {
@@ -114,10 +120,7 @@ export async function loginUser(username, password) {
     }
 
     const data = await response.json();
-    console.log(getAccessToken());
-    removeAccessToken();
     setAccessToken(data.access_token);
-    console.log(getAccessToken());
     setRefreshToken(data.refresh_token);
 
     return {
@@ -128,7 +131,51 @@ export async function loginUser(username, password) {
   } catch (err) {
     if (err instanceof TypeError) {
       // This happens on network errors (e.g. connection refused)
-      throw new Error("Unable to connect to server. Please try again.");
+      throw new TypeError("Unable to connect to server. Please try again.");
+    }
+
+    // Re-throw the error with actual status/message
+    throw err;
+  }
+}
+
+export async function registerUser(requestBody) {
+  const formData = {
+    email: requestBody.email,
+    username: requestBody.username,
+    password: requestBody.password,
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": "123", // your API key
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      const err = new Error(errorData.detail || "Register failed");
+      err.status = response.status;
+      throw err;
+    }
+
+    const data = await response.json();
+    setAccessToken(data.access_token);
+    setRefreshToken(data.refresh_token);
+
+    return {
+      accessToken: data.access_token,
+      refreshToken: data.refresh_token,
+      tokenType: data.token_type,
+    };
+  } catch (err) {
+    if (err instanceof TypeError) {
+      // This happens on network errors (e.g. connection refused)
+      throw new TypeError("Unable to connect to server. Please try again.");
     }
 
     // Re-throw the error with actual status/message

@@ -19,25 +19,34 @@ const validationChecks = [
   },
 ];
 
-export default function PasswordValidator({ onChange }) {
-  const [password, setPassword] = useState("");
-
-  const validationsArray = validationChecks.map((rule) => rule.check(password));
+export default function PasswordValidator({ value, onChange }) {
+  const validationsArray = validationChecks.map((rule) => rule.check(value));
   const isValid = validationsArray.every(Boolean);
 
   useEffect(() => {
-    onChange?.({
-      password,
+    onChange((prevFields) => ({
+      ...prevFields,
       isValid,
       validationsArray,
-    });
-  }, [password, isValid]);
+    }));
+  }, [value, isValid]);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <label>Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        <input
+          type="password"
+          name="password"
+          value={value}
+          onChange={(e) =>
+            onChange((prevFields) => ({
+              ...prevFields,
+              password: e.target.value,
+            }))
+          }
+          placeholder="123abc"
+        />
       </div>
 
       {/*  Grey/Green Bars */}

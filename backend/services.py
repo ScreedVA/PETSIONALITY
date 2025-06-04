@@ -13,7 +13,7 @@ import os
 import uuid
 
 # Modules
-from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token
+from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token, read_pet_by_id
 from models import UserTable
 
 # Convert Plain Text to hash
@@ -66,7 +66,6 @@ async def get_current_user(token: login_dependency):
         if decoded_token is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                                 detail='User Unauthorized: Access Token Invalid/Expired')
-        
         return decoded_token
     
     except JWTError as e:
@@ -197,15 +196,38 @@ def authenticate_user(db: Session, username: str, password: str):
         return True
     return False
 
-
-
 def upsert_refresh_token(db: Session, user_id: int, token: str, expiration_date: datetime):
-    
     token_table = read_token_by_user_id(db, user_id)
 
     if token_table:
-        token_table.update(token, expiration_date)
+        # ✅ Assign values directly
+        token_table.token = token
+        token_table.expiration_date = expiration_date
     else:
         create_refresh_token(db, token, user_id, expiration_date)
-        
+
+    # ✅ Always commit changes
+    db.commit()
+
+
+def verify_pet_ownership(db, pet_id, user_id: int):
+    """
+    Raises 401 if the pet is not owned by the given user.
+
+    Parameters
+    ----------
+    db: Session(injected)
+    pet_id : PetTable
+        The pet object to verify.
+    user_id : int
+        The ID of the authenticated user.
+
+    Returns
+    ------
+    boolean
+    """
+    pet_table = read_pet_by_id(db, pet_id)
+
+    return pet_table.owner_id == user_id
+
 

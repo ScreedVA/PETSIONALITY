@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { imgs } from "./Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { getMe } from "../services/http/User";
+import { getMe, updateMe } from "../services/http/User";
+import { useToast } from "../services/ContextService";
+import Loading from "./Loading";
 
 export default function UserInfo() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true); // 🟡 loading state
+  const { showToast } = useToast();
 
   useEffect(() => {
     async function handleLoadData() {
@@ -14,14 +17,31 @@ export default function UserInfo() {
         const response = await getMe();
         setFormData(response);
       } catch (err) {
-        console.error("Error Message", err.message, "Status:", err.status);
-        alert(`Error Message: ${err.message} Status: ${err.status}`);
+        console.error(`Error Message: ${err.message}`);
       } finally {
-        setLoading(false); // ✅ stop loading once done (even if failed)
+        setTimeout(() => {
+          setLoading(false); // ✅ stop loading once done (even if failed)
+        }, 500);
       }
     }
     handleLoadData();
   }, []);
+
+  async function handleSaveChangesClick() {
+    setLoading(true);
+    try {
+      const response = await updateMe(formData);
+      console.log(response);
+      console.log("formData", formData);
+    } catch (err) {
+      console.error("Error Message", err.message, "Status:", err.status);
+    } finally {
+      setTimeout(() => {
+        setLoading(false); // ✅ stop loading once done (even if failed)
+        showToast("Update Successful", "success");
+      }, 500);
+    }
+  }
 
   function handleInputChange(event) {
     const { name, value } = event.target || {};
@@ -32,11 +52,7 @@ export default function UserInfo() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center w-full h-full">
-        <p className="text-lg font-medium text-gray-600">Loading...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -85,7 +101,9 @@ export default function UserInfo() {
         </div>
 
         <div className="flex justify-center lg:justify-start">
-          <button className="w-full md:w-64 button2">Save Changes</button>
+          <button className="w-full md:w-64 button2" onClick={handleSaveChangesClick}>
+            Save Changes
+          </button>
         </div>
       </form>
     </div>

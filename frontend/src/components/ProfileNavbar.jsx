@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logos, imgs, notifications, messages } from "./Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faMessage, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../services/Storage";
 
 export default function ProfileNavbar() {
   const navigate = useNavigate();
@@ -176,6 +177,7 @@ export default function ProfileNavbar() {
                 className="px-3 py-2 hover:bg-gray-200"
                 onClick={() => {
                   navigate("/");
+                  auth.logout();
                 }}
               >
                 Logout

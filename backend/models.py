@@ -1,5 +1,5 @@
 # PyPi Dependencies
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Date, ForeignKey, Enum as SQLAlchemyEnum
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Date, ForeignKey, Enum as SQLAlchemyEnum, JSON
 from sqlalchemy.orm import relationship
 from db import Base
 
@@ -46,9 +46,19 @@ class PetTable(TimeStampModel):
 
     name = Column(String, nullable=False)
     species = Column(String, nullable=False)  # e.g., dog, cat
+    gender = Column(String, nullable=False)
+    
     breed = Column(String, nullable=True)
-    age = Column(Integer, nullable=True)
+    size = Column(String, nullable=True)
     photo = Column(String, nullable=True)  # URL to profile image
+    description = Column(String, nullable=True)
+    yob = Column(Integer, nullable=True)
+    spayed_neatured = Column(Boolean, nullable=True)
+    microchipped = Column(Boolean, nullable=True)
+    vaccinations = Column(Boolean, nullable=True)
+    house_trained = Column(Boolean, nullable=True)
+    friendly_with = Column(JSON, nullable=True)  # 👈 New column
+
     owner_id = Column(Integer, ForeignKey('user.id'), nullable=False)
 
     user = relationship('UserTable', back_populates='pets' )

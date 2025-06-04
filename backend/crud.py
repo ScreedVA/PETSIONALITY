@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Modules
 from models import UserTable, TokenTable, PetTable
-from schemas import CreateUserFrontend
+from schemas import CreateUserFrontend, UpdateUserFrontend
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -113,7 +113,7 @@ def read_token_list(db: Session, filter = None):
     return stored_token_list
 def read_token_by_user_id(db: Session, user_id: int):
     token = db.query(TokenTable).filter(TokenTable.user_id == user_id).first()
-
+    
     return token
 
 def read_pet_list(db: Session, filter = None):
@@ -121,6 +121,92 @@ def read_pet_list(db: Session, filter = None):
     pet_list = db.query(PetTable).all()
 
     return pet_list
+
+def read_pet_list_by_owner_id(
+    db: Session,owner_id: int,
+    detail_level: str = "full",
+    limit: int = None
+):
+    """
+    Retrieve a list of pets belonging to a specific owner, with optional detail level and result limit.
+
+    Parameters
+    ----------
+    db : Session
+        The SQLAlchemy database session used for querying.
+    owner_id : int
+        The ID of the owner whose pets are to be retrieved.
+    detail_level : str, optional
+        Level of detail to return for each pet. 
+        - "summary": Returns only id, name, and description fields.
+        - "full" (default): Returns full pet model objects.
+    limit : int, optional
+        Maximum number of pets to return. If not specified, returns all matching pets.
+
+    Returns
+    -------
+    list
+        A list of pets:
+        - If detail_level is "summary", returns a list of dicts with keys: "id", "name", "description".
+        - If detail_level is "full", returns a list of PetTable model instances.
+
+    Raises
+    ------
+    None explicitly raised. Any database exceptions will propagate naturally.
+    """
+    if detail_level == "summary":
+        query = db.query(PetTable.id, PetTable.name, PetTable.description).filter(PetTable.owner_id == owner_id)
+        if limit:
+            query = query.limit(limit)
+        return [
+            {"id": r.id, "name": r.name, "description": r.description}
+            for r in query.all()
+        ]
+
+    # full detail
+    query = db.query(PetTable).filter(PetTable.owner_id == owner_id)
+    if limit:
+        query = query.limit(limit)
+    return query.all()
+def read_pet_by_id(
+    db: Session,
+    pet_id: int,
+    detail_level: str = "full"
+):
+    """
+    Retrieve a pet by ID with optional detail level.
+
+    Parameters
+    ----------
+    db : Session
+        SQLAlchemy session.
+    pet_id : int
+        ID of the pet.
+    detail_level : str
+        "summary" or "full".
+
+    Returns
+    -------
+    PetTable or dict
+        Pet object or dict with summary fields.
+    """
+    if detail_level == "summary":
+        result = db.query(
+            PetTable.id,
+            PetTable.name,
+            PetTable.description
+        ).filter(PetTable.id == pet_id).first()
+
+        if result:
+            return {
+                "id": result.id,
+                "name": result.name,
+                "description": result.description
+            }
+        return None
+
+    # Full detail
+    return db.query(PetTable).filter(PetTable.id == pet_id).first()
 
 
 #  Create
@@ -182,3 +268,18 @@ def create_refresh_token(db: Session, token: str, user_id: int, expiration_date:
     db.commit()
     db.refresh(token)
 
+# Updated
+def update_user_by_id(db: Session, user_id: int, update_request: UpdateUserFrontend): 
+    user = db.query(UserTable).filter(UserTable.id == user_id).first()
+
+    if not user:
+        return None
+
+    update_fields = update_request.model_dump(exclude_unset=True)
+    
+    for field, value in update_fields.items():
+        setattr(user, field, value)
+
+    db.commit()
+    db.refresh(user)
+    return user

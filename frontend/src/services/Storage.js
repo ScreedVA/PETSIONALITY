@@ -1,4 +1,4 @@
-export const localStorageService = {
+export const storage = {
   // Create or Update an item
   set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
@@ -36,31 +36,49 @@ export const localStorageService = {
   },
 };
 
-export default localStorageService;
+export default storage;
 
 const ACCESS_TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
 
 export function getAccessToken() {
-  return localStorageService.get(ACCESS_TOKEN_KEY);
+  return storage.get(ACCESS_TOKEN_KEY);
 }
 
 export function setAccessToken(accessToken) {
-  localStorageService.set(ACCESS_TOKEN_KEY, accessToken);
+  storage.set(ACCESS_TOKEN_KEY, accessToken);
 }
 
 export function removeAccessToken() {
-  localStorageService.remove(ACCESS_TOKEN_KEY);
+  storage.remove(ACCESS_TOKEN_KEY);
 }
 
 export function getRefreshToken() {
-  return localStorageService.get(REFRESH_TOKEN_KEY);
+  return storage.get(REFRESH_TOKEN_KEY);
 }
 
 export function setRefreshToken(refreshToken) {
-  localStorageService.set(REFRESH_TOKEN_KEY, refreshToken);
+  storage.set(REFRESH_TOKEN_KEY, refreshToken);
 }
 
 export function removeRefreshToken() {
-  localStorageService.remove(REFRESH_TOKEN_KEY);
+  storage.remove(REFRESH_TOKEN_KEY);
 }
+
+export const auth = {
+  KEY: "authentication",
+
+  login() {
+    storage.set(this.KEY, true);
+  },
+
+  logout() {
+    storage.set(this.KEY, false);
+    removeAccessToken();
+    removeRefreshToken();
+  },
+
+  state() {
+    return storage.get(this.KEY);
+  },
+};

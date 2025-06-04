@@ -4,6 +4,8 @@ import { imgs, logos } from "../components/Data";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/http/Auth";
+import { useAuth, useToast } from "../services/ContextService";
+import { auth } from "../services/Storage";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export default function Login() {
     password: "BYX.S8CSPqVXER5",
   });
   const [error, setError] = useState({});
+  const { showToast } = useToast();
 
   async function handleSigninClick(e) {
     e.preventDefault();
@@ -19,12 +22,19 @@ export default function Login() {
       await loginUser(loginData.username, loginData.password);
       setError({});
       navigate("/user-dashboard");
+      showToast(`Welcome back ${loginData.username}`, "success", 6000);
+      auth.login();
+      console.log(auth.state());
     } catch (err) {
-      console.error("Login failed", err.message, "Status:", err.status);
+      console.error(`Login Failed: Error Message: ${err.message}`);
       if (err.status === 404) {
         setError(() => ({ username: "Account with this username does not exist" }));
       } else if (err.status === 401) {
         setError(() => ({ password: "Password incorrect" }));
+      } else if (err instanceof TypeError) {
+        showToast(err.message, "error", 6000);
+      } else {
+        throw err;
       }
     }
   }

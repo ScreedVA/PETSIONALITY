@@ -11,6 +11,10 @@ from db import Base, engine, SessionLocal
 from routers import auth, user, pet
 from data import add_default_data
 from services import verify_api_key
+from models import UserTable, PetTable, TokenTable
+
+Base.metadata.create_all(bind=engine) # Initialize Database Tables/Metadata
+
 
 load_dotenv(find_dotenv())
 app = FastAPI()
@@ -29,7 +33,6 @@ app.add_middleware(
     allow_headers=["*"],     
 )
 
-Base.metadata.create_all(bind=engine) # Initialize Database Tables/Metadata
 
 app.include_router(auth.router)
 app.include_router(user.router)

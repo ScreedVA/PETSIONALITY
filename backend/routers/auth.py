@@ -20,7 +20,7 @@ router = APIRouter(
     tags=["auth"]
 )
 
-ACCESS_TOKEN_EXP = 5 # Seconds
+ACCESS_TOKEN_EXP = 300 # Seconds
 REFRESH_TOKEN_EXP = 7 # Days
 
 
@@ -108,17 +108,18 @@ async def login(db: db_dependency, form_data: Annotated[OAuth2PasswordRequestFor
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User unauthorized")
             
         tokens = issue_access_and_refresh_tokens(user.id, user.username, timedelta(seconds=ACCESS_TOKEN_EXP), timedelta(days=7))
+        
         upsert_refresh_token(db, user.id, tokens["refresh_token"], tokens["refresh_expires"])
-        print(tokens["access_expires"])
+        
         return ReadToken(
             access_token=tokens["access_token"],
             refresh_token=tokens["refresh_token"],
             token_type="bearer"
         )
 
-    except HTTPException:
-        raise  # re-raise custom exceptions
-
+    except HTTPException as e:
+        # Re-raise known HTTP errors as-is
+        raise e
     except JWTError as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail=f'User not authorized: {str(e)}')
@@ -166,12 +167,16 @@ async def refresh_access_token(db: db_dependency, refresh_token:str = Header(Non
  
         user = read_user_by_id(db, stored_token.user_id)
 
-        new_access_token, _ = issue_token(stored_token.user_id, user.username, timedelta(seconds=ACCESS_TOKEN_EXP))
+        new_access_token, _ = issue_token(username=user.username, user_id=stored_token.user_id, expires_delta=timedelta(seconds=ACCESS_TOKEN_EXP))
 
         return ReadToken(
             access_token=new_access_token,
             token_type="bearer"
         )
+    
+    except HTTPException as e:
+        # Re-raise known HTTP errors as-is
+        raise e
 
     except Exception as e:
         # Log generic error
