@@ -1,13 +1,13 @@
 # Pypi Dependencies
 
 # Python Library
-from datetime import datetime
+from datetime import datetime, time
 
 # Modules
 from db import db_dependency
-from models import UserTable, PetTable
+from models import UserTable, PetTable, DogBoardingTable, DoggyDayCareTable
 from services import bcrypt_context
-from enums import UserStatus
+from enums import UserStatus, PottyBreakFrequency
 
 current_year = datetime.now().year
 
@@ -18,6 +18,9 @@ def add_default_data(db: db_dependency):
     for row in list([
         UserTable(username="Judith", hashed_password=bcrypt_context.hash("BYX.S8CSPqVXER5"), email="judith@gmail.com", date_of_birth=datetime.strptime("2000-01-01", "%Y-%m-%d").date(), status=UserStatus(1), phone_no="1234567890", city="Hamburg", country="Germany", postal_code="10115"),
         UserTable(username="Lena", hashed_password=bcrypt_context.hash(":uY.DemYvm8Lyi."), email="lena@gmail.com", date_of_birth=datetime.strptime("2000-01-01", "%Y-%m-%d").date(), status=UserStatus(1), phone_no="0987654321", city="Hamburg", country="Germany", postal_code="80331"),       
+
+        DogBoardingTable(user_id=1, max_dogs=2,checkin_time=time(8, 0), checkout_time=time(18, 0), multi_family_allowed=True, potty_break_freq={PottyBreakFrequency.TWO_TO_FOUR: True}, is_active=True),
+        DoggyDayCareTable(user_id=1, max_dogs=2, checkin_time=time(9, 0), checkout_time=time(17, 0), multi_family_allowed=False, potty_break_freq={PottyBreakFrequency.ZERO_TO_TWO: True}, is_active=True),
 
         PetTable(
             name="Buddy",

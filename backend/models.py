@@ -1,5 +1,5 @@
 # PyPi Dependencies
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Date, ForeignKey, Enum as SQLAlchemyEnum, JSON
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Date, ForeignKey, Enum as SQLAlchemyEnum, JSON, Time
 from sqlalchemy.orm import relationship
 from db import Base
 
@@ -7,7 +7,7 @@ from db import Base
 from datetime import datetime
 
 # Modules
-from enums import UserStatus
+from enums import UserStatus, PottyBreakFrequency
 
 class BaseModel(Base):
     """Wrapper for sqlalchemy declaritive_base"""
@@ -40,6 +40,12 @@ class UserTable(TimeStampModel):
 
     token = relationship('TokenTable', back_populates='user')
     pets = relationship('PetTable', back_populates='user')
+
+    dog_boarding = relationship("DogBoardingTable", back_populates="user", uselist=False)
+    doggy_day_care = relationship("DoggyDayCareTable", back_populates="user", uselist=False)
+    drop_in_visits = relationship("DropInVisitsTable", back_populates="user", uselist=False)
+    dog_walking = relationship("DogWalking", back_populates="user", uselist=False)
+
 
 class PetTable(TimeStampModel):
     __tablename__ = 'pets'
@@ -75,3 +81,53 @@ class TokenTable(TimeStampModel):
     def update(self, token, expiration_date):
         self.token = token
         self.expiration_date = expiration_date
+
+
+class BaseHomeService(TimeStampModel):
+    __abstract__ = True
+
+    max_dogs = Column(Integer)
+    checkin_time = Column(Time)
+    checkout_time = Column(Time)
+    multi_family_allowed = Column(Boolean)
+    potty_break_freq = Column(JSON, nullable=False)
+    is_active = Column(Boolean, default=False)
+
+# Visit-based services
+class BaseVisitService(TimeStampModel):
+    __abstract__ = True
+
+    max_distance_km = Column(Integer)
+    max_visits_per_day = Column(Integer)
+
+    # Stores a list of time slot strings like ["6:00-11:00", "11:00-15:00"]
+    available_times = Column(JSON, nullable=False)
+    is_active = Column(Boolean, default=False)
+
+
+class DogBoardingTable(BaseHomeService):
+    __tablename__ = "dog_boarding"
+
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("UserTable", back_populates="dog_boarding")
+
+
+class DoggyDayCareTable(BaseHomeService):
+    __tablename__ = "doggy_day_care"
+
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("UserTable", back_populates="doggy_day_care")
+
+
+class DropInVisitsTable(BaseVisitService):
+    __tablename__ = "drop_in_visits"
+
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("UserTable", back_populates="drop_in_visits")
+
+
+class DogWalking(BaseVisitService):
+    __tablename__ = "dog_walking"
+
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship("UserTable", back_populates="dog_walking")

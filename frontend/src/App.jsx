@@ -28,10 +28,30 @@ import { API_BASE_DOMAIN } from "./services/CommonService";
 import Toaster from "./pages/Toaster";
 import { updateMe } from "./services/http/User";
 import { createPet, getMyPet, getMyPets, updatePet } from "./services/http/Pet";
+import { getMyHomeService, upsertMyHomeService } from "./services/http/Sitter";
 
 function App() {
   useEffect(() => {
-    async function testHttp() {}
+    async function testHttp() {
+      try {
+        // const response = await upsertMyHomeService("dog_boarding", {
+        //   maxDogs: 2,
+        //   checkinTime: "08:00:00",
+        //   checkoutTime: "18:00:00",
+        //   multiFamilyAllowed: true,
+        //   pottyBreakFreq: {
+        //     "0-2": true,
+        //     "2-4": true,
+        //     "4-6": false,
+        //   },
+        //   isActive: true,
+        //   id: 1,
+        //   userId: 1,
+        // });
+      } catch (err) {
+        // console.error("Error during testHttp:", err.message || err);
+      }
+    }
 
     testHttp();
   });

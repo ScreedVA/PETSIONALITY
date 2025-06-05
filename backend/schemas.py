@@ -1,5 +1,12 @@
+# Pypi dependancies
 from pydantic import BaseModel, Field
+
+# Python Libraries
+from datetime import time
 from typing import Optional, Dict
+
+# Modules
+from enums import PottyBreakFrequency
 
 # Create or Update
 class CreateUserFrontend(BaseModel):
@@ -66,5 +73,38 @@ class ReadPetFull(ReadPetSummary):
 
     model_config = {
         "from_attributes": True,  # replaces orm_mode
+        "populate_by_name": True
+    }
+
+class ReadBaseHomeService(BaseModel):
+    max_dogs: int = Field(..., alias="maxDogs")
+    checkin_time: time = Field(..., alias="checkinTime")
+    checkout_time: time = Field(..., alias="checkoutTime")
+    multi_family_allowed: bool = Field(..., alias="multiFamilyAllowed")
+    potty_break_freq: Dict[str, bool] = Field(..., alias="pottyBreakFreq")
+    is_active: Optional[bool] = Field(False, alias="isActive")
+
+    model_config = {
+        "from_attributes": True,   # replaces orm_mode, enables loading from ORM objects
+        "populate_by_name": True,  # allows using field aliases both ways
+    }
+
+class ReadDogBoarding(ReadBaseHomeService):
+    id: int
+    user_id: int = Field(..., alias="userId")
+
+class ReadDoggyDayCare(ReadBaseHomeService):
+    id: int
+    user_id: int = Field(..., alias="userId")
+
+class CreateOrUpdateBaseHomeService(BaseModel):
+    max_dogs: int = Field(..., alias="maxDogs")
+    checkin_time: time = Field(..., alias="checkinTime")
+    checkout_time: time = Field(..., alias="checkoutTime")
+    multi_family_allowed: bool = Field(..., alias="multiFamilyAllowed")
+    potty_break_freq: Dict[str, bool] = Field(..., alias="pottyBreakFreq")
+    is_active: Optional[bool] = Field(False, alias="isActive")
+
+    model_config = {
         "populate_by_name": True
     }

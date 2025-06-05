@@ -6,12 +6,14 @@ import { petList as pets } from "./Data";
 import PetCard from "./PetCard";
 import Loading from "./Loading";
 import { getMyPets } from "../services/http/Pet";
+import { useToast } from "../services/ContextService";
 
 export default function MyPets() {
   const [pageState, setPageState] = useState("Pet List");
   const [petList, setPetList] = useState([]);
   const [loading, setLoading] = useState(true); // 🟡 loading state
   const [reload, setReload] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     async function handleLoadData() {
@@ -32,9 +34,12 @@ export default function MyPets() {
 
         console.log("petList ", petList);
       } catch (err) {
-        console.error("Error Message", err.message, "Status:", err.status);
         if (err.status === 404) {
           setPageState("Add Pet");
+        } else {
+          const errorType = err?.constructor?.name || "UnknownError";
+          showToast(`${err.message}`, "error");
+          console.error("Error Message:", err.message, "Error Type:", errorType);
         }
       } finally {
         setLoading(false);
@@ -80,7 +85,7 @@ export default function MyPets() {
         </>
       )}
 
-      {pageState === "Pet List" && (
+      {pageState === "Pet List" && petList.length && (
         <div className="flex flex-col items-end gap-6">
           {/* State 1 - Pet List */}
           <ul className="flex flex-col w-full gap-4 ">

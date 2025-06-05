@@ -7,8 +7,8 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 
 # Modules
-from models import UserTable, TokenTable, PetTable
-from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull
+from models import UserTable, TokenTable, PetTable, DogBoardingTable, DoggyDayCareTable
+from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull, CreateOrUpdateBaseHomeService
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -121,8 +121,6 @@ def read_pet_list(db: Session, filter = None):
     pet_list = db.query(PetTable).all()
 
     return pet_list
-
-
 def read_pet_list_by_owner_id(db, owner_id, detail_level="full", limit=None):
     """
     Retrieve a list of pets belonging to a specific owner, with optional detail level and result limit.
@@ -165,7 +163,6 @@ def read_pet_list_by_owner_id(db, owner_id, detail_level="full", limit=None):
     if limit:
         query = query.limit(limit)
     return [ReadPetFull.model_validate(pet) for pet in query.all()]
-
 def read_pet_by_id(db, pet_id, detail_level="full"):
     """
     Retrieve a pet by ID with optional detail level.
@@ -191,6 +188,11 @@ def read_pet_by_id(db, pet_id, detail_level="full"):
 
     pet = db.query(PetTable).filter(PetTable.id == pet_id).first()
     return ReadPetFull.model_validate(pet) if pet else None
+
+def read_dog_boarding_by_user(db: Session, user_id):
+    return db.query(DogBoardingTable).filter_by(user_id=user_id).first()
+def read_doggy_day_care_by_user(db: Session, user_id):
+    return db.query(DoggyDayCareTable).filter_by(user_id=user_id).first()
 
 
 #  Create
@@ -290,3 +292,31 @@ def update_pet_by_id(db: Session, pet_id: int, update_request: UpdateUserFronten
     db.commit()
     db.refresh(pet)
     return pet
+
+
+# Upsert
+def upsert_dog_boarding(db, user_id: int, data: CreateOrUpdateBaseHomeService):
+    instance = read_dog_boarding_by_user(db, user_id)
+    if instance:
+        print("Dog Boarding Instance")
+        for key, value in data.model_dump().items():
+            setattr(instance, key, value)
+    else:
+        instance = DogBoardingTable(user_id=user_id, **data.model_dump(by_alias=True))
+        db.add(instance)
+    db.commit()
+    db.refresh(instance)
+    return instance
+
+
+def upsert_doggy_day_care(db, user_id: int, data: CreateOrUpdateBaseHomeService):
+    instance = read_doggy_day_care_by_user(db, user_id)
+    if instance:
+        for key, value in data.model_dump().items():
+            setattr(instance, key, value)
+    else:
+        instance = DoggyDayCareTable(user_id=user_id, **data.model_dump(by_alias=True))
+        db.add(instance)
+    db.commit()
+    db.refresh(instance)
+    return instance

@@ -8,7 +8,7 @@ import os
 
 # Modules
 from db import Base, engine, SessionLocal
-from routers import auth, user, pet
+from routers import auth, user, pet, sitter
 from data import add_default_data
 from services import verify_api_key
 from models import UserTable, PetTable, TokenTable
@@ -37,6 +37,8 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(pet.router)
+app.include_router(sitter.router)
+
 
 @app.on_event("startup")
 def startup_event():
