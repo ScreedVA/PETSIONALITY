@@ -9,9 +9,10 @@ from typing import List, Optional
 
 # Modules
 from models import UserTable, PetTable
-from crud import read_pet_list, read_pet_list_by_owner_id, read_pet_by_id
+from crud import read_pet_list, read_pet_list_by_owner_id, read_pet_by_id, create_pet_for_owner
 from db import db_dependency
 from services import user_dependency, verify_pet_ownership
+from schemas import CreatePet
 
 router = APIRouter(
     prefix="/pet",
@@ -120,7 +121,23 @@ async def get_logged_owner_pet_by_id(
             detail=f"Unexpected error occurred: {str(e)}"
         )
 
-
+@router.post("/owner/me", status_code=status.HTTP_201_CREATED)
+async def create_pet_for_logged_owner(
+    pet: CreatePet,
+    db: db_dependency,
+    user=user_dependency
+):
+    try:
+        new_pet = create_pet_for_owner(db=db, owner_id=user.id, pet_data=pet)
+        return new_pet
+    
+    except Exception as e:
+        # Catch-all for any other unhandled exceptions
+        raise HTTPException(
+            status_code=500,
+            detail=f"An unexpected error occurred while creating the pet. Error Message: {e}"
+        )
+    
 
 @router.get("/list", status_code=status.HTTP_200_OK)
 async def get_list(db: db_dependency, filter = None):

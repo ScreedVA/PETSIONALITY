@@ -8,8 +8,8 @@ import Loading from "./Loading";
 import { getMyPets } from "../services/http/Pet";
 
 export default function MyPets() {
-  const [pageState, setPageState] = useState(null);
-  const [petList, setPetList] = useState(pets);
+  const [pageState, setPageState] = useState("Pet List");
+  const [petList, setPetList] = useState([]);
   const [loading, setLoading] = useState(true); // 🟡 loading state
 
   useEffect(() => {
@@ -38,6 +38,19 @@ export default function MyPets() {
     handleLoadData();
   }, []);
 
+  function handleAddPetClick(event) {
+    event.preventDefault();
+
+    setPetList((prevFields) => [
+      ...prevFields,
+      {
+        showDetails: true,
+        new: true,
+      },
+    ]);
+    setPageState("Pet List");
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -45,7 +58,7 @@ export default function MyPets() {
   return (
     // Renders 'Add Pet' or 'Pet List'
     <>
-      {pageState === "Add Pet" ? (
+      {pageState === "Add Pet" && (
         <>
           {/* State 0 - Add Pet*/}
           <div className="w-full h-full">
@@ -53,21 +66,35 @@ export default function MyPets() {
               <div className="w-[450px] h-[450px] bg-mint-gradient-light flex flex-col justify-center gap-5 px-20">
                 <FontAwesomeIcon icon={faPaw} size={"10x"} color="#49978B" />
                 <p className="text-center">Share their name, photo, and a little about what makes them special.</p>
-                <button className="button1">Add Pet Profile</button>
+                <button className="button1" onClick={handleAddPetClick}>
+                  Add Pet Profile
+                </button>
               </div>
             </div>
           </div>
         </>
-      ) : (
-        <>
+      )}
+
+      {pageState === "Pet List" && (
+        <div className="flex flex-col items-end gap-6">
           {/* State 1 - Pet List */}
           <ul className="flex flex-col w-full gap-4 ">
             {/* Pet Card */}
             {petList.map((pet, index) => (
-              <PetCard key={`${pet.breed}-${index}`} pet={pet} setPetList={setPetList} index={index} />
+              <PetCard
+                key={`${pet.breed}-${index}`}
+                pet={pet}
+                setPetList={setPetList}
+                petList={petList}
+                index={index}
+                setPageState={setPageState}
+              />
             ))}
           </ul>
-        </>
+          <button className="w-full text-2xl md:w-1/2 button1" onClick={handleAddPetClick}>
+            Add Pet
+          </button>
+        </div>
       )}
     </>
   );

@@ -457,6 +457,19 @@ button.button1:active {
   transform: translateY(5px);
 }
 
+button.button1x2 {
+  color: #49978b;
+  border: 3px solid #49978b;
+  background: linear-gradient(to right, #49978b 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+}
+
+button.button1x2:hover {
+  background-position: 0 0;
+  color: white;
+}
+
 button.button2 {
   color: #ff914d;
   border: 3px solid #ff914d;

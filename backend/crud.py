@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Modules
 from models import UserTable, TokenTable, PetTable
-from schemas import CreateUserFrontend, UpdateUserFrontend
+from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -267,6 +267,13 @@ def create_refresh_token(db: Session, token: str, user_id: int, expiration_date:
     db.add(token)
     db.commit()
     db.refresh(token)
+def create_pet_for_owner(db: Session, owner_id: int, pet_data: CreatePet):
+    new_pet = PetTable(**pet_data.model_dump(), owner_id=owner_id)
+    db.add(new_pet)
+    db.commit()
+    db.refresh(new_pet)
+    return new_pet
+
 
 # Updated
 def update_user_by_id(db: Session, user_id: int, update_request: UpdateUserFrontend): 

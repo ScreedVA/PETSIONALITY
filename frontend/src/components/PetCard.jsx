@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faChevronDown, faShieldDog, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
 import { getMyPet } from "../services/http/Pet";
 import { isFriendlyWithField } from "../services/CommonService";
 
-export default function PetCard({ pet, setPetList, index }) {
+export default function PetCard({ pet, index, setPetList, petList, setPageState }) {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({});
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    // Skip load state for new Pet Entry
+    if (pet.new) setLoading(false);
+
+    console.log("pet list", petList);
+    console.log(petList.length);
+  }, []);
 
   async function handleClickExpand() {
     setPetList((prevList) => prevList.map((p, i) => (i === index ? { ...p, showDetails: !p.showDetails } : p)));
     try {
-      const response = await getMyPet({ id: pet.id });
+      let response;
+      if (!pet.new) response = await getMyPet({ id: pet.id });
       setFormData(response);
     } catch (err) {
       console.error("Error Message", err.message, "Status:", err.status);
@@ -27,6 +33,7 @@ export default function PetCard({ pet, setPetList, index }) {
 
   async function handleClickCollapse() {
     setPetList((prevList) => prevList.map((p, i) => (i === index ? { ...p, showDetails: !p.showDetails } : p)));
+    if (petList.length < 1) setPageState("Add Pet");
   }
 
   function handleInputChange(event) {
@@ -54,28 +61,51 @@ export default function PetCard({ pet, setPetList, index }) {
     event.preventDefault();
   }
 
+  function handleCancelClick() {
+    setPetList((prevList) => {
+      const updatedList = prevList.filter((_, i) => i !== index);
+
+      // Now we can safely act on the new list
+      if (updatedList.length < 1) {
+        setPageState("Add Pet");
+      }
+
+      return updatedList;
+    });
+  }
+
   return (
     <li key={`${pet.name}-${index}`} className="flex w-full gap-3 border px-10 py-4  border-[#49978B]">
       <div className={`flex flex-col w-full ${pet.showDetails ? "gap-10" : ""}`}>
         {/* Card Summary */}
-        <div className="flex ">
+        <div className="flex justify-between">
           <div className="flex justify-start items-center gap-5 w-[450px]">
-            <img src={pet.img} alt="Dog Image" className="w-20 h-20 rounded-full" />
+            {pet.img ? (
+              <img src={pet.img} alt="Dog Image" className="w-20 h-20 rounded-full" />
+            ) : (
+              <FontAwesomeIcon icon={faShieldDog} size="3x" color="#49978B" />
+            )}
 
             <div className="flex flex-col">
-              <h3>{pet.name}</h3>
-              <p className="text-[#808080] font-semibold text-xs">{pet.description}</p>
+              <h3>{pet.name || formData?.name}</h3>
+              <p className="text-[#808080] font-semibold text-xs">{pet.description || formData?.description}</p>
             </div>
           </div>
 
-          {/* Render Chevron Right or Chevron Down Icon */}
-          <div className="flex items-end justify-end flex-grow cursor-pointer text-m text-[#49978B] hover:text-[#FF914D]">
-            {pet.showDetails ? (
-              // onClick toggle details
-              <FontAwesomeIcon icon={faChevronDown} onClick={handleClickCollapse} />
+          {/* Render Chevron Right or Chevron Down Icon or Cancel Icon */}
+          <div className="flex flex-col justify-end h-full cursor-pointer text-m text-[#49978B] hover:text-[#FF914D]">
+            {pet.new ? (
+              <FontAwesomeIcon icon={faXmark} onClick={handleCancelClick} />
             ) : (
-              // onClick toggle details
-              <FontAwesomeIcon icon={faChevronRight} onClick={handleClickExpand} />
+              <>
+                {pet.showDetails ? (
+                  // onClick toggle details
+                  <FontAwesomeIcon icon={faChevronDown} onClick={handleClickCollapse} className="" />
+                ) : (
+                  // onClick toggle details
+                  <FontAwesomeIcon icon={faChevronRight} onClick={handleClickExpand} />
+                )}
+              </>
             )}
           </div>
         </div>
@@ -96,7 +126,14 @@ export default function PetCard({ pet, setPetList, index }) {
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-col gap-1">
                     <label htmlFor="">Name</label>
-                    <input type="text" placeholder="Enter Name" className="input3" value={formData.name} />
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Enter Name"
+                      className="input3"
+                      value={formData?.name}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="flex flex-col justify-center gap-1">
                     <label htmlFor="cars">Gender:</label>
@@ -105,7 +142,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       name="gender"
                       placeholder="Select Gender"
                       className="select1"
-                      value={formData.gender}
+                      value={formData?.gender}
                       onChange={handleInputChange}
                     >
                       <option value="">Select Gender</option>
@@ -121,7 +158,7 @@ export default function PetCard({ pet, setPetList, index }) {
                         name="size"
                         placeholder="Select Weight"
                         className="select1"
-                        value={formData.size}
+                        value={formData?.size}
                         onChange={handleInputChange}
                       >
                         <option value="">Select Weight</option>
@@ -139,7 +176,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       name="year"
                       min="1900"
                       max={new Date().getFullYear()}
-                      value={formData.yob}
+                      value={formData?.yob}
                       onChange={handleInputChange}
                       className="input3"
                     />
@@ -154,7 +191,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['Spayed/Neutered'] before:content-['\e573'] "
                       name="spayed_neatured"
-                      checked={formData.spayed_neatured}
+                      checked={formData?.spayed_neatured}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -163,7 +200,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['Chipped'] before:content-['\f2db'] "
                       name="microchipped"
-                      checked={formData.microchipped}
+                      checked={formData?.microchipped}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -172,7 +209,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['Vaccinated'] before:content-['\f48e'] "
                       name="vaccinations"
-                      checked={formData.vaccinations}
+                      checked={formData?.vaccinations}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -181,7 +218,7 @@ export default function PetCard({ pet, setPetList, index }) {
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['House-Trained'] before:content-['\e509'] "
                       name="house_trained"
-                      checked={formData.house_trained}
+                      checked={formData?.house_trained}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -194,7 +231,7 @@ export default function PetCard({ pet, setPetList, index }) {
                           type="checkbox"
                           className=" checkbox2x2 flex-grow after:content-['Dogs'] before:content-['\f6d3'] "
                           name="dogs"
-                          checked={formData.friendly_with.dogs}
+                          checked={formData?.friendly_with?.dogs}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -203,7 +240,7 @@ export default function PetCard({ pet, setPetList, index }) {
                           type="checkbox"
                           className="checkbox2x2 after:content-['Cats'] before:content-['\f6be'] "
                           name="cats"
-                          checked={formData.friendly_with.cats}
+                          checked={formData?.friendly_with?.cats}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -212,7 +249,7 @@ export default function PetCard({ pet, setPetList, index }) {
                           type="checkbox"
                           className="checkbox2x2 after:content-['Kids'] before:content-['\f1ae'] "
                           name="kids"
-                          checked={formData.friendly_with.kids}
+                          checked={formData?.friendly_with?.kids}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -221,7 +258,7 @@ export default function PetCard({ pet, setPetList, index }) {
                           type="checkbox"
                           className="checkbox2x2 after:content-['Adults'] before:content-['\f007'] "
                           name="adults"
-                          checked={formData.friendly_with.adults}
+                          checked={formData?.friendly_with?.adults}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -237,12 +274,13 @@ export default function PetCard({ pet, setPetList, index }) {
                   cols={55}
                   rows={10}
                   draggable="false"
-                  value={formData.description}
+                  value={formData?.description}
                   onChange={handleInputChange}
                 ></textarea>
               </div>
               {/* 3/3 (form) */}
-              <div className="flex justify-end">
+              <div className="flex flex-col justify-end w-full gap-3 md:flex-row">
+                <button className="button1x2">Remove Pet</button>
                 <button className="button2">Save Changes</button>
               </div>
             </>

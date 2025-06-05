@@ -2,7 +2,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
-from fastapi import Depends
+from sqlalchemy.exc import SQLAlchemyError
+from fastapi import Depends, HTTPException
 
 # python libraries
 from typing import Annotated
@@ -26,6 +27,10 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+    except SQLAlchemyError as e:
+        # DB-level errors
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"A database error occurred.\n Error Message: {e}")
     finally:
         db.close()
 
