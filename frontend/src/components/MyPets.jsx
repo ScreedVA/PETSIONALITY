@@ -11,21 +11,26 @@ export default function MyPets() {
   const [pageState, setPageState] = useState("Pet List");
   const [petList, setPetList] = useState([]);
   const [loading, setLoading] = useState(true); // 🟡 loading state
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     async function handleLoadData() {
       try {
         const response = await getMyPets({ detailLevel: "summary" });
+        console.log("response", response);
+        console.log("petList ", petList);
 
         // Add showDetails to each pet
         const petsWithDetailsFlag = response.map((pet, index) => ({
           ...pet,
           showDetails: false, // default value
-          img: pets[index].img, // Temp images from Data.js
+          img: pets[index]?.img || null, // Temp images from Data.js
         }));
 
         setPageState("Pet List");
         setPetList(petsWithDetailsFlag);
+
+        console.log("petList ", petList);
       } catch (err) {
         console.error("Error Message", err.message, "Status:", err.status);
         if (err.status === 404) {
@@ -36,7 +41,7 @@ export default function MyPets() {
       }
     }
     handleLoadData();
-  }, []);
+  }, [reload]);
 
   function handleAddPetClick(event) {
     event.preventDefault();
@@ -86,6 +91,9 @@ export default function MyPets() {
                 pet={pet}
                 setPetList={setPetList}
                 petList={petList}
+                reloadParent={() => {
+                  setReload((prev) => !prev);
+                }}
                 index={index}
                 setPageState={setPageState}
               />

@@ -44,16 +44,16 @@ class UserTable(TimeStampModel):
 class PetTable(TimeStampModel):
     __tablename__ = 'pets'
 
-    name = Column(String, nullable=False)
-    species = Column(String, nullable=False)  # e.g., dog, cat
-    gender = Column(String, nullable=False)
+    name = Column(String, nullable=True)
+    species = Column(String, nullable=True)  # e.g., dog, cat
+    gender = Column(String, nullable=True)
     
     breed = Column(String, nullable=True)
     size = Column(String, nullable=True)
     photo = Column(String, nullable=True)  # URL to profile image
     description = Column(String, nullable=True)
     yob = Column(Integer, nullable=True)
-    spayed_neatured = Column(Boolean, nullable=True)
+    spayed_neutured = Column(Boolean, nullable=True)
     microchipped = Column(Boolean, nullable=True)
     vaccinations = Column(Boolean, nullable=True)
     house_trained = Column(Boolean, nullable=True)

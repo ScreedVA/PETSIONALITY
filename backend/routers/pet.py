@@ -5,14 +5,14 @@ from starlette import status
 from jose import JWTError
 
 # Python Library
-from typing import List, Optional
+from typing import List, Optional, Union
 
 # Modules
 from models import UserTable, PetTable
-from crud import read_pet_list, read_pet_list_by_owner_id, read_pet_by_id, create_pet_for_owner
+from crud import read_pet_list, read_pet_list_by_owner_id, read_pet_by_id, create_pet_for_owner, update_pet_by_id
 from db import db_dependency
 from services import user_dependency, verify_pet_ownership
-from schemas import CreatePet
+from schemas import CreatePet, ReadPetFull, ReadPetSummary
 
 router = APIRouter(
     prefix="/pet",
@@ -23,7 +23,8 @@ router = APIRouter(
 async def test():
     return "test user router"
 
-@router.get("/list/owner/me", status_code=status.HTTP_200_OK)
+
+@router.get("/list/owner/me", response_model=List[Union[ReadPetSummary, ReadPetFull]])
 async def get_logged_owner_pets(
     db: db_dependency,
     user: user_dependency,
@@ -61,23 +62,24 @@ async def get_logged_owner_pets(
     HTTPException (500)
         If an unexpected error occurs during query execution or processing.
     """
+
     try:
         pets = read_pet_list_by_owner_id(db, user["id"], detail_level, limit)
 
         if not pets:
             raise HTTPException(status_code=404, detail="Not Found: No pets exist for this owner")
-        return pets
+        
+        return pets  # List of dicts (summary) or list of ORM models (full)
 
-    except HTTPException as e:
-        raise e
-    
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An unexpected error occurred: {str(e)}"
-        )
-    
-@router.get("/owner/me/{pet_id}", status_code=status.HTTP_200_OK)
+        ) 
+
+@router.get("/owner/me/{pet_id}", response_model=Union[ReadPetSummary, ReadPetFull])
 async def get_logged_owner_pet_by_id(
     db: db_dependency,
     user: user_dependency,
@@ -100,15 +102,15 @@ async def get_logged_owner_pet_by_id(
     -------
     dict or PetTable
     """
+
     try:
         pet = read_pet_by_id(db, pet_id, detail_level)
 
         if not pet:
             raise HTTPException(status_code=404, detail="Not Found: Pet does not exist")
 
-        # Check ownership (must use full object if in summary mode)
         if not verify_pet_ownership(db, pet_id, user["id"]):
-                raise HTTPException(status_code=401, detail="User Unauthorized: User is not owner of pet")
+            raise HTTPException(status_code=401, detail="User Unauthorized: User is not owner of pet")
 
         return pet
 
@@ -125,11 +127,14 @@ async def get_logged_owner_pet_by_id(
 async def create_pet_for_logged_owner(
     pet: CreatePet,
     db: db_dependency,
-    user=user_dependency
+    user: user_dependency
 ):
     try:
-        new_pet = create_pet_for_owner(db=db, owner_id=user.id, pet_data=pet)
-        return new_pet
+        new_pet = create_pet_for_owner(db=db, owner_id=user["id"], pet_data=pet)
+        return ReadPetFull.model_validate(new_pet)
+    
+    except HTTPException as e:
+        raise e
     
     except Exception as e:
         # Catch-all for any other unhandled exceptions
@@ -138,6 +143,33 @@ async def create_pet_for_logged_owner(
             detail=f"An unexpected error occurred while creating the pet. Error Message: {e}"
         )
     
+@router.put("/owner/me/{pet_id}", status_code=status.HTTP_201_CREATED)
+async def update_pet_for_logged_owner(
+    db: db_dependency,
+    user: user_dependency,
+    updated_data: CreatePet,
+    pet_id: int = Path(..., ge=1),
+
+):
+
+    try:        
+        updated_pet = update_pet_by_id(db, pet_id=pet_id, update_request=updated_data)
+
+        if not updated_pet:
+            raise HTTPException(status_code=404, detail="Not Found: Pet to update does not exist")
+
+        if not verify_pet_ownership(db, pet_id, user["id"]):
+            raise HTTPException(status_code=401, detail="User Unauthorized: User is not owner of pet")
+
+        return updated_pet
+
+    except HTTPException as e:
+        raise e
+
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Unexpected error: {str(e)}")
+
 
 @router.get("/list", status_code=status.HTTP_200_OK)
 async def get_list(db: db_dependency, filter = None):

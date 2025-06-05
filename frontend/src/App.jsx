@@ -27,17 +27,11 @@ import { handle401Exception, loginUser, registerUser } from "./services/http/Aut
 import { API_BASE_DOMAIN } from "./services/CommonService";
 import Toaster from "./pages/Toaster";
 import { updateMe } from "./services/http/User";
-import { getMyPet, getMyPets } from "./services/http/Pet";
+import { createPet, getMyPet, getMyPets, updatePet } from "./services/http/Pet";
 
 function App() {
   useEffect(() => {
-    async function testHttp() {
-      try {
-        // respose = await getMyPet({ id: 9 });
-      } catch (err) {
-        // console.error("Error Message", err.message, "Status:", err.status);
-      }
-    }
+    async function testHttp() {}
 
     testHttp();
   });

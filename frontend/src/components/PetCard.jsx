@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import { faChevronRight, faChevronDown, faShieldDog, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
-import { getMyPet } from "../services/http/Pet";
+import { createPet, getMyPet, updatePet } from "../services/http/Pet";
 import { isFriendlyWithField } from "../services/CommonService";
+import { useToast } from "../services/ContextService";
 
-export default function PetCard({ pet, index, setPetList, petList, setPageState }) {
+export default function PetCard({ pet, index, setPetList, petList, setPageState, reloadParent }) {
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "newName",
+    gender: "male",
+    description: "newDescription",
+  });
   const [reload, setReload] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     // Skip load state for new Pet Entry
     if (pet.new) setLoading(false);
-
-    console.log("pet list", petList);
-    console.log(petList.length);
-  }, []);
+  }, [reload]);
 
   async function handleClickExpand() {
     setPetList((prevList) => prevList.map((p, i) => (i === index ? { ...p, showDetails: !p.showDetails } : p)));
@@ -55,10 +58,20 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
         [name]: type === "checkbox" ? checked : value,
       };
     });
+    console.log(`name: ${name}: value: ${value} checked: ${checked}`);
   }
 
   async function handleSaveChangesClick(event) {
     event.preventDefault();
+    try {
+      await updatePet(formData.id, formData);
+    } catch (err) {
+      console.error("Error Message", err.message, "Status:", err.status);
+    } finally {
+      reloadParent();
+      setLoading(false);
+      showToast(`${formData.name} Updated Succesfully`, "success", 6000);
+    }
   }
 
   function handleCancelClick() {
@@ -72,6 +85,29 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
 
       return updatedList;
     });
+  }
+
+  async function handleConfirmClick(event) {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      await createPet(formData);
+      console.log(formData);
+    } catch (err) {
+      if (err.status == 422) {
+        showToast("Missing Field", "error", 6000);
+      }
+      console.error("Error Message", err.message, "Status:", err.status);
+    } finally {
+      // Reset Page
+      reloadParent();
+      setLoading(false);
+      showToast(`${formData.name} Added Succesfully`, "success", 6000);
+    }
+  }
+
+  async function handleRemovePetClick(event) {
+    event.preventDefault();
   }
 
   return (
@@ -151,17 +187,16 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                     </select>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label htmlFor="">Weight</label>
+                    <label htmlFor="">Size</label>
                     <div className="relative flex flex-col">
                       <select
                         id="size"
                         name="size"
-                        placeholder="Select Weight"
                         className="select1"
                         value={formData?.size}
                         onChange={handleInputChange}
                       >
-                        <option value="">Select Weight</option>
+                        <option value={null}>Select Size</option>
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -172,8 +207,8 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                     <label htmlFor="">Year of birth</label>
                     <input
                       type="number"
-                      id="year"
-                      name="year"
+                      id="yob"
+                      name="yob"
                       min="1900"
                       max={new Date().getFullYear()}
                       value={formData?.yob}
@@ -190,8 +225,8 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                     <input
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['Spayed/Neutered'] before:content-['\e573'] "
-                      name="spayed_neatured"
-                      checked={formData?.spayed_neatured}
+                      name="spayedNeutured"
+                      checked={formData?.spayedNeutered}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -218,7 +253,7 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                       type="checkbox"
                       className="checkbox3x2 after:left-12 after:content-['House-Trained'] before:content-['\e509'] "
                       name="house_trained"
-                      checked={formData?.house_trained}
+                      checked={formData?.houseTrained}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -231,7 +266,7 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                           type="checkbox"
                           className=" checkbox2x2 flex-grow after:content-['Dogs'] before:content-['\f6d3'] "
                           name="dogs"
-                          checked={formData?.friendly_with?.dogs}
+                          checked={formData?.friendlyWith?.dogs}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -279,9 +314,22 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState 
                 ></textarea>
               </div>
               {/* 3/3 (form) */}
+              {/* Render Add Pet, Save Changes or Remove Pet Button */}
               <div className="flex flex-col justify-end w-full gap-3 md:flex-row">
-                <button className="button1x2">Remove Pet</button>
-                <button className="button2">Save Changes</button>
+                {!pet.new && (
+                  <button className="button1x2" onClick={handleRemovePetClick}>
+                    Remove Pet
+                  </button>
+                )}
+                {pet.new ? (
+                  <button className="button2" onClick={handleConfirmClick}>
+                    Confirm
+                  </button>
+                ) : (
+                  <button className="button2" onClick={handleSaveChangesClick}>
+                    Save Changes
+                  </button>
+                )}
               </div>
             </>
           )}

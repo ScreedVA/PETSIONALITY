@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Modules
 from models import UserTable, TokenTable, PetTable
-from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet
+from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -122,11 +122,8 @@ def read_pet_list(db: Session, filter = None):
 
     return pet_list
 
-def read_pet_list_by_owner_id(
-    db: Session,owner_id: int,
-    detail_level: str = "full",
-    limit: int = None
-):
+
+def read_pet_list_by_owner_id(db, owner_id, detail_level="full", limit=None):
     """
     Retrieve a list of pets belonging to a specific owner, with optional detail level and result limit.
 
@@ -154,25 +151,22 @@ def read_pet_list_by_owner_id(
     ------
     None explicitly raised. Any database exceptions will propagate naturally.
     """
+
     if detail_level == "summary":
         query = db.query(PetTable.id, PetTable.name, PetTable.description).filter(PetTable.owner_id == owner_id)
         if limit:
             query = query.limit(limit)
         return [
-            {"id": r.id, "name": r.name, "description": r.description}
+            ReadPetSummary(id=r.id, name=r.name, description=r.description)
             for r in query.all()
         ]
-
-    # full detail
+    
     query = db.query(PetTable).filter(PetTable.owner_id == owner_id)
     if limit:
         query = query.limit(limit)
-    return query.all()
-def read_pet_by_id(
-    db: Session,
-    pet_id: int,
-    detail_level: str = "full"
-):
+    return [ReadPetFull.model_validate(pet) for pet in query.all()]
+
+def read_pet_by_id(db, pet_id, detail_level="full"):
     """
     Retrieve a pet by ID with optional detail level.
 
@@ -190,23 +184,13 @@ def read_pet_by_id(
     PetTable or dict
         Pet object or dict with summary fields.
     """
+
     if detail_level == "summary":
-        result = db.query(
-            PetTable.id,
-            PetTable.name,
-            PetTable.description
-        ).filter(PetTable.id == pet_id).first()
+        result = db.query(PetTable.id, PetTable.name, PetTable.description).filter(PetTable.id == pet_id).first()
+        return ReadPetSummary(id=result.id, name=result.name, description=result.description) if result else None
 
-        if result:
-            return {
-                "id": result.id,
-                "name": result.name,
-                "description": result.description
-            }
-        return None
-
-    # Full detail
-    return db.query(PetTable).filter(PetTable.id == pet_id).first()
+    pet = db.query(PetTable).filter(PetTable.id == pet_id).first()
+    return ReadPetFull.model_validate(pet) if pet else None
 
 
 #  Create
@@ -268,6 +252,7 @@ def create_refresh_token(db: Session, token: str, user_id: int, expiration_date:
     db.commit()
     db.refresh(token)
 def create_pet_for_owner(db: Session, owner_id: int, pet_data: CreatePet):
+    print(pet_data.model_dump())
     new_pet = PetTable(**pet_data.model_dump(), owner_id=owner_id)
     db.add(new_pet)
     db.commit()
@@ -290,3 +275,18 @@ def update_user_by_id(db: Session, user_id: int, update_request: UpdateUserFront
     db.commit()
     db.refresh(user)
     return user
+
+def update_pet_by_id(db: Session, pet_id: int, update_request: UpdateUserFrontend): 
+    pet = db.query(PetTable).filter(PetTable.id == pet_id).first()
+
+    if not pet:
+        return None
+
+    update_fields = update_request.model_dump(exclude_unset=True)
+    
+    for field, value in update_fields.items():
+        setattr(pet, field, value)
+
+    db.commit()
+    db.refresh(pet)
+    return pet
