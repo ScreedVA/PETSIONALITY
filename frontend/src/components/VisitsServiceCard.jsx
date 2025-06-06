@@ -43,8 +43,6 @@ export default function VisitsServiceCard({ icon, title, subtitle, reloadParent,
     try {
       await upsertMyVisitService(serviceType, { isActive: isChecked });
 
-      console.log(isChecked);
-      console.log(isActive);
       isChecked === true
         ? showToast(`Added ${title} Service`, "success")
         : showToast(`Removed ${title} Service`, "error");

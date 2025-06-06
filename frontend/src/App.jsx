@@ -26,10 +26,12 @@ import { useEffect } from "react";
 import { handle401Exception, loginUser, registerUser } from "./services/http/Auth";
 import { API_BASE_DOMAIN } from "./services/Common";
 import Toaster from "./pages/Toaster";
+import { getMyTrainerInfo } from "./services/http/Trainer";
 
 function App() {
   useEffect(() => {
     async function testHttp() {
+      let response = await getMyTrainerInfo();
       try {
       } catch (err) {}
     }

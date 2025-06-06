@@ -37,14 +37,8 @@ import UserIcon from "../assets/images/icons/user.png";
 import BoneIcon from "../assets/images/icons/bone.png";
 import DocIcon from "../assets/images/icons/doc.png";
 
-import {
-  faUser,
-  faDog,
-  faComment,
-  faClipboard,
-  faPaw,
-  faCat,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faDog, faComment, faClipboard, faPaw, faCat } from "@fortawesome/free-solid-svg-icons";
+import { name } from "ejs";
 // import { name } from "ejs";
 
 export const homeVideos = [Video1, Video4, Video3, Video2];
@@ -208,8 +202,7 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description:
-      "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
+    description: "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
     img: pet3,
     showDetails: false,
   },
@@ -237,8 +230,7 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description:
-      "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
+    description: "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
     img: pet1,
     showDetails: false,
   },
@@ -385,26 +377,77 @@ export const trainerBoxes = [
 ];
 
 export const trainingSpecialities = [
-  "Obedience Training (Basic/Advanced)",
-  "Puppy-Training",
-  "Behavorial-Issues",
-  "Aggression/Reactivity",
-  "Seperation-Anxiety",
-  "Leash-Training",
-  "Potty-Training",
-  "Trick-Training",
-  "Therapy/Emotional-Support-Animal-Prep",
-  "Service-Dog-Training",
-  "Gaurd-Dog-Training",
-  "Clicker-Training",
-  "Agility/Sports-Training",
+  {
+    label: "Obedience Training (Basic/Advanced)",
+    name: "obedienceTraining",
+  },
+  {
+    label: "Puppy-Training",
+    name: "puppyTraining",
+  },
+  {
+    label: "Behavorial-Issues",
+    name: "behavorialIssues",
+  },
+  {
+    label: "Aggression/Reactivity",
+    name: "aggressionReactivity",
+  },
+  {
+    label: "Seperation-Anxiety",
+    name: "seperationAnxiety",
+  },
+  {
+    label: "Leash-Training",
+    name: "leashTraining",
+  },
+  {
+    label: "Potty-Training",
+    name: "pottyTraining",
+  },
+  {
+    label: "Trick-Training",
+    name: "trickTraining",
+  },
+  {
+    label: "Therapy/Emotional-Support-Animal-Prep",
+    name: "therapy",
+  },
+  {
+    label: "Service-Dog-Training",
+    name: "serviceDogTraining",
+  },
+  {
+    label: "Gaurd-Dog-Training",
+    name: "gaurdDogTraining",
+  },
+  {
+    label: "Clicker-Training",
+    name: "clickerTraining",
+  },
+  {
+    label: "Agility/Sports-Training",
+    name: "agilityTraining",
+  },
 ];
 
 export const serviceOptions = [
-  "In-person-at-Trainer's-Location",
-  "In-person-at-Client's-Location",
-  "Group-Classes",
-  "Online/Virtual-Training",
+  {
+    label: "In-person-at-Trainer's-Location",
+    name: "inPersonAtTrainersLocation",
+  },
+  {
+    label: "In-person-at-Client's-Location",
+    name: "inPersonAtClientLocation",
+  },
+  {
+    label: "Group-Classes",
+    name: "groupClasses",
+  },
+  {
+    label: "Online/Virtual-Training",
+    name: "onlineTraining",
+  },
 ];
 
 export const servicePage = {
@@ -436,14 +479,12 @@ export const ourBenefits = [
   {
     icon: BoneIcon,
     title: "Trusted Sitters",
-    paragraph:
-      "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
+    paragraph: "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
   },
   {
     icon: DocIcon,
     title: "Hassle-Free Booking",
-    paragraph:
-      "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
+    paragraph: "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
   },
 ];
 

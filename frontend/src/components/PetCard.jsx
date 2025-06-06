@@ -122,7 +122,7 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState,
               <FontAwesomeIcon icon={faShieldDog} size="3x" color="#49978B" />
             )}
 
-            <div className="flex flex-col">
+            <div className="flex flex-col text-center md:text-start">
               <h3>{pet.name || formData?.name}</h3>
               <p className="text-[#808080] font-semibold text-xs">{pet.description || formData?.description}</p>
             </div>

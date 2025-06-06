@@ -55,7 +55,7 @@ export async function upsertMyHomeService(serviceType = "dog_boarding", payload)
       throw new Error(`Invalid service type: ${serviceType}`);
     }
 
-    const url = `${API_BASE_URL}/home_service?service_type=${encodeURIComponent(serviceType)}`;
+    const url = `${API_BASE_URL}/home_service/me?service_type=${encodeURIComponent(serviceType)}`;
 
     let response = await fetch(url, {
       method: "PUT",
@@ -135,7 +135,7 @@ export async function upsertMyVisitService(serviceType = "drop_in_visits", paylo
       throw new Error(`Invalid service type: ${serviceType}`);
     }
 
-    const url = `${API_BASE_URL}/visit_service?service_type=${encodeURIComponent(serviceType)}`;
+    const url = `${API_BASE_URL}/visit_service/me?service_type=${encodeURIComponent(serviceType)}`;
 
     let response = await fetch(url, {
       method: "PUT", // Could be "POST" depending on your use

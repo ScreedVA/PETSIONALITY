@@ -5,7 +5,7 @@ from datetime import datetime, time
 
 # Modules
 from db import db_dependency
-from models import UserTable, PetTable, DogBoardingTable, DoggyDayCareTable, DogWalkingTable, DropInVisitsTable
+from models import UserTable, PetTable, DogBoardingTable, DoggyDayCareTable, DogWalkingTable, DropInVisitsTable, TrainerInfoTable
 from services import bcrypt_context
 from enums import UserStatus, PottyBreakFrequency, AvailableTimeSlot
 
@@ -23,6 +23,29 @@ def add_default_data(db: db_dependency):
         DoggyDayCareTable(user_id=1, max_dogs=2, checkin_time=time(9, 0), checkout_time=time(17, 0), multi_family_allowed=False, potty_break_freq={PottyBreakFrequency.ZERO_TO_TWO: True}),
         DropInVisitsTable(user_id=1, max_distance_km=10, max_visits_per_day=3, available_times={AvailableTimeSlot.MORNING: True} ),
         DogWalkingTable(user_id=1, max_distance_km=40, max_visits_per_day=2, available_times={AvailableTimeSlot.EVENING: True}),
+
+        TrainerInfoTable(user_id=1, training_specialities={
+            "obedienceTraining": True,
+            "puppyTraining": True,
+            "behavorialIssues": False,
+            "aggressionReactivity": False,
+            "seperationAnxiety": True,
+            "leashTraining": True,
+            "pottyTraining": True,
+            "trickTraining": False,
+            "therapy": False,
+            "serviceDogTraining": False,
+            "gaurdDogTraining": True,
+            "clickerTraining": True,
+            "agilityTraining": False,
+          },
+          service_options={
+            "inPersonAtTrainersLocation": False,
+            "inPersonAtClientLocation": True,
+            "groupClasses": True,
+            "onlineTraining": False,
+          }
+          ),
 
         PetTable(
             name="Buddy",

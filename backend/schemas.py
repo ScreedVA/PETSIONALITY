@@ -24,25 +24,6 @@ class UpdateUserFrontend(BaseModel):
     class Config:
         validate_by_name = True  # Enables population via field name or alias
 
-class CreatePet(BaseModel):
-    name: Optional[str] = None
-    species: Optional[str] = None
-    gender: Optional[str] = None
-    breed: Optional[str] = None
-    size: Optional[str] = None
-    photo: Optional[str] = None
-    description: Optional[str] = None
-    yob: Optional[int] = None
-    spayed_neutured: Optional[bool] = Field(None, alias="spayedNeutured")
-    microchipped: Optional[bool] = None
-    vaccinations: Optional[bool] = None
-    house_trained: Optional[bool] =  Field(None, alias="houseTrained")
-    friendly_with: Optional[Dict[str, bool]] = Field(None, alias="friendlyWith")
-
-    model_config = {
-        "populate_by_name": True,           # ✅ Allow deserialization by alias
-        "from_attributes": True             # ✅ Required for .model_validate with SQLAlchemy models
-    }
 
 # Read
 
@@ -97,18 +78,6 @@ class ReadDoggyDayCare(ReadBaseHomeService):
     id: int
     user_id: int = Field(..., alias="userId")
 
-class CreateOrUpdateBaseHomeService(BaseModel):
-    max_dogs: Optional[int] = Field(None, alias="maxDogs")
-    checkin_time: Optional[time] = Field(None, alias="checkinTime")
-    checkout_time: Optional[time] = Field(None, alias="checkoutTime")
-    multi_family_allowed: Optional[bool] = Field(None, alias="multiFamilyAllowed")
-    potty_break_freq: Optional[Dict[str, bool]] = Field(None, alias="pottyBreakFreq")
-    is_active: Optional[bool] = Field(False, alias="isActive")
-
-    model_config = {
-        "populate_by_name": True
-    }
-
 # Base Schema for Visit Services
 class ReadBaseVisitService(BaseModel):
     max_distance_km: Optional[int] = Field(None, alias="maxDistanceKm")
@@ -120,24 +89,60 @@ class ReadBaseVisitService(BaseModel):
         "from_attributes": True,
         "populate_by_name": True
     }
-
-
 class ReadDropInVisits(ReadBaseVisitService):
     id: int
     user_id: int = Field(..., alias="userId")
-
-
 class ReadDogWalking(ReadBaseVisitService):
     id: int
     user_id: int = Field(..., alias="userId")
 
 
-class CreateOrUpdateBaseVisitService(BaseModel):
-    max_distance_km: Optional[int] = Field(None, alias="maxDistanceKm")
-    max_visits_per_day: Optional[int] = Field(None, alias="maxVisitsPerDay")
-    available_times: Optional[Dict[str, bool]] = Field(None, alias="availableTimes")
-    is_active: Optional[bool] = Field(False, alias="isActive")
+class ReadTrainerInfo(BaseModel):
+    id: int
+    training_specialities: Dict[str, bool] = Field(None, alias="trainingSpecialities")
+    service_options: Dict[str, bool] = Field(None, alias="serviceOptions")
+    user_id: int = Field(None, alias="userId")
 
     model_config = {
+        "from_attributes": True,
         "populate_by_name": True
+    }
+
+ 
+
+
+# Create
+class CreatePet(BaseModel):
+    name: Optional[str] = None
+    species: Optional[str] = None
+    gender: Optional[str] = None
+    breed: Optional[str] = None
+    size: Optional[str] = None
+    photo: Optional[str] = None
+    description: Optional[str] = None
+    yob: Optional[int] = None
+    spayed_neutured: Optional[bool] = Field(None, alias="spayedNeutured")
+    microchipped: Optional[bool] = None
+    vaccinations: Optional[bool] = None
+    house_trained: Optional[bool] =  Field(None, alias="houseTrained")
+    friendly_with: Optional[Dict[str, bool]] = Field(None, alias="friendlyWith")
+
+    model_config = {
+        "populate_by_name": True,           # ✅ Allow deserialization by alias
+        "from_attributes": True             # ✅ Required for .model_validate with SQLAlchemy models
+    }
+
+class CreateOrUpdateBaseHomeService(ReadBaseHomeService):
+    pass
+
+class CreateOrUpdateBaseVisitService(ReadBaseVisitService):
+    pass
+
+class CreateOrUpdateTrainerInfo(BaseModel):
+    training_specialities: Dict[str, bool] = Field(..., alias="trainingSpecialities")
+    service_options: Dict[str, bool] = Field(..., alias="serviceOptions")
+
+    model_config = {
+        "populate_by_name": True,
+        "from_attributes": True
     }

@@ -13,7 +13,7 @@ import os
 import uuid
 
 # Modules
-from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token, read_pet_by_id
+from crud import read_user_by_name, read_user_by_email, read_token_by_user_id, create_refresh_token, read_pet_by_id, read_user_by_id
 from models import UserTable
 
 # Convert Plain Text to hash
@@ -230,4 +230,6 @@ def verify_pet_ownership(db, pet_id, user_id: int):
 
     return pet_table.owner_id == user_id
 
+def verify_is_trainer(db, user_id):
+    return read_user_by_id(db, user_id).is_trainer
 

@@ -27,6 +27,9 @@ async def test(db: db_dependency):
 
     return db.query(DogBoardingTable).all()
 
+
+
+# GET
 @router.get("/home_service/me", response_model=Union[ReadDogBoarding, ReadDoggyDayCare])
 async def get_home_service(    
     user: user_dependency,
@@ -55,31 +58,6 @@ async def get_home_service(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Unexpected error: {str(e)}"
         )
-
-
-@router.put("/home_service", response_model=Union[ReadDogBoarding, ReadDoggyDayCare])
-@router.post("/home_service", response_model=Union[ReadDogBoarding, ReadDoggyDayCare])
-async def upsert_home_service(
-    user: user_dependency,
-    db: db_dependency,
-    service_type: str = Query(..., pattern="dog_boarding|doggy_day_care"),
-    payload: CreateOrUpdateBaseHomeService = Body(...),
-):
-    try:
-        if service_type == "dog_boarding":
-            instance = upsert_dog_boarding(db, user["id"], payload)
-            return ReadDogBoarding.model_validate(instance)
-        elif service_type == "doggy_day_care":
-            instance = upsert_doggy_day_care(db, user["id"], payload)
-            return ReadDoggyDayCare.model_validate(instance)
-        else:
-            raise HTTPException(status_code=400, detail="Invalid service_type")
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unexpected error: {str(e)}"
-        )
-
 @router.get("/visit_service/me", response_model=Union[ReadDropInVisits, ReadDogWalking])
 async def get_visit_service(
     user: user_dependency,
@@ -109,9 +87,31 @@ async def get_visit_service(
             detail=f"Unexpected error: {str(e)}"
         )
 
-
-@router.put("/visit_service", response_model=Union[ReadDropInVisits, ReadDogWalking])
-@router.post("/visit_service", response_model=Union[ReadDropInVisits, ReadDogWalking])
+# USERT
+@router.put("/home_service/me", response_model=Union[ReadDogBoarding, ReadDoggyDayCare])
+@router.post("/home_service/me", response_model=Union[ReadDogBoarding, ReadDoggyDayCare])
+async def upsert_home_service(
+    user: user_dependency,
+    db: db_dependency,
+    service_type: str = Query(..., pattern="dog_boarding|doggy_day_care"),
+    payload: CreateOrUpdateBaseHomeService = Body(...),
+):
+    try:
+        if service_type == "dog_boarding":
+            instance = upsert_dog_boarding(db, user["id"], payload)
+            return ReadDogBoarding.model_validate(instance)
+        elif service_type == "doggy_day_care":
+            instance = upsert_doggy_day_care(db, user["id"], payload)
+            return ReadDoggyDayCare.model_validate(instance)
+        else:
+            raise HTTPException(status_code=400, detail="Invalid service_type")
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unexpected error: {str(e)}"
+        )
+@router.put("/visit_service/me", response_model=Union[ReadDropInVisits, ReadDogWalking])
+@router.post("/visit_service/me", response_model=Union[ReadDropInVisits, ReadDogWalking])
 async def upsert_visit_service(
     user: user_dependency,
     db: db_dependency,

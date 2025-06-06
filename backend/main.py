@@ -8,7 +8,7 @@ import os
 
 # Modules
 from db import Base, engine, SessionLocal
-from routers import auth, user, pet, sitter
+from routers import auth, user, pet, sitter, trainer
 from data import add_default_data
 from services import verify_api_key
 from models import UserTable, PetTable, TokenTable
@@ -38,6 +38,7 @@ app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(pet.router)
 app.include_router(sitter.router)
+app.include_router(trainer.router)
 
 
 @app.on_event("startup")

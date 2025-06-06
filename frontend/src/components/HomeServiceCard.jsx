@@ -37,11 +37,14 @@ export default function HomeServiceCard({ icon, title, subtitle, reloadParent, s
   }
 
   async function handleActivateClick(event) {
-    setIsActive(event.target.checked);
+    const isChecked = event.target.checked;
+    setIsActive(isChecked);
     event.preventDefault();
     try {
-      await upsertMyHomeService(serviceType, { isActive: event.target.checked });
-      showToast(`Succesfully Added ${title} Service`, "success");
+      await upsertMyHomeService(serviceType, { isActive: isChecked });
+      isChecked === true
+        ? showToast(`Added ${title} Service`, "success")
+        : showToast(`Removed ${title} Service`, "error");
     } catch (err) {
       console.error("Error Message", err.message, "Status:", err.status);
     } finally {
@@ -53,7 +56,6 @@ export default function HomeServiceCard({ icon, title, subtitle, reloadParent, s
     event.preventDefault();
     try {
       await upsertMyHomeService(serviceType, formData);
-      showToast(`Succesfully Added ${title} Service`, "success");
     } catch (err) {
       console.error("Error Message", err.message, "Status:", err.status);
     } finally {

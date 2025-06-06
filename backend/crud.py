@@ -3,12 +3,12 @@ from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 
 # Python Library
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from datetime import datetime
 
 # Modules
-from models import UserTable, TokenTable, PetTable, DogBoardingTable, DoggyDayCareTable, DropInVisitsTable, DogWalkingTable
-from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull, CreateOrUpdateBaseHomeService, CreateOrUpdateBaseVisitService
+from models import UserTable, TokenTable, PetTable, DogBoardingTable, DoggyDayCareTable, DropInVisitsTable, DogWalkingTable, TrainerInfoTable
+from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull, CreateOrUpdateBaseHomeService, CreateOrUpdateBaseVisitService, CreateOrUpdateTrainerInfo
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -198,6 +198,11 @@ def read_drop_in_visits_by_user(db: Session, user_id: int):
 def read_dog_walking_by_user(db: Session, user_id: int):
     return db.query(DogWalkingTable).filter_by(user_id=user_id).first()
 
+def read_trainer_info_by_user_id(db: Session, user_id: int) -> TrainerInfoTable | None:
+    return db.query(TrainerInfoTable).filter(TrainerInfoTable.user_id == user_id).first()
+
+def read_trainer_info_list(db: Session) -> List[TrainerInfoTable] | None:
+    return db.query(TrainerInfoTable).all()
 
 #  Create
 def create_user(db: Session, schema: CreateUserFrontend):
@@ -313,10 +318,10 @@ def upsert_dog_boarding(db, user_id: int, data: CreateOrUpdateBaseHomeService):
 def upsert_doggy_day_care(db, user_id: int, data: CreateOrUpdateBaseHomeService):
     instance = read_doggy_day_care_by_user(db, user_id)
     if instance:
-        for key, value in data.model_dump().items():
+        for key, value in data.model_dump(exclude_unset=True).items():
             setattr(instance, key, value)
     else:
-        instance = DoggyDayCareTable(user_id=user_id, **data.model_dump(by_alias=True))
+        instance = DoggyDayCareTable(user_id=user_id, **data.model_dump())
         db.add(instance)
     db.commit()
     db.refresh(instance)
@@ -334,6 +339,8 @@ def upsert_drop_in_visits(db: Session, user_id: int, data: CreateOrUpdateBaseVis
     db.refresh(instance)
     return instance
 def upsert_dog_walking(db: Session, user_id: int, data: CreateOrUpdateBaseVisitService):
+
+
     instance = read_dog_walking_by_user(db, user_id)
     if instance:
         for key, value in data.model_dump(exclude_unset=True).items():
@@ -344,3 +351,26 @@ def upsert_dog_walking(db: Session, user_id: int, data: CreateOrUpdateBaseVisitS
     db.commit()
     db.refresh(instance)
     return instance
+
+def upsert_trainer_info(db: Session, user_id: int, data: CreateOrUpdateTrainerInfo):
+    existing = db.query(TrainerInfoTable).filter_by(user_id=user_id).first()
+
+    if existing:
+        for key, value in data.model_dump(exclude_unset=True).items():
+            setattr(existing, key, value)
+    else:
+        existing = TrainerInfoTable(
+            user_id=user_id,
+            **data.model_dump()
+        )
+        db.add(existing)
+
+    db.commit()
+    db.refresh(existing)
+    return existing
+
+
+
+
+
+
