@@ -6,6 +6,7 @@ import { imgs } from "../components/Data";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/http/Auth";
 import { useToast } from "../services/ContextService";
+import { auth } from "../services/Storage";
 
 export default function Register2() {
   const navigate = useNavigate();
@@ -26,10 +27,11 @@ export default function Register2() {
     try {
       if (agreeTerms) {
         await registerUser(registerData);
+        auth.login();
         setError({});
         navigate("/user-dashboard");
         showToast(`Welcome back ${loginData.username}`, "success", 6000);
-        auth.login();
+        console.log("log in sucess");
       } else {
         setError((prevFields) => ({ ...prevFields, agreeTerms: "Must agree to terms of service" }));
       }

@@ -77,11 +77,11 @@ class ReadPetFull(ReadPetSummary):
     }
 
 class ReadBaseHomeService(BaseModel):
-    max_dogs: int = Field(..., alias="maxDogs")
-    checkin_time: time = Field(..., alias="checkinTime")
-    checkout_time: time = Field(..., alias="checkoutTime")
-    multi_family_allowed: bool = Field(..., alias="multiFamilyAllowed")
-    potty_break_freq: Dict[str, bool] = Field(..., alias="pottyBreakFreq")
+    max_dogs: Optional[int] = Field(None, alias="maxDogs")
+    checkin_time: Optional[time] = Field(None, alias="checkinTime")
+    checkout_time: Optional[time] = Field(None, alias="checkoutTime")
+    multi_family_allowed: Optional[bool] = Field(None, alias="multiFamilyAllowed")
+    potty_break_freq: Optional[Dict[str, bool]] = Field(None, alias="pottyBreakFreq")
     is_active: Optional[bool] = Field(False, alias="isActive")
 
     model_config = {
@@ -98,11 +98,44 @@ class ReadDoggyDayCare(ReadBaseHomeService):
     user_id: int = Field(..., alias="userId")
 
 class CreateOrUpdateBaseHomeService(BaseModel):
-    max_dogs: int = Field(..., alias="maxDogs")
-    checkin_time: time = Field(..., alias="checkinTime")
-    checkout_time: time = Field(..., alias="checkoutTime")
-    multi_family_allowed: bool = Field(..., alias="multiFamilyAllowed")
-    potty_break_freq: Dict[str, bool] = Field(..., alias="pottyBreakFreq")
+    max_dogs: Optional[int] = Field(None, alias="maxDogs")
+    checkin_time: Optional[time] = Field(None, alias="checkinTime")
+    checkout_time: Optional[time] = Field(None, alias="checkoutTime")
+    multi_family_allowed: Optional[bool] = Field(None, alias="multiFamilyAllowed")
+    potty_break_freq: Optional[Dict[str, bool]] = Field(None, alias="pottyBreakFreq")
+    is_active: Optional[bool] = Field(False, alias="isActive")
+
+    model_config = {
+        "populate_by_name": True
+    }
+
+# Base Schema for Visit Services
+class ReadBaseVisitService(BaseModel):
+    max_distance_km: Optional[int] = Field(None, alias="maxDistanceKm")
+    max_visits_per_day: Optional[int] = Field(None, alias="maxVisitsPerDay")
+    available_times: Optional[Dict[str, bool]] = Field(None, alias="availableTimes")
+    is_active: Optional[bool] = Field(False, alias="isActive")
+
+    model_config = {
+        "from_attributes": True,
+        "populate_by_name": True
+    }
+
+
+class ReadDropInVisits(ReadBaseVisitService):
+    id: int
+    user_id: int = Field(..., alias="userId")
+
+
+class ReadDogWalking(ReadBaseVisitService):
+    id: int
+    user_id: int = Field(..., alias="userId")
+
+
+class CreateOrUpdateBaseVisitService(BaseModel):
+    max_distance_km: Optional[int] = Field(None, alias="maxDistanceKm")
+    max_visits_per_day: Optional[int] = Field(None, alias="maxVisitsPerDay")
+    available_times: Optional[Dict[str, bool]] = Field(None, alias="availableTimes")
     is_active: Optional[bool] = Field(False, alias="isActive")
 
     model_config = {

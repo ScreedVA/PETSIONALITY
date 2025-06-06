@@ -1,4 +1,4 @@
-import { API_BASE_DOMAIN } from "../CommonService";
+import { API_BASE_DOMAIN } from "../Common";
 import { handle401Exception } from "./Auth";
 import { getAccessToken, getRefreshToken } from "../Storage";
 
@@ -74,6 +74,85 @@ export async function upsertMyHomeService(serviceType = "dog_boarding", payload)
       } else {
         const errorData = await response.json();
         const err = new Error(errorData.detail || "Failed to save service");
+        err.status = response.status;
+        throw err;
+      }
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    if (err instanceof TypeError) {
+      throw new Error("Network error. Please check your connection.");
+    }
+    throw err;
+  }
+}
+
+export async function getMyVisitService(serviceType = "drop_in_visits") {
+  try {
+    const allowedTypes = ["drop_in_visits", "dog_walking"];
+    if (!allowedTypes.includes(serviceType)) {
+      throw new Error(`Invalid service type: ${serviceType}`);
+    }
+
+    const url = `${API_BASE_URL}/visit_service/me?service_type=${encodeURIComponent(serviceType)}`;
+
+    let response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401 && getRefreshToken()) {
+        response = await handle401Exception(url, "GET");
+        if (!response) throw new Error("Unauthorized after retry.");
+      } else {
+        const errorData = await response.json();
+        const err = new Error(errorData.detail || "Failed to fetch visit service");
+        err.status = response.status;
+        throw err;
+      }
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    if (err instanceof TypeError) {
+      throw new Error("Network error. Please check your connection.");
+    }
+    throw err;
+  }
+}
+
+export async function upsertMyVisitService(serviceType = "drop_in_visits", payload) {
+  try {
+    const allowedTypes = ["drop_in_visits", "dog_walking"];
+    if (!allowedTypes.includes(serviceType)) {
+      throw new Error(`Invalid service type: ${serviceType}`);
+    }
+
+    const url = `${API_BASE_URL}/visit_service?service_type=${encodeURIComponent(serviceType)}`;
+
+    let response = await fetch(url, {
+      method: "PUT", // Could be "POST" depending on your use
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      if (response.status === 401 && getRefreshToken()) {
+        response = await handle401Exception(url, "PUT", payload);
+        if (!response) throw new Error("Unauthorized after retry.");
+      } else {
+        const errorData = await response.json();
+        const err = new Error(errorData.detail || "Failed to save visit service");
         err.status = response.status;
         throw err;
       }

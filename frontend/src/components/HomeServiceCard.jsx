@@ -6,29 +6,60 @@ import { useToast } from "../services/ContextService";
 
 export default function HomeServiceCard({ icon, title, subtitle, reloadParent, serviceType }) {
   const [showDetails, setShowDetails] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
-  const [formData, setFormData] = useState({
-    maxDogs: 3,
-    checkinTime: "06:00:00",
-    checkoutTime: "12:00:00",
-    multiFamilyAllowed: true,
-    pottyBreakFreq: {
-      "0-2": true,
-      "2-4": true,
-      "4-6": false,
-      "8+": false,
-    },
-  });
+  const [formData, setFormData] = useState({});
   const { showToast } = useToast();
 
-  useEffect(() => {}, [reload]);
-
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    if (!isActive) setShowDetails(false);
+  }, [reload]);
+
+  async function handleExpandClick() {
+    if (isActive) {
+      setShowDetails(true);
+      setLoading(true);
+      try {
+        const response = await getMyHomeService(serviceType);
+        setFormData(response);
+        setIsNew(false);
+      } catch (err) {
+        if (err.status === 404) {
+          setIsNew(true);
+        }
+        console.error("Error Message", err.message, "Status:", err.status);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
+
+  async function handleActivateClick(event) {
+    setIsActive(event.target.checked);
+    event.preventDefault();
+    try {
+      await upsertMyHomeService(serviceType, { isActive: event.target.checked });
+      showToast(`Succesfully Added ${title} Service`, "success");
+    } catch (err) {
+      console.error("Error Message", err.message, "Status:", err.status);
+    } finally {
+      setReload((prev) => !prev);
+    }
+  }
+
+  async function handleSaveChanges(event) {
+    event.preventDefault();
+    try {
+      await upsertMyHomeService(serviceType, formData);
+      showToast(`Succesfully Added ${title} Service`, "success");
+    } catch (err) {
+      console.error("Error Message", err.message, "Status:", err.status);
+    } finally {
+      setReload((prev) => !prev);
+    }
+  }
 
   function handleInputChange(event) {
     const { name, multiple, options, value } = event.target;
@@ -56,42 +87,8 @@ export default function HomeServiceCard({ icon, title, subtitle, reloadParent, s
     console.log(`name: ${name}, value: ${typeof parsedValue}`);
   }
 
-  async function handleExpandClick() {
-    if (isActive) {
-      setShowDetails(true);
-      setLoading(true);
-      try {
-        const response = await getMyHomeService(serviceType);
-        setFormData(response);
-        setIsNew(false);
-      } catch (err) {
-        if (err.status === 404) {
-          setIsNew(true);
-        }
-        console.error("Error Message", err.message, "Status:", err.status);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }
   function handleCollapseClick() {
     setShowDetails(false);
-  }
-
-  function handleActivateClick(event) {
-    setIsActive(event.target.checked);
-  }
-
-  async function handleSaveChanges(event) {
-    event.preventDefault();
-    try {
-      await upsertMyHomeService(serviceType, formData);
-      showToast(`Succesfully Added ${title} Service`, "success");
-    } catch (err) {
-      console.error("Error Message", err.message, "Status:", err.status);
-    } finally {
-      setReload((prev) => !prev);
-    }
   }
 
   return (
@@ -248,9 +245,13 @@ export default function HomeServiceCard({ icon, title, subtitle, reloadParent, s
               className="select2"
               multiple={true}
               onChange={handleInputChange}
-              value={Object.entries(formData.pottyBreakFreq) // → [["0-2", true], ["2-4", false], ["4-6", true], ["8+", false]]
-                .filter(([_, selected]) => selected) // → [["0-2", true], ["4-6", true]]
-                .map(([key]) => key)} // → ["0-2", "4-6"]
+              value={
+                formData.pottyBreakFreq
+                  ? Object.entries(formData.pottyBreakFreq) // → [["0-2", true], ["2-4", false], ["4-6", true], ["8+", false]]
+                      .filter(([_, selected]) => selected) // → [["0-2", true], ["4-6", true]]
+                      .map(([key]) => key)
+                  : []
+              } // → ["0-2", "4-6"]
             >
               <option value="0-2">0-2 Hours</option>
               <option value="2-4">2-4 Hours</option>

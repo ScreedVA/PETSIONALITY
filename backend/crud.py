@@ -7,8 +7,8 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 
 # Modules
-from models import UserTable, TokenTable, PetTable, DogBoardingTable, DoggyDayCareTable
-from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull, CreateOrUpdateBaseHomeService
+from models import UserTable, TokenTable, PetTable, DogBoardingTable, DoggyDayCareTable, DropInVisitsTable, DogWalkingTable
+from schemas import CreateUserFrontend, UpdateUserFrontend, CreatePet, ReadPetSummary, ReadPetFull, CreateOrUpdateBaseHomeService, CreateOrUpdateBaseVisitService
 
 # Read
 def read_user_list(db: Session, filter = None):
@@ -193,6 +193,10 @@ def read_dog_boarding_by_user(db: Session, user_id):
     return db.query(DogBoardingTable).filter_by(user_id=user_id).first()
 def read_doggy_day_care_by_user(db: Session, user_id):
     return db.query(DoggyDayCareTable).filter_by(user_id=user_id).first()
+def read_drop_in_visits_by_user(db: Session, user_id: int):
+    return db.query(DropInVisitsTable).filter_by(user_id=user_id).first()
+def read_dog_walking_by_user(db: Session, user_id: int):
+    return db.query(DogWalkingTable).filter_by(user_id=user_id).first()
 
 
 #  Create
@@ -277,7 +281,6 @@ def update_user_by_id(db: Session, user_id: int, update_request: UpdateUserFront
     db.commit()
     db.refresh(user)
     return user
-
 def update_pet_by_id(db: Session, pet_id: int, update_request: UpdateUserFrontend): 
     pet = db.query(PetTable).filter(PetTable.id == pet_id).first()
 
@@ -299,16 +302,14 @@ def upsert_dog_boarding(db, user_id: int, data: CreateOrUpdateBaseHomeService):
     instance = read_dog_boarding_by_user(db, user_id)
     if instance:
         print("Dog Boarding Instance")
-        for key, value in data.model_dump().items():
+        for key, value in data.model_dump(exclude_unset=True).items():
             setattr(instance, key, value)
     else:
-        instance = DogBoardingTable(user_id=user_id, **data.model_dump(by_alias=True))
+        instance = DogBoardingTable(user_id=user_id, **data.model_dump())
         db.add(instance)
     db.commit()
     db.refresh(instance)
     return instance
-
-
 def upsert_doggy_day_care(db, user_id: int, data: CreateOrUpdateBaseHomeService):
     instance = read_doggy_day_care_by_user(db, user_id)
     if instance:
@@ -316,6 +317,29 @@ def upsert_doggy_day_care(db, user_id: int, data: CreateOrUpdateBaseHomeService)
             setattr(instance, key, value)
     else:
         instance = DoggyDayCareTable(user_id=user_id, **data.model_dump(by_alias=True))
+        db.add(instance)
+    db.commit()
+    db.refresh(instance)
+    return instance
+
+def upsert_drop_in_visits(db: Session, user_id: int, data: CreateOrUpdateBaseVisitService):
+    instance = read_drop_in_visits_by_user(db, user_id)
+    if instance:
+        for key, value in data.model_dump(exclude_unset=True).items():
+            setattr(instance, key, value)
+    else:
+        instance = DropInVisitsTable(user_id=user_id, **data.model_dump())
+        db.add(instance)
+    db.commit()
+    db.refresh(instance)
+    return instance
+def upsert_dog_walking(db: Session, user_id: int, data: CreateOrUpdateBaseVisitService):
+    instance = read_dog_walking_by_user(db, user_id)
+    if instance:
+        for key, value in data.model_dump(exclude_unset=True).items():
+            setattr(instance, key, value)
+    else:
+        instance = DogWalkingTable(user_id=user_id, **data.model_dump())
         db.add(instance)
     db.commit()
     db.refresh(instance)

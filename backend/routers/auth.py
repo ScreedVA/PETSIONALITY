@@ -20,7 +20,7 @@ router = APIRouter(
     tags=["auth"]
 )
 
-ACCESS_TOKEN_EXP = 900 # Seconds
+ACCESS_TOKEN_EXP = 10000 # Seconds
 REFRESH_TOKEN_EXP = 7 # Days
 
 

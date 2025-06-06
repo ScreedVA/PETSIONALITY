@@ -1,4 +1,4 @@
-import { API_BASE_DOMAIN } from "../CommonService";
+import { API_BASE_DOMAIN } from "../Common";
 import storage, {
   setAccessToken,
   setRefreshToken,
@@ -20,6 +20,7 @@ async function refreshAccessToken() {
     });
 
     if (!response.ok) {
+      auth.logout();
       throw new Error(
         `Refresh token expired or invalid, Report Status: ${response.status}, Message: ${response.message}`
       );
@@ -47,6 +48,7 @@ export async function handle401Exception(endpoint, method, body = null) {
 
     if (!refreshSuccess) {
       console.warn("Token refresh failed. Redirecting to login...");
+
       throw new Error("Session expired. Please log in again.");
     }
 
@@ -74,6 +76,7 @@ export async function handle401Exception(endpoint, method, body = null) {
       const errorData = await response.json().catch(() => ({}));
       const err = new Error(errorData.detail || "Retry request failed");
       err.status = response.status;
+
       throw err;
     }
 

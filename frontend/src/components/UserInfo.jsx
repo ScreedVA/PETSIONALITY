@@ -5,11 +5,14 @@ import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { getMe, updateMe } from "../services/http/User";
 import { useToast } from "../services/ContextService";
 import Loading from "./Loading";
+import { useNavigate } from "react-router-dom";
+import { checkAuth } from "../services/Common";
 
 export default function UserInfo() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true); // 🟡 loading state
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function handleLoadData() {
@@ -25,6 +28,8 @@ export default function UserInfo() {
       }
     }
     handleLoadData();
+
+    checkAuth(navigate, showToast);
   }, []);
 
   async function handleSaveChangesClick() {

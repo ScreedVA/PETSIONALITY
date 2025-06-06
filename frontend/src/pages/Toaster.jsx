@@ -8,7 +8,8 @@ export default function Toaster() {
   if (!toast) return null;
 
   const colorMap = {
-    success: "bg-green-600",
+    // success: "bg-[#49978B]",
+    success: "bg-orange-400",
     error: "bg-red-600",
     info: "bg-blue-600",
     warning: "bg-yellow-600 text-black",

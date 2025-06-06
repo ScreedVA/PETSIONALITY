@@ -6,14 +6,18 @@ import { petList as pets } from "./Data";
 import PetCard from "./PetCard";
 import Loading from "./Loading";
 import { getMyPets } from "../services/http/Pet";
-import { useToast } from "../services/ContextService";
+import { useNavbar, useToast } from "../services/ContextService";
+import { checkAuth } from "../services/Common";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPets() {
   const [pageState, setPageState] = useState("Pet List");
   const [petList, setPetList] = useState([]);
   const [loading, setLoading] = useState(true); // 🟡 loading state
   const [reload, setReload] = useState(false);
+  const { setNavbarType } = useNavbar();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function handleLoadData() {
@@ -38,7 +42,7 @@ export default function MyPets() {
           setPageState("Add Pet");
         } else {
           const errorType = err?.constructor?.name || "UnknownError";
-          showToast(`${err.message}`, "error");
+          // showToast(`${err.message}`, "error");
           console.error("Error Message:", err.message, "Error Type:", errorType);
         }
       } finally {
@@ -46,6 +50,8 @@ export default function MyPets() {
       }
     }
     handleLoadData();
+
+    checkAuth(navigate, showToast);
   }, [reload]);
 
   function handleAddPetClick(event) {

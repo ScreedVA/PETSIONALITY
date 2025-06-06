@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavbar } from "../services/ContextService";
+import { useNavbar, useToast } from "../services/ContextService";
 import TabMenu from "../components/TabMenu";
 import TabMenuMobile from "./TabMenu.Mobile";
 import { tabOptions4 } from "../components/Data";
@@ -9,20 +9,28 @@ import UserInfo from "../components/UserInfo";
 import MyPets from "../components/MyPets";
 import Services from "../components/Services";
 import TrainerInfo from "../components/TrainerInfo";
+import { auth } from "../services/Storage";
+import { useNavigate } from "react-router-dom";
+import { checkAuth } from "../services/Common";
 export default function UserDashboard() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [tabOptions, setTabOptions] = useState(tabOptions4);
   const { setNavbarType } = useNavbar();
   const [width, setWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
+  const { showToast } = useToast();
 
   useEffect(() => {
     setNavbarType("profile");
+
+    checkAuth(navigate, showToast);
 
     const handleResize = () => setWidth(window.innerWidth);
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <div className="flex flex-col md:flex-row h-[100vh] pt-[105px] bg-beige-gradient">
       {/* Sidebar or Topbar */}

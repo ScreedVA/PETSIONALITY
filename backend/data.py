@@ -5,9 +5,9 @@ from datetime import datetime, time
 
 # Modules
 from db import db_dependency
-from models import UserTable, PetTable, DogBoardingTable, DoggyDayCareTable
+from models import UserTable, PetTable, DogBoardingTable, DoggyDayCareTable, DogWalkingTable, DropInVisitsTable
 from services import bcrypt_context
-from enums import UserStatus, PottyBreakFrequency
+from enums import UserStatus, PottyBreakFrequency, AvailableTimeSlot
 
 current_year = datetime.now().year
 
@@ -19,8 +19,10 @@ def add_default_data(db: db_dependency):
         UserTable(username="Judith", hashed_password=bcrypt_context.hash("BYX.S8CSPqVXER5"), email="judith@gmail.com", date_of_birth=datetime.strptime("2000-01-01", "%Y-%m-%d").date(), status=UserStatus(1), phone_no="1234567890", city="Hamburg", country="Germany", postal_code="10115"),
         UserTable(username="Lena", hashed_password=bcrypt_context.hash(":uY.DemYvm8Lyi."), email="lena@gmail.com", date_of_birth=datetime.strptime("2000-01-01", "%Y-%m-%d").date(), status=UserStatus(1), phone_no="0987654321", city="Hamburg", country="Germany", postal_code="80331"),       
 
-        DogBoardingTable(user_id=1, max_dogs=2,checkin_time=time(8, 0), checkout_time=time(18, 0), multi_family_allowed=True, potty_break_freq={PottyBreakFrequency.TWO_TO_FOUR: True}, is_active=True),
-        DoggyDayCareTable(user_id=1, max_dogs=2, checkin_time=time(9, 0), checkout_time=time(17, 0), multi_family_allowed=False, potty_break_freq={PottyBreakFrequency.ZERO_TO_TWO: True}, is_active=True),
+        DogBoardingTable(user_id=1, max_dogs=2,checkin_time=time(8, 0), checkout_time=time(18, 0), multi_family_allowed=True, potty_break_freq={PottyBreakFrequency.TWO_TO_FOUR: True}),
+        DoggyDayCareTable(user_id=1, max_dogs=2, checkin_time=time(9, 0), checkout_time=time(17, 0), multi_family_allowed=False, potty_break_freq={PottyBreakFrequency.ZERO_TO_TWO: True}),
+        DropInVisitsTable(user_id=1, max_distance_km=10, max_visits_per_day=3, available_times={AvailableTimeSlot.MORNING: True} ),
+        DogWalkingTable(user_id=1, max_distance_km=40, max_visits_per_day=2, available_times={AvailableTimeSlot.EVENING: True}),
 
         PetTable(
             name="Buddy",

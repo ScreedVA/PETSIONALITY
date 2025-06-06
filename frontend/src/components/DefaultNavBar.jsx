@@ -61,6 +61,9 @@ const DefaultNavBar = () => {
               >
                 Sign Out
               </Link>
+              <Link to={"/user-dashboard"} className="block px-8 py-2 font-bold align-middle bg-orange h-fit">
+                Profile
+              </Link>
             </div>
           ) : (
             <div className="flex gap-6">

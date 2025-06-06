@@ -44,7 +44,7 @@ class UserTable(TimeStampModel):
     dog_boarding = relationship("DogBoardingTable", back_populates="user", uselist=False)
     doggy_day_care = relationship("DoggyDayCareTable", back_populates="user", uselist=False)
     drop_in_visits = relationship("DropInVisitsTable", back_populates="user", uselist=False)
-    dog_walking = relationship("DogWalking", back_populates="user", uselist=False)
+    dog_walking = relationship("DogWalkingTable", back_populates="user", uselist=False)
 
 
 class PetTable(TimeStampModel):
@@ -126,7 +126,7 @@ class DropInVisitsTable(BaseVisitService):
     user = relationship("UserTable", back_populates="drop_in_visits")
 
 
-class DogWalking(BaseVisitService):
+class DogWalkingTable(BaseVisitService):
     __tablename__ = "dog_walking"
 
     user_id = Column(Integer, ForeignKey("user.id"))

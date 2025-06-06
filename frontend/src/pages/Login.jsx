@@ -1,10 +1,10 @@
 import { faLongArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { imgs, logos } from "../components/Data";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/http/Auth";
-import { useAuth, useToast } from "../services/ContextService";
+import { useAuth, useNavbar, useToast } from "../services/ContextService";
 import { auth } from "../services/Storage";
 
 export default function Login() {
@@ -15,6 +15,11 @@ export default function Login() {
   });
   const [error, setError] = useState({});
   const { showToast } = useToast();
+  const { setNavbarType } = useNavbar();
+
+  useEffect(() => {
+    setNavbarType("default");
+  }, []);
 
   async function handleSigninClick(e) {
     e.preventDefault();
@@ -24,7 +29,6 @@ export default function Login() {
       navigate("/user-dashboard");
       showToast(`Welcome back ${loginData.username}`, "success", 6000);
       auth.login();
-      console.log(auth.state());
     } catch (err) {
       console.error(`Login Failed: Error Message: ${err.message}`);
       if (err.status === 404) {

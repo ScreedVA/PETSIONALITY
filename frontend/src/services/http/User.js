@@ -1,4 +1,4 @@
-import { API_BASE_DOMAIN } from "../CommonService";
+import { API_BASE_DOMAIN } from "../Common";
 import { getAccessToken, getRefreshToken } from "../Storage";
 import { handle401Exception } from "./Auth";
 

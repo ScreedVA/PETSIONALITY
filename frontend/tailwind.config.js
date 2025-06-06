@@ -2,6 +2,18 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      xs: "360px",
+      sm: "480px",
+      md: "790px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      // Optional custom named aliases
+      tablet: "640px",
+      laptop: "1024px",
+      desktop: "1280px",
+    },
     extend: {
       fontWeight: {
         ultra: "1000",

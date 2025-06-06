@@ -3,7 +3,7 @@ import { faChevronRight, faChevronDown, faShieldDog, faXmark } from "@fortawesom
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "./Loading";
 import { createPet, getMyPet, updatePet } from "../services/http/Pet";
-import { isFriendlyWithField } from "../services/CommonService";
+import { isFriendlyWithField } from "../services/Common";
 import { useToast } from "../services/ContextService";
 
 export default function PetCard({ pet, index, setPetList, petList, setPageState, reloadParent }) {
@@ -115,7 +115,7 @@ export default function PetCard({ pet, index, setPetList, petList, setPageState,
       <div className={`flex flex-col w-full ${pet.showDetails ? "gap-10" : ""}`}>
         {/* Card Summary */}
         <div className="flex justify-between">
-          <div className="flex justify-start items-center gap-5 w-[450px]">
+          <div className="flex md:flex-row flex-col items-center  gap-5 w-[450px]">
             {pet.img ? (
               <img src={pet.img} alt="Dog Image" className="w-20 h-20 rounded-full" />
             ) : (
