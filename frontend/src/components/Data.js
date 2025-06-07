@@ -38,7 +38,6 @@ import BoneIcon from "../assets/images/icons/bone.png";
 import DocIcon from "../assets/images/icons/doc.png";
 
 import { faUser, faDog, faComment, faClipboard, faPaw, faCat } from "@fortawesome/free-solid-svg-icons";
-import { name } from "ejs";
 // import { name } from "ejs";
 
 export const homeVideos = [Video1, Video4, Video3, Video2];

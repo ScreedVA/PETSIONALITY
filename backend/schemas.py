@@ -99,8 +99,8 @@ class ReadDogWalking(ReadBaseVisitService):
 
 class ReadTrainerInfo(BaseModel):
     id: int
-    training_specialities: Dict[str, bool] = Field(None, alias="trainingSpecialities")
-    service_options: Dict[str, bool] = Field(None, alias="serviceOptions")
+    training_specialities: Optional[Dict[str, bool]] = Field(None, alias="trainingSpecialities")
+    service_options: Optional[Dict[str, bool]] = Field(None, alias="serviceOptions")
     user_id: int = Field(None, alias="userId")
 
     model_config = {
@@ -139,8 +139,8 @@ class CreateOrUpdateBaseVisitService(ReadBaseVisitService):
     pass
 
 class CreateOrUpdateTrainerInfo(BaseModel):
-    training_specialities: Dict[str, bool] = Field(..., alias="trainingSpecialities")
-    service_options: Dict[str, bool] = Field(..., alias="serviceOptions")
+    training_specialities: Optional[Dict[str, bool]] = Field(None, alias="trainingSpecialities")
+    service_options: Optional[Dict[str, bool]] = Field(None, alias="serviceOptions")
 
     model_config = {
         "populate_by_name": True,
