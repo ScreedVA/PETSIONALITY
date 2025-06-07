@@ -19,11 +19,13 @@ Base.metadata.create_all(bind=engine) # Initialize Database Tables/Metadata
 load_dotenv(find_dotenv())
 app = FastAPI()
 
-print("Frontend URL", os.getenv("FRONTEND_URL"))
+frontend_url = os.getenv("FRONTEND_URL")
+
+print("Frontend URL", frontend_url)
 origins = [
     "http://localhost:5173", 
     "http://127.0.0.1:5173",
-    os.getenv("FRONTEND_URL")   
+    frontend_url  
 ]
 
 app.add_middleware(
