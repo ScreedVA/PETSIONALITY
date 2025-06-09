@@ -22,33 +22,21 @@ const Home = () => {
           src={Img1}
           alt=""
         />
-        <div className="relative wrapper text-center max-w-3xl">
+        <div className="relative wrapper text-center max-w-3xl md:py-10">
           <h2 className="font-bold mb-7">Match your best buddy!</h2>
-          <h4>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-          </h4>
+          <h4>Haustierbetreuung, die wirklich passt.</h4>
         </div>
       </section>
 
-      <section className="wrapper max-w-3xl pb-32">
+      <section className="wrapper max-w-3xl pb-32 ">
         <h2 className="text-center mb-10">Title of this section?</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate
-          quo distinctio qui tempora explicabo, error quidem! Nesciunt deserunt
-          provident cum voluptate, perspiciatis numquam distinctio omnis in
-          harum laborum dignissimos cupiditate modi excepturi autem
-          consequuntur. Quod, et quae nisi blanditiis cum facilis aut ipsam.
-          <br />
-          <br />
-          Aliquid, suscipit eos incidunt fugiat laudantium nostrum. Sequi vitae
-          vero dignissimos voluptates ullam iure deserunt vel ducimus, at
-          veritatis totam alias praesentium maxime, amet consequuntur eum
-          accusantium tempore corporis aspernatur exercitationem doloremque
-          expedita quod? Eligendi id exercitationem, voluptatibus sed tempore
-          repellat dignissimos at tenetur deserunt?
-        </p>
+        <div>
+          Viele Haustierbesitzer stehen vor dem Problem, eine verlässliche
+          Betreuung für ihr Tier zu finden. PETSONALITY verbindet Tierfreunde
+          über ein KI-basiertes Matching-System basierend auf Persönlichkeit und
+          Bedürfnissen – für eine Betreuung, die genauso individuell ist wie
+          dein Tier und genau dort, wo es sich wirklich wohlfühlt.
+        </div>
       </section>
       <section className="relative w-screen h-screen">
         <div className="flex items-center justify-center w-full h-full py-20">

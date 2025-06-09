@@ -12,11 +12,10 @@ const PetOwners = () => {
         <div className=" bg-main-green mb-10 md:pt-12 pt-32">
           <div className="wrapper flex items-center justify-between md:flex-row flex-col">
             <div className="md:pb-12">
-              <h2>What is Lorem Ipsum</h2>
+              <h3>Bereit für dein nächstes Tierabenteuer? </h3>
               <h4 className="max-w-xl mt-4">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever{" "}
+                Werde (Tier)Sitter! (Is it possible to use a rotating wheel with
+                changing terms, for example Hunde/Katzen/Kaninchen Sitter?)
               </h4>
             </div>
             <img
@@ -28,6 +27,15 @@ const PetOwners = () => {
           </div>
         </div>
         <div className="wrapper">
+          <div className="max-w-3xl mx-auto sm:text-justify my-20 sm:text-lg">
+            Stöbere durch aktuelle Betreuungsanfragen (aus deiner Umgebung) und
+            entdecke, ob das passende Tier für dich dabei ist. <br />
+            Du suchst nach einem perfekten Match, das genau zu dir und deinem
+            Alltag passt? <br />
+            Dann klicke unten und lass dir Vorschläge basierend auf deinen
+            persönlichen Angaben anzeigen – individuell, smart und tiergerecht.{" "}
+            <br />
+          </div>
           <div className="flex justify-center gap-4 flex-wrap">
             <div className="relative bg-white">
               <FiSearch className="absolute text-2xl top-2 left-2" />
