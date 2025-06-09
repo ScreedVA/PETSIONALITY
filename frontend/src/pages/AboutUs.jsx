@@ -14,12 +14,13 @@ const AboutUs = () => {
           alt=""
         />
         <div className="wrapper sm:pt-40 pt-32 pb-60 xl:px-28">
-          <h2>What we wanna do</h2>
+          <h2>Unsere Vision und Mission</h2>
           <h4 className="max-w-4xl mt-5">
-            Our goal with PETSONALITY is to create an intelligent, secure and
-            user-friendly platform that helps pet owners to find the perfect pet
-            sitter - based on an innovative matching system that harmonizes
-            personal characteristics and animal needs.
+            Unser Ziel ist es, mit PETSONALITY eine intelligente, sichere und
+            benutzerfreundliche Plattform zu schaffen, die Tierbesitzern hilft,
+            den perfekten Tiersitter zu finden – basierend auf einem innovativen
+            Matching-System, das persönliche Eigenschaften und tierische
+            Bedürfnisse in Einklang bringt.
           </h4>
         </div>
       </div>
@@ -42,61 +43,66 @@ const AboutUs = () => {
 
       <div className="wrapper xl:px-28 pb-20 ">
         <p className="sm:text-lg">
-          We want to offer a solution to a widespread problem: Pet owners are
-          often faced with the question of where to take their pet when they go
-          on vacation, are tied up at work or are ill. Conventional boarding
-          kennels rarely offer individual care - we, on the other hand, offer a
-          personal and coordinated alternative.
+          Wir wollen eine Lösung für ein weit verbreitetes Problem bieten:
+          Tierbesitzer stehen oft vor der Frage, wohin mit dem Tier, wenn sie in
+          den Urlaub fahren, beruflich eingespannt oder krank sind. Herkömmliche
+          Pensionen bieten selten individuelle Betreuung – wir hingegen bieten
+          eine persönliche und abgestimmte Alternative.
           <br />
           <br />
-          We not only provide allround service for pet owners, but also a
-          fulfilling activity for animal lovers who want to take in animals -
-          whether for extra income, an emotional connection or as a try to a
-          life with animals.
+          Dabei ermöglichen wir nicht nur sorglose Betreuung für Tierbesitzer,
+          sondern auch eine erfüllende Tätigkeit für Tierliebhaber, die Tiere
+          aufnehmen möchten – sei es für Nebenverdienst, emotionale Verbindung
+          oder als Einstieg in ein Leben mit Tier.
           <br />
           <br />
-          Our vision is sustainable pet care in which the needs of everyone
-          involved - whether human or animal - complement each other perfectly.
+          Unsere Vision ist eine zukunftsfähige Haustierbetreuung, bei der sich
+          die Bedürfnisse aller Beteiligten – ob Mensch oder Tier – ideal
+          ergänzen.
           <br />
           <br />
-          <h4>What we stand for</h4>
-          <br /> At PETSONALITY, we focus on the well-being of animals, the
-          strengthening of human and animal bonds and a sustainable, smart
-          solution. We believe that every pet deserves a temporary home that is
-          not only functional, but loving, empathetic and individual. Our
-          innovative approach combines modern technology with genuine love for
-          animals - for a better quality of life for people and pets.
+          <h4>Wofür wir stehen</h4>
+          <br /> Bei PETSONALITY steht das Wohl der Tiere, die Stärkung
+          zwischenmenschlicher und tierischer Bindungen und eine nachhaltige,
+          smarte Lösung im Mittelpunkt. Wir glauben, dass jedes Haustier ein
+          temporäres Zuhause verdient, das nicht nur funktional, sondern
+          liebevoll, empathisch und individuell ist. Unser innovativer Ansatz
+          verbindet moderne Technologie mit echter Tierliebe – für mehr
+          Lebensqualität bei Mensch und Tier.
           <br />
           <br />
-          Our values: <br />
-          Animal welfare – our focus on everything we do Empathy &
-          responsibility - for animals, their owners and pet sitters Innovation
-          & transparency - through modern technology and traceable processes
-          Sustainability & community - through local placement, resource
-          conservation and strong partnerships
+          Unsere Werte: <br />
+          • Tierwohl – im Zentrum all unseres Handelns <br />• Empathie &
+          Verantwortung – für Tiere, ihre Halter und Tiersitter <br />
+          • Innovation & Transparenz – durch moderne Technik und
+          nachvollziehbare Prozesse <br />
+          • Nachhaltigkeit & Gemeinschaft – durch lokale Vermittlung,
+          Ressourcenschonung und starke Partnerschaften <br />
           <br />
           <br />
-          PETSONALITY is more than a platform - we are a movement towards a more
-          responsible and appropriate approach to pet care.
+          PETSONALITY ist mehr als eine Plattform – wir sind eine Bewegung hin
+          zu einem verantwortungsvolleren und passenderen Umgang mit
+          Haustierbetreuung.
           <br />
           <br />
-          <h4>Who we are</h4>
+          <h4>Wer wir sind</h4>
           <br />
-          Behind PETSONALITY is a dedicated team of founders who know from their
-          own experience how difficult it can be to find trustworthy care for
-          your pet. The idea was born as part of a university project - but the
-          motivation behind it is deeply rooted in our personal love of animals.
-          <br />
-          <br />
-          We are pet owners ourselves and know about the challenges of everyday
-          life, but also about the desire to know that your pet is always in
-          good hands.
+          Hinter PETSONALITY steht ein engagiertes Gründerteam, das aus eigener
+          Erfahrung weiß, wie schwer es sein kann, eine vertrauensvolle
+          Betreuung für das eigene Tier zu finden. Die Idee entstand im Rahmen
+          eines Hochschulprojekts – doch die Motivation dahinter ist tief
+          verwurzelt in unserer persönlichen Tierliebe.
           <br />
           <br />
-          Our strength? We think from the customer's perspective, live empathy,
-          combine digital skills with social sensitivity - and have the ambition
-          to create an offer that is both technologically strong and close to
-          the heart.
+          Wir sind selbst Tierhalter, wissen um die Herausforderungen im Alltag,
+          aber auch um den Wunsch, das eigene Tier stets gut aufgehoben zu
+          wissen.
+          <br />
+          <br />
+          Unsere Stärke? Wir denken aus Kundenperspektive, leben Empathie,
+          vereinen digitale Kompetenzen mit sozialem Gespür – und haben den
+          Anspruch, ein Angebot zu schaffen, das technologisch stark und
+          gleichzeitig herzensnah ist.
         </p>
       </div>
 

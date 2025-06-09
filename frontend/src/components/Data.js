@@ -37,7 +37,14 @@ import UserIcon from "../assets/images/icons/user.png";
 import BoneIcon from "../assets/images/icons/bone.png";
 import DocIcon from "../assets/images/icons/doc.png";
 
-import { faUser, faDog, faComment, faClipboard, faPaw, faCat } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faDog,
+  faComment,
+  faClipboard,
+  faPaw,
+  faCat,
+} from "@fortawesome/free-solid-svg-icons";
 // import { name } from "ejs";
 
 export const homeVideos = [Video1, Video4, Video3, Video2];
@@ -201,7 +208,8 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description: "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
+    description:
+      "Luna is a spirited and intelligent Husky with a big personality and an even bigger heart....",
     img: pet3,
     showDetails: false,
   },
@@ -229,7 +237,8 @@ export const petList = [
     "spayed/neutered": true,
     microchipped: true,
     vaccinations: true,
-    description: "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
+    description:
+      "Rusty is a goofy, tail-wagging golden retriever mix who lives for belly rubs and mud....",
     img: pet1,
     showDetails: false,
   },
@@ -478,12 +487,14 @@ export const ourBenefits = [
   {
     icon: BoneIcon,
     title: "Trusted Sitters",
-    paragraph: "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
+    paragraph:
+      "All sitters are verified and background-checked for your pet’s safety and peace of mind.",
   },
   {
     icon: DocIcon,
     title: "Hassle-Free Booking",
-    paragraph: "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
+    paragraph:
+      "Book a sitter in minutes with our easy-to-use platform, designed for your convenience.",
   },
 ];
 
@@ -502,20 +513,28 @@ export const reviews = [
 
 export const questions = [
   {
-    q: " Lorem Ipsum typesetting industry. Lorem Ipsum has been?",
-    a: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus",
+    q: "🐾 1. Wie finde ich den passenden Tiersitter für mein Haustier?",
+    a: "Nachdem du dein Tierprofil ausgefüllt hast, schlägt dir unser intelligentes Matching-System passende Tiersitter aus deiner Umgebung vor. Dabei fließen sowohl Persönlichkeitsmerkmale als auch Lebensumstände und Tierbedürfnisse mit ein. Du kannst die vorgeschlagenen Profile durchstöbern und direkt Kontakt aufnehmen.",
   },
   {
-    q: "Тypesetting in Lorem Ipsum Lorem Ipsy. Lorem Ipsum has been?",
-    a: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    q: "🧪 2. Wie funktioniert der Persönlichkeitstest und wozu ist er gut?",
+    a: "Unser Persönlichkeitstest für Tiersitter basiert auf dem wissenschaftlich fundierten Fünf-Faktoren-Modell (Big Five). Die Ergebnisse helfen uns, Sitter mit passenden Tieren zusammenzubringen – so entsteht eine harmonische und stressfreie Betreuung für Tier und Mensch.",
   },
   {
-    q: "Lorem Ipsum is simply dummy text of the Lorem Ipsum typesetting industry. Lorem Ipsum has been?",
-    a: "printing and typesetting industry. Lorem Ipsum has been the indus",
+    q: "🔐 3. Wie stellt ihr sicher, dass Tiersitter vertrauenswürdig sind?",
+    a: "Alle Sitter durchlaufen einen Prüfprozess: Wir checken Ausweisdokumente, Angaben zur Wohnsituation und auf Wunsch auch polizeiliche Führungszeugnisse. Besonders vertrauenswürdige Profile werden mit einem „Trusted“-Siegel gekennzeichnet – zusätzlich helfen Bewertungen vorheriger Tierbesitzer bei der Entscheidung.",
   },
   {
-    q: "Тypesetting in Lorem Ipsum Lorem Ipsy. Lorem Ipsum has been?",
-    a: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+    q: "💬 4. Was passiert, wenn ein Tiersitter kurzfristig absagt?",
+    a: "Sollte es doch einmal zu einer Absage kommen, setzen wir alles daran, schnellstmöglich eine geeignete Alternative zu finden. In bestimmten Fällen bemühen wir uns zusätzlich um einen finanziellen Ausgleich, damit du nicht auf den Kosten sitzen bleibst.",
+  },
+  {
+    q: "💼 5. Kann ich als Tiersitter auch Geld verdienen?",
+    a: "Ja! Du kannst dir mit deiner Tierliebe flexibel etwas dazuverdienen. Die Vermittlung erfolgt privat, die genauen Konditionen (z. B. Vergütung) werden individuell zwischen dir und dem Tierbesitzer abgestimmt. PETSONALITY erhebt lediglich eine Vermittlungsgebühr.",
+  },
+  {
+    q: "🐕 6. Welche Tiere kann ich über PETSONALITY betreuen oder betreuen lassen?",
+    a: "Unsere Plattform ist offen für alle Haustierarten – egal ob Hund, Katze, Kaninchen oder Papagei. Wichtig ist nur, dass im Profil alle relevanten Infos (z. B. Bedürfnisse, Verhalten, Gesundheit) eingetragen sind, damit ein gutes Matching möglich ist.",
   },
 ];
 

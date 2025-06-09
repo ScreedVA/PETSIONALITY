@@ -4,6 +4,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { useEffect, useLayoutEffect } from "react";
 import NavBarSelector from "./pages/NavBarSelector";
 import Home from "./pages/Home";
 import PetOwners from "./pages/PetOwners";
@@ -15,27 +16,26 @@ import Contact from "./pages/Contact";
 import RegisterSSO from "./pages/RegisterSSO";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import UserDashboardOwner from "./pages/UserDashboardOwner";
-import UserDashboardSitter from "./pages/UserDashboardSitter";
-import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import UserDashboard from "./pages/UserDashboard";
 import { NavbarProvider } from "./services/ContextService";
 import JobOffer from "./pages/JobOffer";
 import AboutUs from "./pages/AboutUs";
-
 import SingleTrainer from "./pages/SingleTrainer";
 import Matchmaking from "./pages/Matchmaking";
 import OurConcept from "./pages/OurConcept";
 import FAQs from "./pages/FAQs";
-import { useEffect, useLayoutEffect } from "react";
+import Toaster from "./pages/Toaster";
+import { getMyTrainerInfo } from "./services/http/Trainer";
+
 import {
   handle401Exception,
   loginUser,
   registerUser,
 } from "./services/http/Auth";
+import UserDashboardOwner from "./pages/UserDashboardOwner";
+import UserDashboardSitter from "./pages/UserDashboardSitter";
+import UserDashboardTrainer from "./pages/UserDashboardTrainer";
 import { API_BASE_DOMAIN } from "./services/Common";
-import Toaster from "./pages/Toaster";
-import { getMyTrainerInfo } from "./services/http/Trainer";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();

@@ -7,115 +7,120 @@ const OurConcept = () => {
       <div className="wrapper max-w-4xl pb-20">
         <h2>Our concept</h2>
         <br />
-        <h3>What PETSONALITY offers - our service</h3>
+        <h3>Was PETSONALITY bietet – unsere Dienstleistung</h3>
         <br />
         <p>
-          PETSONALITY is a platform for the smart placement of pet sitters that
-          takes into account not only time and place, but above all
-          personalities.
+          PETSONALITY ist eine Plattform zur smarten Vermittlung von
+          Tiersittern, die nicht nur Zeit und Ort, sondern vor allem
+          Persönlichkeiten berücksichtigt.
         </p>
         <br />
 
         <p>
-          <h5>Our offer is aimed at:</h5>
-          Pet owners looking for temporary care (day, vacation or training
-          placement) Animal lovers who would like to look after animals
-          temporarily Professional animal trainers who would like to offer their
-          services via our platform.
+          <h5>Unser Angebot richtet sich an:</h5>
+          • Haustierbesitzer, die temporäre Betreuung suchen (Tages-, Urlaubs-
+          oder Trainingsvermittlung) <br />
+          • Tierliebhaber, die zeitweise Tiere betreuen möchten <br />
+          • Professionelle Tiertrainer, die ihre Dienste über unsere Plattform
+          anbieten möchten
           <br />
-          <br /> Our placement service is based on an AI-supported personality
-          test that takes into account the characteristics of both the animal
-          and the potential pet sitter.
+          <br /> Unsere Vermittlung basiert auf einem KI-gestützten
+          Persönlichkeitstest, der sowohl die Eigenschaften des Tieres als auch
+          die des potenziellen Tiersitters berücksichtigt.
         </p>
         <br />
         <p>
-          <h5>We offer:</h5>
-          Personal matching for day-, vacation- or training care Verified pet
-          sitters with a rating system and trusted seal Contacting and getting
-          to know each other in advance Chatbot support and guidance for sitters
-          Availability query, picture upload and feedback system Possibility to
-          find and book certified pet trainers via our website
+          <h5>Wir bieten:</h5>• Persönliches Matching für Tages-, Urlaubs- oder
+          Trainingsbetreuung <br />• Verifizierte Tiersitter mit
+          Bewertungssystem und Trusted-Siegel <br />
+          • Kontaktaufnahme und Kennenlernen vorab <br />
+          • Chatbot-Support und Anleitung für Sitter <br />
+          • Verfügbarkeitsabfrage, Bilder-Upload und Feedbacksystem <br />
+          • Möglichkeit, über unsere Seite zertifizierte Tiertrainer zu finden
+          und zu buchen <br />
         </p>
         <br />
-        <h3>How our matching process works</h3>
+        <h3>Wie unser Matching-Prozess funktioniert</h3>
         <br />
-        <p>Our matching process consists of five intelligent steps:</p>
+        <p>Unser Matching verläuft in fünf intelligenten Schritten:</p>
         <br />
         <ol className="list-decimal pl-10">
           <li>
-            data collection <br />
+            Datenerhebung
+            <br />
             <p>
               {" "}
-              Pet owners provide information about the pet: Species, breed,
-              behavior, needs Pet sitters complete a detailed personality test
-              and describe their home and living situation
+              Tierbesitzer geben Informationen zum Tier an: Art, Rasse,
+              Verhalten, Bedürfnisse Tiersitter durchlaufen einen detaillierten
+              Persönlichkeitstest und beschreiben ihre Wohn- und Lebenssituation
             </p>
           </li>
           <br />
           <li>
-            data analysis <br />
+            Datenanalyse <br />
             <p>
-              The AI creates personality profiles for the animal and sitter
-              based on a psychological test; living situation, experience,
-              handling of certain animal species are taken into account
+              Die KI erstellt Persönlichkeitsprofile für Tier und Sitter auf
+              Basis eines psychologischen Tests; Wohnsituation, Erfahrung,
+              Umgang mit bestimmten Tierarten fließen mit ein
             </p>
           </li>
           <br />
           <li>
-            matching algorithm <br />
+            Matching-Algorithmus <br />
             <p>
               {" "}
-              The profiles are compared with each other <br />A list of suitable
-              pet sitters in the region is created, sorted by accuracy of fit
+              Die Profile werden miteinander abgeglichen Es entsteht eine Liste
+              passender Tiersitter in der Region, sortiert nach Übereinstimmung
             </p>
           </li>
           <br />
           <li>
-            contact & booking <br />
+            Kontakt & Buchung
+            <br />
             <p>
-              Pet owners make contact with suitable sitters <br />
-              Meetings can be arranged and availability clarified individually
-              The booking is only made after mutual agreement
+              Tierbesitzer nehmen Kontakt zu passenden Sittern auf <br />
+              Es können Treffen arrangiert und Verfügbarkeiten individuell
+              abgeklärt werden Erst nach gegenseitigem Einverständnis erfolgt
+              die Buchung
             </p>
           </li>
           <br />
           <li>
-            Feedback & further development <br />
+            Feedback & Weiterentwicklung <br />
             <p>
-              After the care, both sides give ratings The AI uses this feedback
-              to continuously improve itself through machine learning
+              Nach der Betreuung geben beide Seiten Bewertungen ab Die KI nutzt
+              dieses Feedback, um sich durch Machine Learning stetig zu
+              verbessern
             </p>
           </li>
           <br />
         </ol>
 
         <br />
-        <h3>Security & trust</h3>
+        <h3>Sicherheit & Vertrauen</h3>
         <br />
         <p>
-          PETSONALITY attaches great importance to trust and safety: <br />
-          Every pet sitter is verified (e.g. ID card, residence check) <br />
-          Optional: certificate of good conduct, home check, trusted seal <br />
-          Sitters receive star ratings in various categories <br />
-          Pet owners can see a picture of their pet every two days - for a good
-          feeling
+          • Jeder Tiersitter wird verifiziert (u.a. Personalausweis,
+          Wohnortprüfung) <br />
+          • Optional: Führungszeugnis, Wohnungscheck, Trusted-Siegel <br />
+          • Sitter erhalten Sternebewertungen in verschiedenen Kategorien <br />
+          • Tierbesitzer können alle zwei Tage ein Bild ihres Tieres sehen – für
+          ein gutes Gefühl <br />
         </p>
         <br />
-        <h3>More than just care: social impact</h3>
+        <h3>Mehr als nur Betreuung: gesellschaftliche Wirkung</h3>
         <br />
         <p>
-          With PETSONALITY we create: <br />
-          Responsible transitional solutions for animals - fewer shelter fees{" "}
-          <br />
-          Income opportunities for pet sitters <br />
-          Equal participation regardless of gender, age, origin <br />
-          Technological innovation for a social mission <br />
-          Strengthening local networks and sustainable care concepts
-        </p>
-        <br />
-        <p>
-          Our platform actively supports the UN Sustainable Development Goals -
-          from climate protection and gender equality to health and wellbeing.
+          • Verantwortungsvolle Übergangslösungen für Tiere – weniger
+          Tierheimabgaben <br />
+          • Einkommensmöglichkeiten für Tiersitter <br />
+          • Gleichberechtigte Teilhabe unabhängig von Geschlecht, Alter,
+          Herkunft <br />
+          • Technologische Innovation für eine soziale Mission <br />
+          • Stärkung lokaler Netzwerke und nachhaltiger Betreuungskonzepte{" "}
+          <br />• Unsere Plattform unterstützt aktiv die UN-Nachhaltigkeitsziele
+          – vom Klimaschutz über Geschlechtergleichheit bis hin zu Gesundheit
+          und Wohlergehen.
         </p>
       </div>
 

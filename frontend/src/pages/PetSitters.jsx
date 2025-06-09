@@ -19,9 +19,10 @@ const PetSitters = () => {
           </div>
           <div className="text-center">
             <div>
-              <h3 className="font-bold">Find your best match!</h3>
+              <h3 className="font-bold mb-4">Find your best match!</h3>
               <h4 className="sm:block hidden max-w-xl">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+                ‘Trage deine Sitting-Wünsche ein, um dein perfektes Match zu
+                finden‘
               </h4>
             </div>
             <img
