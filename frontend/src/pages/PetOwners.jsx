@@ -3,7 +3,7 @@ import Img1 from "../assets/images/other/1.png";
 import { FiSearch } from "react-icons/fi";
 import { RiMapPinLine } from "react-icons/ri";
 import { ownerOfferBoxes } from "../components/Data";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 
 const PetOwners = () => {
   return (
@@ -81,6 +81,13 @@ const PetOwners = () => {
               </Link>
             );
           })}
+        </div>
+        <div className="wrapper text-center pb-40">
+          <Link
+            to="/Matchmaking"
+            className="mx-auto w-auto bg-orange py-5 px-10 font-bold text-xl hover:bg-orange-500">
+            Perfect Match
+          </Link>
         </div>
       </div>
     </>
